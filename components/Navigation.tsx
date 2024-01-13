@@ -4,14 +4,14 @@ import Image from "next/image";
 
 const Navigation = () => {
   return (
-    <div className="navbar bg-base-100">
+    <nav className="bg-base-100 flex">
       <div className="flex-1">
         <Link href={"/"}>
-          <Image src={logo} className="btn btn-ghost" alt="logo" />
+          <Image src={logo} className="my-3 mx-5" height={50} alt="logo" />
         </Link>
       </div>
-      <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
+      <div className="">
+        <ul className=" flex gap-2 m-5">
           <li>
             <Link href={"/logs"} className="text-xl">
               Logs
@@ -24,7 +24,7 @@ const Navigation = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 
