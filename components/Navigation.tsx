@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Navigation = () => {
   return (
-    <nav className="bg-base-100 flex">
+    <nav className="flex">
       <div className="flex-1">
         <Link href={"/"}>
           <Image src={logo} className="my-3 mx-5" height={50} alt="logo" />
