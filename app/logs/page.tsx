@@ -2,6 +2,7 @@ import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 
 import { createClient } from "@supabase/supabase-js";
+import Log from "@/components/Log";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -27,6 +28,7 @@ const Logs = async () => {
     return data;
   };
   const logs = await getLogs();
+  console.log("logs", logs);
   return (
     <div>
       <div className="flex justify-between m-10">
