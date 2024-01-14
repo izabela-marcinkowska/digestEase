@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DigestEase
 
-## Getting Started
+## Overview
 
-First, run the development server:
+DigestEase is a specialized health app designed for individuals with Irritable Bowel Syndrome (IBS) and related digestive conditions. Our goal is to empower users to track their dietary habits, bowel movements, and symptoms to better manage their digestive health.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Food Diary:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Log every meal and snack to identify potential IBS triggers.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Bowel Movement Tracker:
 
-## Learn More
+Keep a record of bowel movement types to notice patterns over time.
 
-To learn more about Next.js, take a look at the following resources:
+#### Alcohol and Medication Logs:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Input alcohol consumption and medication to see their effects on IBS.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Pain and Stress Journal:
 
-## Deploy on Vercel
+Rate your daily pain and stress to correlate emotional well-being with IBS symptoms.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Analysis Tool:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Our AI-powered engine analyzes your entries to provide insights and suggestions based on IBS dietary recommendations.
+
+## Who We Are
+
+Founded by Bella, an IBS patient herself, this app is the result of a personal journey through the challenges of managing IBS. Our mission is to make IBS management more intuitive and less time-consuming for everyone.
+
+## Disclaimer
+
+The IBS Tracker App is a health assistant tool and not a substitute for professional medical advice. Always consult with a healthcare provider for medical issues.
