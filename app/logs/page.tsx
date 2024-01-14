@@ -33,7 +33,7 @@ const Logs = async () => {
     <div>
       <div className="flex justify-between m-10">
         <h1 className="text-3xl">Logs</h1>
-        <Link href={"/add-log"}>
+        <Link href={"/new-log"}>
           <PlusCircle size={34} />
         </Link>
       </div>
