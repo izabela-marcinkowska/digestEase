@@ -96,7 +96,7 @@ const LogForm = () => {
       <div className="flex justify-center h-screen ">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-5 bg-lime-700 px-10 py-4"
+          className="flex flex-col gap-5 bg-lime-300/40 px-10 py-4"
         >
           <Controller
             control={control}
