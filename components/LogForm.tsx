@@ -93,7 +93,7 @@ const LogForm = () => {
           <XCircle size={34} />
         </Link>
       </div>
-      <div className="flex justify-center h-screen ">
+      <div className="flex justify-center  ">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-5 bg-lime-300/40 px-10 py-4"
