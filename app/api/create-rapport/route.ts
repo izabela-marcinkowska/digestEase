@@ -1,6 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { format, startOfMonth, endOfMonth } from "date-fns";
 const openai = new OpenAI();
@@ -30,7 +29,7 @@ async function getRecordsForCurrentMonth() {
   }
 }
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextResponse) {
   try {
     const dataFromThisMonth = await getRecordsForCurrentMonth();
     console.log(dataFromThisMonth);
