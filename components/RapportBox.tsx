@@ -1,8 +1,9 @@
-"use client";
-import { createClient } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
-import { format, startOfMonth, endOfMonth } from "date-fns";
-import { PlusCircle } from "lucide-react";
+'use client';
+import { createClient } from '@supabase/supabase-js';
+import { useEffect, useState } from 'react';
+import { format, startOfMonth, endOfMonth } from 'date-fns';
+import { PlusCircle } from 'lucide-react';
+import Rapport from './Rapport';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
@@ -20,9 +21,9 @@ const RapportBox = () => {
   useEffect(() => {
     async function getRapports() {
       const { data, error } = await supabase
-        .from("Rapports")
+        .from('Rapports')
         .select()
-        .order("date", { ascending: false }); // Orders by the 'date' field in descending order
+        .order('date', { ascending: false }); // Orders by the 'date' field in descending order
       setRapports(data || []);
     }
     getRapports();
@@ -36,12 +37,12 @@ const RapportBox = () => {
           <PlusCircle size={34} />
         </button>
       </div>
-      {JSON.stringify(rapports)}
-      {/* <div className="ml-2 mr-2">
+
+      <div className="ml-2 mr-2">
         {rapports.map((rapport: Rapport) => (
           <Rapport key={rapport.id} rapport={rapport} />
         ))}
-      </div> */}
+      </div>
     </>
   );
 };
