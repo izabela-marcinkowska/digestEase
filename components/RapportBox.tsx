@@ -29,11 +29,26 @@ const RapportBox = () => {
     getRapports();
   }, [rapports]);
 
+  const sendRapports = async () => {
+    try {
+      const response = await fetch('/api/create-rapport', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rapports }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="flex justify-between m-10">
         <h1 className="text-3xl">Rapports</h1>
-        <button onClick={() => {}}>
+        <button onClick={sendRapports}>
           <PlusCircle size={34} />
         </button>
       </div>
