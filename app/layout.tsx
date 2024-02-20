@@ -1,12 +1,25 @@
 import type { Metadata } from 'next';
-import { Inter, Dancing_Script } from 'next/font/google';
+import {
+  Inter,
+  Dancing_Script,
+  Fanwood_Text,
+  Open_Sans,
+  Montserrat,
+} from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 
 const inter = Inter({ subsets: ['latin'] });
+const open = Open_Sans({ subsets: ['latin'] });
+const montserrat = Montserrat({ subsets: ['latin'], weight: '400' });
 const dancing = Dancing_Script({
   subsets: ['latin'],
   variable: '--font-dancing_scripts',
+});
+const Fanwood = Fanwood_Text({
+  subsets: ['latin'],
+  variable: '--font-fanwood',
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -21,7 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${dancing.variable}`}>
+      <body
+        className={`${montserrat.className} ${dancing.variable} ${Fanwood.variable} bg-backg`}
+      >
         <Navigation />
         {children}
       </body>

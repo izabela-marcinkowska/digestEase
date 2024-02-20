@@ -11,8 +11,9 @@ const config = {
   theme: {
     fontFamily: {
       sans: ['ubuntu'],
-      serif: ['Protest Riot'],
+      open: ['open'],
       logo: 'var(--font-dancing_scripts)',
+      main: 'var(--font-fanwood)',
     },
     container: {
       center: true,
@@ -25,6 +26,8 @@ const config = {
     extend: {
       colors: {
         border: 'hsl(var(--border))',
+        backg: '#f2f7f6',
+        darkGreen: '#3A8370',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
