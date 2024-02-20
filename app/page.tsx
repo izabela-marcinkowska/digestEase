@@ -1,26 +1,27 @@
 import Image from 'next/image';
-import whatitis from '../assets/whatitis.png';
 import howitworks from '../assets/howitworks.png';
+import tarm from '../assets/tarm.svg';
 import { howItWorksDescription, whatIsItDescription } from '@/content';
 import ActionCard from '@/components/ActionCard';
+import LogotextDark from '../assets/DigestEase-darkGreen.svg';
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-gray-700 text-3xl font-logo">DigestEase</h1>
+    <div className="relative">
+      <Image
+        src={LogotextDark}
+        alt="logo"
+        className="absolute top-52 left-40 z-20 "
+      ></Image>
+      <Image
+        src={tarm}
+        alt="logo"
+        width={700}
+        className="absolute right-28"
+      ></Image>
+      <h2 className="text-3xl font-montserrat text-darkGreen absolute top-80 left-40">
+        The Smart Path to Digestive Balance.
+      </h2>
     </div>
-
-    // <div className=" flex flex-col gap-2 mx-2 my-4 bg-green-50">
-    //   <ActionCard
-    //     img={whatitis}
-    //     title="What is it?"
-    //     description={whatIsItDescription}
-    //   />
-    //   <ActionCard
-    //     img={howitworks}
-    //     title="How it works?"
-    //     description={howItWorksDescription}
-    //   />
-    // </div>
   );
 }
