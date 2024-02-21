@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import logo from '../assets/logosvg.svg';
 import Image from 'next/image';
+import Hamburger from './Hamburger';
 
 const Navigation = () => {
   return (
@@ -11,20 +12,7 @@ const Navigation = () => {
           <Image src={logo} className="my-3 mx-5" height={50} alt="logo" />
         </Link>
       </div>
-      <div className="">
-        <ul className=" flex gap-2 m-5">
-          <li>
-            <Link href={'/logs'} className="text-xl">
-              Logs
-            </Link>
-          </li>
-          <li>
-            <Link href={'/rapports'} className="text-xl">
-              Rapports
-            </Link>
-          </li>
-        </ul>
-      </div>
+      <Hamburger />
     </nav>
   );
 };
