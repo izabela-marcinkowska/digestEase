@@ -19,17 +19,6 @@ const Hamburger = ({ visible }: Props) => {
     setOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    const updatePageScroll = () => {
-      if (isOpen && bodyRef.current) {
-        bodyRef.current.style.overflow = 'hidden';
-      } else if (!isOpen && bodyRef.current) {
-        bodyRef.current.style.overflow = '';
-      }
-    };
-
-    updatePageScroll();
-  }, [isOpen]);
   return (
     <>
       <div className="">
