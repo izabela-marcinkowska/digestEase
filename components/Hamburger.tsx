@@ -16,7 +16,7 @@ export const NAV_LINKS = [
   },
   {
     text: 'Rapports',
-    href: '/.rapports',
+    href: '/rapports',
   },
 ];
 
@@ -59,10 +59,15 @@ const Hamburger = ({ visible }: Props) => {
           />
         )}
         <OpenMenu visible={isOpen} />
-        <ul className="md:flex gap-6 m-5 hidden">
+        <ul className="md:flex gap-6 m-5 mx-8 hidden">
           {NAV_LINKS.map((link, index) => (
             <li key={index}>
-              <Link href={link.href} className="text-xl">
+              <Link
+                href={link.href}
+                className={`text-xl ${
+                  pathName === link.href ? 'text-green-700' : ''
+                }`}
+              >
                 {link.text}
               </Link>
             </li>
