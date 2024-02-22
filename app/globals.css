@@ -74,18 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-.bm-burger-bars-hover {
-  background: #a90000;
-}
-
-.bm-menu-wrap {
-  position: fixed;
-  height: 100%;
-}
-
-.bm-menu {
-  background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-}

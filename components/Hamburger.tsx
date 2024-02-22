@@ -1,13 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import OpenMenu from './OpenMenu';
-import { usePathname } from 'next/navigation';
-
-type Props = {
-  visible: boolean;
-};
 
 export const NAV_LINKS = [
   {
@@ -20,14 +16,16 @@ export const NAV_LINKS = [
   },
 ];
 
-const Hamburger = ({ visible }: Props) => {
+const Hamburger = () => {
   const [isOpen, setOpen] = useState(false);
   const pathName = usePathname();
 
+  // Closes menu after changing the path
   useEffect(() => {
     setOpen(false);
   }, [pathName]);
 
+  // Closes menu after resizing the window
   useEffect(() => {
     const handleResize = () => {
       setOpen(false);
@@ -38,6 +36,7 @@ const Hamburger = ({ visible }: Props) => {
     };
   }, []);
 
+  // Togle window between open and close
   const handleHamburgerClick = () => {
     setOpen((prev) => !prev);
   };
