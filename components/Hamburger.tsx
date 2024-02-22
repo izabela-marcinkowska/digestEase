@@ -59,7 +59,7 @@ const Hamburger = ({ visible }: Props) => {
           />
         )}
         <OpenMenu visible={isOpen} />
-        <ul className="md:flex gap-2 m-5 hidden">
+        <ul className="md:flex gap-6 m-5 hidden">
           {NAV_LINKS.map((link, index) => (
             <li key={index}>
               <Link href={link.href} className="text-xl">
