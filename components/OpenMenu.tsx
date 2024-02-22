@@ -1,4 +1,5 @@
-'use client';
+import Link from 'next/link';
+import { useEffect } from 'react';
 
 type Props = {
   visible: boolean;
@@ -6,13 +7,26 @@ type Props = {
 
 const OpenMenu = ({ visible }: Props) => {
   return (
-    <div className={!visible ? 'hidden' : 'visible'}>
-      <div className="bg-white absolute border border-solid left-0 top-18 min-w-full ">
-        <div className="flex flex-col gap-3 text-center my-6">
-          <p> Link nr 1</p>
-          <p> Link nr 2</p>
-          <p> Link nr 3</p>
-        </div>
+    <div
+      className={`transition-all top-0 duration-1000 ease-in-out absolute md:hidden border-t-0 bg-white  left-0 w-full  ${
+        visible
+          ? 'translate-y-[4.8rem] opacity-100'
+          : '-translate-y-full opacity-0'
+      }`}
+    >
+      <div className="">
+        <ul className="flex flex-col gap-5 text-center my-6">
+          <li>
+            <Link href={'/logs'} className="text-xl">
+              Logs
+            </Link>
+          </li>
+          <li>
+            <Link href={'/rapports'} className="text-xl">
+              Rapports
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
   );
