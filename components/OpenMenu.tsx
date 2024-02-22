@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { NAV_LINKS } from './Hamburger';
+import { usePathname } from 'next/navigation';
 
 type Props = {
   visible: boolean;
 };
 
 const OpenMenu = ({ visible }: Props) => {
+  const pathName = usePathname();
   return (
     <div
       className={`transition-all top-0 duration-1000 ease-in-out absolute md:hidden border-t-0 bg-white  left-0 w-full  ${
@@ -16,16 +19,18 @@ const OpenMenu = ({ visible }: Props) => {
     >
       <div className="">
         <ul className="flex flex-col gap-5 text-center my-6">
-          <li>
-            <Link href={'/logs'} className="text-xl">
-              Logs
-            </Link>
-          </li>
-          <li>
-            <Link href={'/rapports'} className="text-xl">
-              Rapports
-            </Link>
-          </li>
+          {NAV_LINKS.map((link, index) => (
+            <li key={index}>
+              <Link
+                href={link.href}
+                className={`text-xl ${
+                  pathName === link.href ? 'text-green-700' : ''
+                }`}
+              >
+                {link.text}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
