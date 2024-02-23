@@ -1,5 +1,5 @@
+import { NAV_LINKS } from '@/content';
 import Link from 'next/link';
-import { NAV_LINKS } from './Hamburger';
 import { usePathname } from 'next/navigation';
 
 type Props = {
@@ -23,7 +23,7 @@ const OpenMenu = ({ visible }: Props) => {
               <Link
                 href={link.href}
                 className={`text-xl ${
-                  pathName === link.href ? 'text-green-700' : ''
+                  pathName === link.href ? 'text-darkGreen' : ''
                 }`}
               >
                 {link.text}

@@ -3,3 +3,14 @@ export const whatIsItDescription =
 
 export const howItWorksDescription =
   'You log your food, bowel types, alcohol, medication, pain, stress levels, and feelings daily. With a click, the AI analyzes your inputs, correlating your diet and stress with IBS symptoms. You receive personalized insights, identifying potential dietary triggers and offering IBS-friendly recommendations.';
+
+export const NAV_LINKS = [
+  {
+    text: 'Logs',
+    href: '/logs',
+  },
+  {
+    text: 'Rapports',
+    href: '/rapports',
+  },
+];

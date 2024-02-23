@@ -4,17 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import OpenMenu from './OpenMenu';
-
-export const NAV_LINKS = [
-  {
-    text: 'Logs',
-    href: '/logs',
-  },
-  {
-    text: 'Rapports',
-    href: '/rapports',
-  },
-];
+import { NAV_LINKS } from '@/content';
 
 const Hamburger = () => {
   const [isOpen, setOpen] = useState(false);
@@ -64,7 +54,7 @@ const Hamburger = () => {
               <Link
                 href={link.href}
                 className={`text-xl ${
-                  pathName === link.href ? 'text-green-700' : ''
+                  pathName === link.href ? 'text-darkGreen' : ''
                 }`}
               >
                 {link.text}
