@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Hamburger from './Hamburger';
 import logoIcon from '../assets/logosvg.svg';
-import logoText from '../assets/DigestEase-darkGreen.svg';
+import logoText from '../assets/DigestEaseTitleGreen.svg';
 
 const Navigation = () => {
   return (
@@ -16,10 +16,10 @@ const Navigation = () => {
             alt="Green logo icon with the picture of the green stomach"
           />
         </Link>
-        <Link href={'/'} className=" hidden md:block">
+        <Link href={'/'} className=" hidden md:block pt-1">
           <Image
             src={logoText}
-            height={35}
+            height={30}
             alt="Logo text with DigestEase green letters."
           />
         </Link>
