@@ -5,6 +5,9 @@ import {
   Fanwood_Text,
   Open_Sans,
   Montserrat,
+  Shadows_Into_Light,
+  Philosopher,
+  Montserrat_Alternates,
 } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
@@ -12,6 +15,11 @@ import Navigation from '@/components/Navigation';
 const inter = Inter({ subsets: ['latin'] });
 const open = Open_Sans({ subsets: ['latin'] });
 const montserrat = Montserrat({ subsets: ['latin'], weight: '400' });
+const montserratTiny = Montserrat({
+  subsets: ['latin'],
+  weight: '300',
+  variable: '--font-montserratTiny',
+});
 const dancing = Dancing_Script({
   subsets: ['latin'],
   variable: '--font-dancing_scripts',
@@ -20,6 +28,22 @@ const Fanwood = Fanwood_Text({
   subsets: ['latin'],
   variable: '--font-fanwood',
   weight: '400',
+});
+const Shadow = Shadows_Into_Light({
+  subsets: ['latin'],
+  variable: '--font-shadow',
+  weight: '400',
+});
+const Philo = Philosopher({
+  subsets: ['latin'],
+  variable: '--font-philo',
+  weight: '400',
+});
+const Mon_Alt = Montserrat_Alternates({
+  subsets: ['latin'],
+  variable: '--font-mont',
+  weight: '200',
+  style: 'italic',
 });
 
 export const metadata: Metadata = {
@@ -35,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} ${dancing.variable} ${Fanwood.variable} bg-backg`}
+        className={`${montserrat.className} ${montserratTiny.variable} ${Mon_Alt.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
       >
         <Navigation />
         {children}
