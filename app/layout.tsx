@@ -9,6 +9,7 @@ import {
   Philosopher,
   Montserrat_Alternates,
   Josefin_Slab,
+  Roboto_Serif,
 } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
@@ -51,6 +52,12 @@ const Josefin = Josefin_Slab({
   weight: '300',
   style: 'italic',
 });
+const RobotoSerif = Roboto_Serif({
+  subsets: ['latin'],
+  variable: '--font-robotoSerif',
+  weight: '100',
+  style: 'italic',
+});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -65,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} ${montserratTiny.variable} ${Josefin.variable} ${Mon_Alt.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
+        className={`${montserrat.className} ${montserratTiny.variable} ${Josefin.variable} ${RobotoSerif.variable} ${Mon_Alt.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
       >
         <Navigation />
         {children}

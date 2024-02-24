@@ -19,6 +19,7 @@ const config = {
       philo: 'var(--font-philo)',
       mont: 'var(--font-mont)',
       josefin: 'var(--font-josefin)',
+      robotoSerif: 'var(--font-robotoSerif)',
     },
     container: {
       center: true,
@@ -29,6 +30,10 @@ const config = {
     },
 
     extend: {
+      backgroundImage: {
+        highlight:
+          'url(//s2.svgbox.net/pen-brushes.svg?ic=brush-1&color=d1f1e8)',
+      },
       colors: {
         border: 'hsl(var(--border))',
         backg: '#f2f7f6',
