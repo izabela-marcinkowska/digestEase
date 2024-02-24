@@ -15,6 +15,7 @@ const config = {
       logo: 'var(--font-dancing_scripts)',
       main: 'var(--font-fanwood)',
       montserratTiny: 'var(--font-montserratTiny)',
+      montserratBold: 'var(--font-montserratBold)',
       shadow: 'var(--font-shadow)',
       philo: 'var(--font-philo)',
       mont: 'var(--font-mont)',

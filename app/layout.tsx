@@ -17,6 +17,11 @@ import Navigation from '@/components/Navigation';
 const inter = Inter({ subsets: ['latin'] });
 const open = Open_Sans({ subsets: ['latin'] });
 const montserrat = Montserrat({ subsets: ['latin'], weight: '400' });
+const montserratBold = Montserrat({
+  subsets: ['latin'],
+  weight: '500',
+  variable: '--font-montserratBold',
+});
 const montserratTiny = Montserrat({
   subsets: ['latin'],
   weight: '300',
@@ -72,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} ${montserratTiny.variable} ${Josefin.variable} ${RobotoSerif.variable} ${Mon_Alt.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
+        className={`${montserrat.className} ${montserratTiny.variable} ${Josefin.variable} ${RobotoSerif.variable} ${montserratBold.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
       >
         <Navigation />
         {children}

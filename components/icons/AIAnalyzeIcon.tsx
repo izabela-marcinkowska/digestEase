@@ -6,7 +6,6 @@ const AIAnalyzeIcon = ({ width }: { width: number }) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 101.99 100.82"
       width={width}
-      className="fill-darkGreen"
     >
       <g id="Lager_1-2" data-name="Lager 1">
         <g>
