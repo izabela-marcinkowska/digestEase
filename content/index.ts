@@ -14,3 +14,6 @@ export const NAV_LINKS = [
     href: '/rapports',
   },
 ];
+
+export const saleText =
+  'Reimagine Your Digestive Health: Discover the Power of Personalized Insights and Seamless Daily Tracking with DigestEase, Your Ally in Wellness.';
