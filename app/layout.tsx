@@ -8,6 +8,7 @@ import {
   Shadows_Into_Light,
   Philosopher,
   Montserrat_Alternates,
+  Josefin_Slab,
 } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
@@ -43,6 +44,11 @@ const Mon_Alt = Montserrat_Alternates({
   subsets: ['latin'],
   variable: '--font-mont',
   weight: '200',
+});
+const Josefin = Josefin_Slab({
+  subsets: ['latin'],
+  variable: '--font-josefin',
+  weight: '300',
   style: 'italic',
 });
 
@@ -59,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} ${montserratTiny.variable} ${Mon_Alt.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
+        className={`${montserrat.className} ${montserratTiny.variable} ${Josefin.variable} ${Mon_Alt.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
       >
         <Navigation />
         {children}

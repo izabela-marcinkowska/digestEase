@@ -18,6 +18,7 @@ const config = {
       shadow: 'var(--font-shadow)',
       philo: 'var(--font-philo)',
       mont: 'var(--font-mont)',
+      josefin: 'var(--font-josefin)',
     },
     container: {
       center: true,

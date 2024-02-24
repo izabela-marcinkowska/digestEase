@@ -74,3 +74,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.highlight {
+  background: url(//s2.svgbox.net/pen-brushes.svg?ic=brush-1&color=d1f1e8);
+
+  padding-top: 25px;
+  padding-bottom: 15px;
+  cc: #d1f1e8;
+}
