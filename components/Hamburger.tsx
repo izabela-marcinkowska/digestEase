@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import OpenMenu from './OpenMenu';
-import { NAV_LINKS } from '@/content';
+import { NAV_LINKS } from '@/content/main';
 
 const Hamburger = () => {
   const [isOpen, setOpen] = useState(false);

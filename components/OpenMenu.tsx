@@ -1,4 +1,4 @@
-import { NAV_LINKS } from '@/content';
+import { NAV_LINKS } from '@/content/main';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

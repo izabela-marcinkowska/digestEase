@@ -1,4 +1,4 @@
-import { saleText } from '@/content';
+import { saleText } from '@/content/main';
 
 const SaleSection = () => {
   return (
