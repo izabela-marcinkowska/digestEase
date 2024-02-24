@@ -7,13 +7,13 @@ import AIAnalyzeIcon from '@/components/icons/AIAnalyzeIcon';
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-5/6 mx-auto md:gap-22 gap-12">
+    <div className="flex flex-col w-5/6 mx-auto  md:gap-22 gap-12">
       <Hero />
       <SaleSection />
-      <div className="flex md:flex-row flex-col md:gap-2 w-10/12 mx-auto">
-        <div className="flex flex-col items-center gap-4">
+      <div className="flex lg:flex-row flex-col md:pt-4 lg:gap-2 gap-14 w-10/12 mx-auto">
+        <div className="flex flex-col items-center lg:gap-4 gap-1">
           <Drumstick size={38} strokeWidth={0.8} />
-          <h3 className="text-xl text-darkGreen font-montserratBold">
+          <h3 className="text-xl text-center text-darkGreen font-montserratBold">
             Food Diary
           </h3>
           <p className="w-5/6 text-center">
@@ -23,9 +23,9 @@ export default function Home() {
             your body right.
           </p>
         </div>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center lg:gap-4 gap-1">
           <BowelTrackerIcon width={38} />
-          <h3 className="text-xl text-darkGreen font-montserratBold">
+          <h3 className="text-xl text-center text-darkGreen font-montserratBold">
             Bowel Movement Tracker
           </h3>
           <p className="w-5/6 text-center">
@@ -35,9 +35,9 @@ export default function Home() {
             and personal insights.
           </p>
         </div>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center lg:gap-4 gap-1">
           <AIAnalyzeIcon width={38} />
-          <h3 className="text-xl text-darkGreen font-montserratBold">
+          <h3 className="text-xl text-center text-darkGreen font-montserratBold">
             Personalized AI Analysis
           </h3>
           <p className="w-5/6 text-center">

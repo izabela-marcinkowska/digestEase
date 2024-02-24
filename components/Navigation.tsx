@@ -6,7 +6,7 @@ import logoText from '../assets/DigestEaseTitleGreen.svg';
 
 const Navigation = () => {
   return (
-    <nav className="flex justify-between bg-white relative z-50 shadow-[0_0_5px_1px_rgba(0,0,0,0.1)] md:w-5/6 mx-auto md:mt-4">
+    <nav className="flex md:rounded-full justify-between bg-white relative z-50 shadow-[0_0_5px_1px_rgba(0,0,0,0.1)] md:w-5/6 mx-auto md:mt-4">
       <div className="flex items-center gap-4">
         <Link href={'/'}>
           <Image
