@@ -10,16 +10,16 @@ export default function Home() {
       <Hero />
       <SaleSection />
       <FeaturesSection />
-      <div className="w-10/12 mx-auto mt-6 shadow-lg bg-lightGreen p-4 rounded-3xl">
-        <div className="flex mt-8 justify-around">
+      <div className="md:w-10/12 mx-auto md:mt-6 shadow-lg bg-lightGreen rounded-3xl">
+        <div className="flex flex-col md:flex-row p-6 md:justify-around items-center">
           <Image
             src={picture}
             alt="picture of founder"
             width={250}
             height={250}
           />
-          <div className="w-1/2 self-center flex flex-col gap-7">
-            <h2 className="text-3xl text-center font-robotoSerif text-darkGreen">
+          <div className="md:w-1/2 text-center md:text-start self-center flex flex-col md:gap-7 gap-5">
+            <h2 className="text-3xl text-center mt-7 md:mt-0 font-robotoSerif text-darkGreen">
               Behind DigestEase
             </h2>
             <p>
