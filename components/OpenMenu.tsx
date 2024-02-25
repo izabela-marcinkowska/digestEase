@@ -1,5 +1,5 @@
+import { NAV_LINKS } from '@/content/main';
 import Link from 'next/link';
-import { NAV_LINKS } from './Hamburger';
 import { usePathname } from 'next/navigation';
 
 type Props = {
@@ -10,7 +10,7 @@ const OpenMenu = ({ visible }: Props) => {
   const pathName = usePathname();
   return (
     <div
-      className={`transition-all top-0 duration-1000 absolute md:hidden border-t-0 bg-white left-0 w-full  ${
+      className={`transition-all top-0 duration-700 absolute md:hidden border-t-0 bg-white left-0 w-full  ${
         visible
           ? 'translate-y-[4.8rem] opacity-100'
           : '-translate-y-full opacity-0'
@@ -23,7 +23,7 @@ const OpenMenu = ({ visible }: Props) => {
               <Link
                 href={link.href}
                 className={`text-xl ${
-                  pathName === link.href ? 'text-green-700' : ''
+                  pathName === link.href ? 'text-darkGreen' : ''
                 }`}
               >
                 {link.text}
