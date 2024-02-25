@@ -10,7 +10,7 @@ const OpenMenu = ({ visible }: Props) => {
   const pathName = usePathname();
   return (
     <div
-      className={`transition-all top-0 duration-1000 absolute md:hidden border-t-0 bg-white left-0 w-full  ${
+      className={`transition-all top-0 duration-700 absolute md:hidden border-t-0 bg-white left-0 w-full  ${
         visible
           ? 'translate-y-[4.8rem] opacity-100'
           : '-translate-y-full opacity-0'
