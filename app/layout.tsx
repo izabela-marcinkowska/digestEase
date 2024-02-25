@@ -13,6 +13,7 @@ import {
 } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 const open = Open_Sans({ subsets: ['latin'] });
@@ -81,6 +82,7 @@ export default function RootLayout({
       >
         <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   );
