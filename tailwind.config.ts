@@ -39,6 +39,7 @@ const config = {
         border: 'hsl(var(--border))',
         backg: '#f2f7f6',
         darkGreen: '#3A8370',
+        lightGreen: '#d1f1e8',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
