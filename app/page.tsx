@@ -1,8 +1,7 @@
 import FeaturesSection from '@/components/FeaturesSection';
+import FounderSection from '@/components/FounderSection';
 import Hero from '@/components/Hero';
 import SaleSection from '@/components/SaleSection';
-import Image from 'next/image';
-import picture from '@/assets/BellaCVRound.png';
 
 export default function Home() {
   return (
@@ -10,28 +9,7 @@ export default function Home() {
       <Hero />
       <SaleSection />
       <FeaturesSection />
-      <div className="md:w-10/12 mx-auto md:mt-6 shadow-lg bg-lightGreen rounded-3xl">
-        <div className="flex flex-col md:flex-row p-6 md:justify-around items-center">
-          <Image
-            src={picture}
-            alt="picture of founder"
-            width={250}
-            height={250}
-          />
-          <div className="md:w-1/2 text-center md:text-start self-center flex flex-col md:gap-7 gap-5">
-            <h2 className="text-3xl text-center mt-7 md:mt-0 font-robotoSerif text-darkGreen">
-              Behind DigestEase
-            </h2>
-            <p>
-              Founded by Bella, who has navigated the IBS journey herself,
-              DigestEase is more than just an app—it is a community. We are
-              committed to making the management of IBS as effortless and
-              insightful as possible, giving you back the time and freedom to
-              enjoy life to the fullest.
-            </p>
-          </div>
-        </div>
-      </div>
+      <FounderSection />
     </div>
   );
 }

@@ -39,3 +39,6 @@ export const features = [
     text: 'Leverage the wisdom of our Personalized AI Analysis to turn your health data into action. Our AI sifts through your logs, offering customized advice and identifying changes that could make a big difference to your digestive comfort.',
   },
 ];
+
+export const behindDigestEastText =
+  'Founded by Bella, who has navigated the IBS journey herself, DigestEase is more than just an app—it is a community. We are committed to making the management of IBS as effortless and insightful as possible, giving you back the time and freedom to enjoy life to the fullest.';
