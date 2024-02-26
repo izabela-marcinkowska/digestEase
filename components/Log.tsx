@@ -11,7 +11,11 @@ import {
 const Log = ({ log }: LogProps) => {
   return (
     <>
-      <Accordion type="single" collapsible>
+      <Accordion
+        type="single"
+        collapsible
+        className="border rounded-lg bg-white shadow-sm w-11/12 mx-auto"
+      >
         <AccordionItem value="item-1">
           <AccordionTrigger>{log.date}</AccordionTrigger>
           <AccordionContent>
