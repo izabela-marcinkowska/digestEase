@@ -1,15 +1,12 @@
-"use client";
-import type { Log as LogType } from "../app/logs/page";
+'use client';
+import type { LogProps } from '../content/types';
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-
-type LogProps = {
-  log: LogType;
-};
+} from '@/components/ui/accordion';
 
 const Log = ({ log }: LogProps) => {
   return (
@@ -19,12 +16,12 @@ const Log = ({ log }: LogProps) => {
           <AccordionTrigger>{log.date}</AccordionTrigger>
           <AccordionContent>
             <div>Date: {log.date}</div>
-            <div>Food Input: {log.foodInput.join(", ")}</div>
-            <div>Alcohol: {log.alcohol ? "Yes" : "No"}</div>
+            <div>Food Input: {log.foodInput.join(', ')}</div>
+            <div>Alcohol: {log.alcohol ? 'Yes' : 'No'}</div>
             <div>Bowel Movements: {log.bowelMovements}</div>
             <div>Stress Level: {log.stress}</div>
-            <div>Pain: {log.pain ? "Yes" : "No"}</div>
-            <div>Nausea: {log.nausea ? "Yes" : "No"}</div>
+            <div>Pain: {log.pain ? 'Yes' : 'No'}</div>
+            <div>Nausea: {log.nausea ? 'Yes' : 'No'}</div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
