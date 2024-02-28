@@ -36,7 +36,9 @@ const LogBox = () => {
       </div>
       <div className="flex flex-col gap-3">
         {logs.map((log: LogType) => (
-          <Log key={log.id} log={log} />
+          <>
+            <Log key={log.id} log={log} />
+          </>
         ))}
       </div>
     </div>
