@@ -15,12 +15,12 @@ const Log = ({ log }: LogProps) => {
       <Accordion
         type="single"
         collapsible
-        className="border rounded-lg bg-white shadow-sm w-11/12 mx-auto"
+        className="border rounded-lg bg-white shadow-sm w-1/3"
       >
         <AccordionItem value="item-1">
           <AccordionTrigger>{log.date}</AccordionTrigger>
-          <AccordionContent className="flex md:justify-around w-3/4 mx-auto flex-col md:flex-row">
-            <div className="bg-green-50 md:w-1/5 rounded-lg">
+          <AccordionContent className="flex w-3/4 mx-auto flex-col gap-2">
+            <div>
               <p className="text-lg">Food:</p>
               {log.foodInput.map((food, index) => (
                 <p key={index} className="ml-2">

@@ -34,9 +34,10 @@ const LogBox = () => {
           <PlusCircle size={34} />
         </Link>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 w-11/12 mx-auto">
         {logs.map((log: LogType) => (
           <>
+            <p>{log.date}</p>
             <Log key={log.id} log={log} />
           </>
         ))}
