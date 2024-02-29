@@ -1,6 +1,5 @@
-export type Log = {
+export type oneDay = {
   id: string;
-  date: string;
   foodInput: string[];
   alcohol: boolean;
   bowelMovements: string;
@@ -9,6 +8,11 @@ export type Log = {
   nausea: boolean;
 };
 
-export type LogProps = {
-  log: Log;
+export type oneDayProp = {
+  log: oneDay;
+};
+
+export type Log = {
+  day: string;
+  logs: oneDay[];
 };
