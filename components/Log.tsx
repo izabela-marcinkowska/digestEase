@@ -16,7 +16,7 @@ const Log = ({ log }: SingleDayProp) => {
       <Accordion
         type="single"
         collapsible
-        className="border rounded-lg bg-white shadow-sm w-1/3"
+        className="border rounded-lg bg-white shadow-sm "
       >
         <AccordionItem value="item-1">
           <AccordionTrigger>One log</AccordionTrigger>

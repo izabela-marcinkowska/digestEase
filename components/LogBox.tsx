@@ -35,9 +35,13 @@ const LogBox = () => {
         {logs.map((log: DayLogs, logindex) => (
           <div key={logindex}>
             <p>{log.day}</p>
-            {log.logs.map((oneLog: SingleLog, oneLogIndex) => (
-              <Log key={oneLogIndex} log={oneLog} />
-            ))}
+            <div className="flex gap-2">
+              {log.logs.map((oneLog: SingleLog, oneLogIndex) => (
+                <div key={oneLogIndex} className="w-1/4">
+                  <Log log={oneLog} />
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
