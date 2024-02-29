@@ -6,6 +6,7 @@ export type SingleLog = {
   stress: number;
   pain: boolean;
   nausea: boolean;
+  type: string;
 };
 
 export type SingleDayProp = {

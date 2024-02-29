@@ -19,7 +19,7 @@ const Log = ({ log }: SingleDayProp) => {
         className="border rounded-lg bg-white shadow-sm "
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger>One log</AccordionTrigger>
+          <AccordionTrigger>{log.type}</AccordionTrigger>
           <AccordionContent className="flex w-3/4 mx-auto flex-col gap-5">
             <div>
               <p className="text-lg">Food:</p>
