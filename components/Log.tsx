@@ -1,5 +1,5 @@
 'use client';
-import type { LogProps } from '../content/types';
+import type { oneDay, oneDayProp } from '../content/types';
 
 import {
   Accordion,
@@ -9,7 +9,8 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from './ui/button';
 
-const Log = ({ log }: LogProps) => {
+const Log = ({ log }: oneDayProp) => {
+  console.log('the', log);
   return (
     <>
       <Accordion
@@ -18,28 +19,27 @@ const Log = ({ log }: LogProps) => {
         className="border rounded-lg bg-white shadow-sm w-1/3"
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger>{log.date}</AccordionTrigger>
-          <AccordionContent className="flex w-3/4 mx-auto flex-col gap-2">
+          <AccordionTrigger>One log</AccordionTrigger>
+          <AccordionContent className="flex w-3/4 mx-auto flex-col gap-5">
             <div>
               <p className="text-lg">Food:</p>
-              {log.foodInput.map((food, index) => (
-                <p key={index} className="ml-2">
-                  {food}
-                </p>
-              ))}
+              <ul>
+                {log.foodInput.map((logEntry, logIndex) => (
+                  <li key={logIndex}>{logEntry}</li>
+                ))}
+              </ul>
             </div>
+
             <div>
-              <div>
-                <div>Alcohol: {log.alcohol ? 'Yes' : 'No'}</div>
-                <div>Stress Level: {log.stress}</div>
-                <div>Bowel Movements: {log.bowelMovements}</div>
-                <div>Pain: {log.pain ? 'Yes' : 'No'}</div>
-                <div>Nausea: {log.nausea ? 'Yes' : 'No'}</div>
-              </div>
-              <div>
-                <Button className="p-3 bg-red-500 w-28">Delete</Button>
-                <Button className="p-3 bg-green-500 w-28">Edit</Button>
-              </div>
+              <div>Alcohol: {log.alcohol ? 'Yes' : 'No'}</div>
+              <div>Stress Level: {log.stress}</div>
+              <div>Bowel Movements: {log.bowelMovements}</div>
+              <div>Pain: {log.pain ? 'Yes' : 'No'}</div>
+              <div>Nausea: {log.nausea ? 'Yes' : 'No'}</div>
+            </div>
+            <div className="flex gap-3 justify-between">
+              <Button className="p-3 bg-red-500 w-28">Delete</Button>
+              <Button className="p-3 bg-green-500 w-28">Edit</Button>
             </div>
           </AccordionContent>
         </AccordionItem>

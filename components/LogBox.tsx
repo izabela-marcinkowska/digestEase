@@ -1,10 +1,11 @@
 'use client';
 import { createClient } from '@supabase/supabase-js';
-import type { Log as LogType } from '../content/types';
+import type { Log as LogType, oneDay } from '../content/types';
 import Link from 'next/link';
 import { PlusCircle } from 'lucide-react';
 import Log from '@/components/Log';
 import { useEffect, useState } from 'react';
+import { Long_Cang } from 'next/font/google';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
@@ -15,10 +16,7 @@ const LogBox = () => {
 
   useEffect(() => {
     const getLogs = async () => {
-      const { data, error } = await supabase
-        .from('Logs')
-        .select()
-        .order('date', { ascending: false });
+      const { data, error } = await supabase.rpc('get_logs_grouped_by_day');
       setLogs(data as LogType[]);
     };
     getLogs();
@@ -35,11 +33,13 @@ const LogBox = () => {
         </Link>
       </div>
       <div className="flex flex-col gap-3 w-11/12 mx-auto">
-        {logs.map((log: LogType) => (
-          <>
-            <p>{log.date}</p>
-            <Log key={log.id} log={log} />
-          </>
+        {logs.map((log: LogType, logindex) => (
+          <div key={logindex}>
+            <p>{log.day}</p>
+            {log.logs.map((oneLog: oneDay, oneLogIndex) => (
+              <Log key={oneLogIndex} log={oneLog} />
+            ))}
+          </div>
         ))}
       </div>
     </div>
