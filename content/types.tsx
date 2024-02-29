@@ -1,4 +1,4 @@
-export type oneDay = {
+export type SingleLog = {
   id: string;
   foodInput: string[];
   alcohol: boolean;
@@ -8,11 +8,11 @@ export type oneDay = {
   nausea: boolean;
 };
 
-export type oneDayProp = {
-  log: oneDay;
+export type SingleDayProp = {
+  log: SingleLog;
 };
 
-export type Log = {
+export type DayLogs = {
   day: string;
-  logs: oneDay[];
+  logs: SingleLog[];
 };

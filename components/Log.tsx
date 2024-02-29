@@ -1,5 +1,5 @@
 'use client';
-import type { oneDay, oneDayProp } from '../content/types';
+import type { SingleLog, SingleDayProp } from '../content/types';
 
 import {
   Accordion,
@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from './ui/button';
 
-const Log = ({ log }: oneDayProp) => {
+const Log = ({ log }: SingleDayProp) => {
   console.log('the', log);
   return (
     <>
