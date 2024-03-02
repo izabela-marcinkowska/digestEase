@@ -25,24 +25,24 @@ const Log = ({ log }: SingleDayProp) => {
         <AccordionItem value="item-1">
           <AccordionTrigger>{log.type}</AccordionTrigger>
           <AccordionContent className="flex w-3/4 mx-auto flex-col gap-6">
-            <div>
-              <div className="flex gap-1">
-                <Wine strokeWidth={1.1} />
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-1 items-center">
+                <Wine strokeWidth={1} />
                 Alcohol: {log.alcohol ? 'Yes' : 'No'}
               </div>
-              <div className="flex gap-1">
-                <SmilePlus strokeWidth={1.1} />
+              <div className="flex gap-1 items-center">
+                <SmilePlus strokeWidth={1} />
                 Stress Level: {log.stress}
               </div>
-              <div className="flex gap-1">
-                <BloatedIcon width={25} />
+              <div className="flex gap-1 items-center">
+                <BloatedIcon width={23} />
                 Bowel: {log.bowelMovements}
               </div>
-              <div className="flex gap-1">
+              <div className="flex gap-1.5 items-center">
                 <PainIcon width={21} />
                 Pain: {log.pain ? 'Yes' : 'No'}
               </div>
-              <div className="flex gap-1">
+              <div className="flex gap-1 items-center">
                 <NauseaIcon width={21} />
                 Nausea: {log.nausea ? 'Yes' : 'No'}
               </div>
