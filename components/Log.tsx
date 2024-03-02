@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from './ui/button';
-import { SmilePlus, Wine } from 'lucide-react';
+import { Pencil, SmilePlus, Trash2, Wine } from 'lucide-react';
 import BloatedIcon from './icons/BloatedIcon';
 import PainIcon from './icons/PainIcon';
 import NauseaIcon from './icons/NauseaIcon';
@@ -42,7 +42,7 @@ const Log = ({ log }: SingleDayProp) => {
                 <PainIcon width={21} />
                 Pain: {log.pain ? 'Yes' : 'No'}
               </div>
-              <div className="flex gap-1 items-center">
+              <div className="flex gap-1.5 items-center">
                 <NauseaIcon width={21} />
                 Nausea: {log.nausea ? 'Yes' : 'No'}
               </div>
@@ -56,8 +56,14 @@ const Log = ({ log }: SingleDayProp) => {
               </ul>
             </div>
             <div className="flex gap-3 justify-between">
-              <Button className="p-3 bg-green-500 w-28">Edit</Button>
-              <Button className="p-3 bg-red-500 w-28">Delete</Button>
+              <Button className="p-3 bg-green-500 w-28 flex gap-2">
+                <Pencil width={17} />
+                Edit
+              </Button>
+              <Button className="p-3 bg-red-500 w-28 flex gap-2">
+                <Trash2 width={17} />
+                Delete
+              </Button>
             </div>
           </AccordionContent>
         </AccordionItem>
