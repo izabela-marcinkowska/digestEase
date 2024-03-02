@@ -56,8 +56,8 @@ const Log = ({ log }: SingleDayProp) => {
               </ul>
             </div>
             <div className="flex gap-3 justify-between">
-              <Button className="p-3 bg-red-500 w-28">Delete</Button>
               <Button className="p-3 bg-green-500 w-28">Edit</Button>
+              <Button className="p-3 bg-red-500 w-28">Delete</Button>
             </div>
           </AccordionContent>
         </AccordionItem>
