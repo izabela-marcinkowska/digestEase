@@ -56,11 +56,11 @@ const Log = ({ log }: SingleDayProp) => {
               </ul>
             </div>
             <div className="flex gap-3 justify-between">
-              <Button className="p-3 bg-green-500 w-28 flex gap-2">
+              <Button className="p-3 w-28 flex gap-2" variant={'outline'}>
                 <Pencil width={17} />
                 Edit
               </Button>
-              <Button className="p-3 bg-red-500 w-28 flex gap-2">
+              <Button className="p-3 w-28 flex gap-2" variant={'destructive'}>
                 <Trash2 width={17} />
                 Delete
               </Button>
