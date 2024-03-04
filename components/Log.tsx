@@ -8,11 +8,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from './ui/button';
-import { Pencil, SmilePlus, Trash2, Wine } from 'lucide-react';
-import BloatedIcon from './icons/BloatedIcon';
-import PainIcon from './icons/PainIcon';
-import NauseaIcon from './icons/NauseaIcon';
-import { categories } from '@/content/logsContent';
+import { Pencil, Trash2 } from 'lucide-react';
 import LogCategory from './LogCategory';
 
 const Log = ({ log }: SingleDayProp) => {
@@ -27,36 +23,7 @@ const Log = ({ log }: SingleDayProp) => {
         <AccordionItem value="item-1">
           <AccordionTrigger>{log.type}</AccordionTrigger>
           <AccordionContent className="flex w-3/4 mx-auto flex-col gap-6">
-            {categories.map((category, index) => (
-              <LogCategory
-                key={index}
-                icon={category.icon}
-                title={category.title}
-                log={log}
-              />
-            ))}
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-1 items-center">
-                <Wine strokeWidth={1} />
-                Alcohol: {log.alcohol ? 'Yes' : 'No'}
-              </div>
-              <div className="flex gap-1 items-center">
-                <SmilePlus strokeWidth={1} />
-                Stress Level: {log.stress}
-              </div>
-              <div className="flex gap-1 items-center">
-                <BloatedIcon width={23} />
-                Bowel: {log.bowelMovements}
-              </div>
-              <div className="flex gap-1.5 items-center">
-                <PainIcon width={21} />
-                Pain: {log.pain ? 'Yes' : 'No'}
-              </div>
-              <div className="flex gap-1.5 items-center">
-                <NauseaIcon width={21} />
-                Nausea: {log.nausea ? 'Yes' : 'No'}
-              </div>
-            </div>
+            <LogCategory log={log} />
             <div>
               <p className="text-lg mb-2">Food:</p>
               <ul className="w-11/12 mx-auto">
