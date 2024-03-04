@@ -1,3 +1,5 @@
+import { LucideIcon } from 'lucide-react';
+
 export type SingleLog = {
   id: string;
   foodInput: string[];
@@ -16,4 +18,10 @@ export type SingleDayProp = {
 export type DayLogs = {
   day: string;
   logs: SingleLog[];
+};
+
+export type LogCategoryProp = {
+  icon: LucideIcon | any;
+  title: string;
+  log: SingleLog;
 };

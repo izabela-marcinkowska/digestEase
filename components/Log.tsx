@@ -12,6 +12,8 @@ import { Pencil, SmilePlus, Trash2, Wine } from 'lucide-react';
 import BloatedIcon from './icons/BloatedIcon';
 import PainIcon from './icons/PainIcon';
 import NauseaIcon from './icons/NauseaIcon';
+import { categories } from '@/content/logsContent';
+import LogCategory from './LogCategory';
 
 const Log = ({ log }: SingleDayProp) => {
   console.log('the', log);
@@ -25,6 +27,14 @@ const Log = ({ log }: SingleDayProp) => {
         <AccordionItem value="item-1">
           <AccordionTrigger>{log.type}</AccordionTrigger>
           <AccordionContent className="flex w-3/4 mx-auto flex-col gap-6">
+            {categories.map((category, index) => (
+              <LogCategory
+                key={index}
+                icon={category.icon}
+                title={category.title}
+                log={log}
+              />
+            ))}
             <div className="flex flex-col gap-2">
               <div className="flex gap-1 items-center">
                 <Wine strokeWidth={1} />
