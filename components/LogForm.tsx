@@ -27,6 +27,7 @@ const LogForm = () => {
   } = useForm<RegLog>({
     defaultValues: {
       alcohol: false,
+      type: 'breakfast',
       pain: false,
       nausea: false,
       stress: 1,
@@ -58,6 +59,7 @@ const LogForm = () => {
           stress: finalData.stress,
           pain: finalData.pain,
           nausea: finalData.nausea,
+          type: finalData.type,
         },
       ]);
 
@@ -66,6 +68,7 @@ const LogForm = () => {
         alcohol: false,
         pain: false,
         nausea: false,
+        type: 'breakfast',
         stress: 1,
         foodInput: [],
       });
@@ -135,6 +138,22 @@ const LogForm = () => {
               <option value="Bloated">Bloated</option>
               <option value="Normal">Normal</option>
               <option value="Diarrhea">Diarrhea</option>
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <span className="label-text">Type:</span>
+            <select
+              {...register('type', { required: true })}
+              className="select select-bordered w-full max-w-xs"
+            >
+              {errors.type && 'Bowel movement is required'}
+              <option disabled value="">
+                Type:
+              </option>
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Dinner">Dinner</option>
+              <option value="Snacks">Snacks</option>
             </select>
           </div>
           <div className="flex flex-col">
