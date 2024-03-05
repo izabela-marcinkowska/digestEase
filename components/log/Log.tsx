@@ -1,5 +1,5 @@
 'use client';
-import type { SingleLog, SingleDayProp } from '../content/types';
+import type { SingleLog, SingleDayProp } from '@/content/types';
 
 import {
   Accordion,
@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { Pencil, Trash2 } from 'lucide-react';
 import LogCategory from './LogCategory';
 

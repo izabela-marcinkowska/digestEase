@@ -1,7 +1,7 @@
-import FeaturesSection from '@/components/FeaturesSection';
-import FounderSection from '@/components/FounderSection';
-import Hero from '@/components/Hero';
-import SaleSection from '@/components/SaleSection';
+import FeaturesSection from '@/components/index/FeaturesSection';
+import FounderSection from '@/components/index/FounderSection';
+import Hero from '@/components/index/Hero';
+import SaleSection from '@/components/index/SaleSection';
 
 export default function Home() {
   return (

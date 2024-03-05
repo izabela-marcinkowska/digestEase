@@ -1,4 +1,4 @@
-import LogBox from '@/components/LogBox';
+import LogBox from '@/components/log/LogBox';
 
 const Logs = async () => {
   return (

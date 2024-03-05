@@ -1,13 +1,14 @@
-"use client";
-import { useState } from "react";
-import type { Log as LogType } from "../app/logs/page";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { createClient } from "@supabase/supabase-js";
-import Link from "next/link";
-import { XCircle } from "lucide-react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { format, parseISO } from "date-fns";
+'use client';
+import { useState } from 'react';
+
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { createClient } from '@supabase/supabase-js';
+import Link from 'next/link';
+import { XCircle } from 'lucide-react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { format, parseISO } from 'date-fns';
+import { SingleLog } from '@/content/types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
@@ -15,7 +16,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const LogForm = () => {
   const [foodItems, setFoodItems] = useState<string[]>([]); // State to hold the list of food items
-  const [currentFoodItem, setCurrentFoodItem] = useState(""); // State to hold the current input value
+  const [currentFoodItem, setCurrentFoodItem] = useState(''); // State to hold the current input value
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
   const {
@@ -24,7 +25,7 @@ const LogForm = () => {
     control,
     reset,
     formState: { errors },
-  } = useForm<LogType>({
+  } = useForm<SingleLog>({
     defaultValues: {
       alcohol: false,
       pain: false,
@@ -37,19 +38,19 @@ const LogForm = () => {
   const handleAddFoodItem = () => {
     if (currentFoodItem) {
       setFoodItems([...foodItems, currentFoodItem]);
-      setCurrentFoodItem(""); // Clear the input after adding
+      setCurrentFoodItem(''); // Clear the input after adding
     }
   };
 
-  const onSubmit: SubmitHandler<LogType> = async (data: LogType) => {
+  const onSubmit: SubmitHandler<SingleLog> = async (data: SingleLog) => {
     const finalData = {
       ...data,
       foodInput: foodItems,
     };
-    console.log("Submitting data:", finalData);
+    console.log('Submitting data:', finalData);
 
     try {
-      const { data, error } = await supabase.from("Logs").insert([
+      const { data, error } = await supabase.from('Logs').insert([
         {
           date: finalData.date,
           foodInput: finalData.foodInput,
@@ -74,13 +75,13 @@ const LogForm = () => {
       setSubmissionSuccess(true); // Set submission success state to true
       setTimeout(() => setSubmissionSuccess(false), 5000); // Optionally, hide the message after 5 seconds
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error('Submission error:', error);
       setSubmissionSuccess(false);
     }
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       event.preventDefault(); // Prevent the default form submit behavior
       handleAddFoodItem();
     }
@@ -89,7 +90,7 @@ const LogForm = () => {
     <div className="flex flex-col">
       <div className="flex justify-between mx-4 my-8">
         <h1 className="text-3xl">Add log</h1>
-        <Link href={"/logs"}>
+        <Link href={'/logs'}>
           <XCircle size={34} />
         </Link>
       </div>
@@ -101,7 +102,7 @@ const LogForm = () => {
           <Controller
             control={control}
             name="date"
-            rules={{ required: "Date is required" }} // Add validation rules here
+            rules={{ required: 'Date is required' }} // Add validation rules here
             render={({
               field: { onChange, onBlur, value },
               fieldState: { error },
@@ -111,13 +112,13 @@ const LogForm = () => {
                   className="select select-bordered w-full max-w-xs"
                   placeholderText="Select date"
                   onChange={(date) =>
-                    onChange(date ? format(date, "yyyy-MM-dd") : "")
+                    onChange(date ? format(date, 'yyyy-MM-dd') : '')
                   }
                   onBlur={onBlur}
                   selected={value ? parseISO(value) : null}
                   dateFormat="yyyy-MM-dd"
                 />
-                {error && <p className="text-red-500">{error.message}</p>}{" "}
+                {error && <p className="text-red-500">{error.message}</p>}{' '}
                 {/* Display error message */}
               </>
             )}
@@ -125,10 +126,10 @@ const LogForm = () => {
           <div className="flex flex-col">
             <span className="label-text">Bowel Movements:</span>
             <select
-              {...register("bowelMovements", { required: true })}
+              {...register('bowelMovements', { required: true })}
               className="select select-bordered w-full max-w-xs"
             >
-              {errors.bowelMovements && "Bowel movement is required"}
+              {errors.bowelMovements && 'Bowel movement is required'}
               <option disabled value="">
                 Bowel Movements:
               </option>
@@ -142,7 +143,7 @@ const LogForm = () => {
               <label className="cursor-pointer label">
                 <span className="label-text">Alcohol</span>
                 <input
-                  {...register("alcohol")}
+                  {...register('alcohol')}
                   type="checkbox"
                   className="toggle toggle-primary"
                 />
@@ -152,7 +153,7 @@ const LogForm = () => {
               <label className="cursor-pointer label">
                 <span className="label-text">Pain</span>
                 <input
-                  {...register("pain")}
+                  {...register('pain')}
                   type="checkbox"
                   className="toggle toggle-primary"
                 />
@@ -162,7 +163,7 @@ const LogForm = () => {
               <label className="cursor-pointer label">
                 <span className="label-text">Nausea</span>
                 <input
-                  {...register("nausea")}
+                  {...register('nausea')}
                   type="checkbox"
                   className="toggle toggle-primary"
                 />
@@ -173,7 +174,7 @@ const LogForm = () => {
             <div className="label">
               <span className="label-text">Stress Level:</span>
             </div>
-            <select {...register("stress")} className="select select-bordered">
+            <select {...register('stress')} className="select select-bordered">
               <option disabled>Stress level:</option>
               <option>1</option>
               <option>2</option>
@@ -213,11 +214,11 @@ const LogForm = () => {
                 {/* Existing input and button elements */}
               </div>
               <div className="space-y-2">
-                {" "}
+                {' '}
                 {/* Vertical spacing between items */}
                 {foodItems.map((item, index) => (
                   <div key={index} className="card bg-accent shadow-xl p-4">
-                    {" "}
+                    {' '}
                     {/* Card style for each item */}
                     <span>{item}</span>
                   </div>

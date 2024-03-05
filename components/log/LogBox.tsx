@@ -1,9 +1,9 @@
 'use client';
 import { createClient } from '@supabase/supabase-js';
-import type { DayLogs, SingleLog } from '../content/types';
+import type { DayLogs, SingleLog } from '@/content/types';
 import Link from 'next/link';
 import { PlusCircle } from 'lucide-react';
-import Log from '@/components/Log';
+import Log from '@/components/log/Log';
 import { useEffect, useState } from 'react';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;

@@ -1,8 +1,8 @@
 import { LogCategoryProp } from '@/content/types';
 import { SmilePlus, Wine } from 'lucide-react';
-import BloatedIcon from './icons/BloatedIcon';
-import PainIcon from './icons/PainIcon';
-import NauseaIcon from './icons/NauseaIcon';
+import BloatedIcon from '../icons/BloatedIcon';
+import PainIcon from '../icons/PainIcon';
+import NauseaIcon from '../icons/NauseaIcon';
 
 const LogCategory = ({ log }: LogCategoryProp) => {
   return (

@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import tarm from '../assets/tarm.svg';
-import LogotextDark from '../assets/DigestEaseTitleGreen.svg';
+import tarm from '@/assets/tarm.svg';
+import LogotextDark from '@/assets/DigestEaseTitleGreen.svg';
 
 const Hero = () => {
   return (
