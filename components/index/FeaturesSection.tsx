@@ -1,4 +1,4 @@
-import Feature from '@/components/Feature';
+import Feature from '@/components/index/Feature';
 import { features } from '@/content/main';
 
 const FeaturesSection = () => {
