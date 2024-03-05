@@ -29,3 +29,15 @@ export type FeatureProp = {
   title: string;
   text: string;
 };
+
+export type RegLog = {
+  date: string;
+  id: string;
+  foodInput: string[];
+  alcohol: boolean;
+  bowelMovements: string;
+  stress: number;
+  pain: boolean;
+  nausea: boolean;
+  type: string;
+};
