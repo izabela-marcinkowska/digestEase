@@ -23,3 +23,9 @@ export type DayLogs = {
 export type LogCategoryProp = {
   log: SingleLog;
 };
+
+export type FeatureProp = {
+  icon: LucideIcon | any;
+  title: string;
+  text: string;
+};

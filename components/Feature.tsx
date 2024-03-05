@@ -1,10 +1,4 @@
-import { LucideIcon } from 'lucide-react';
-
-type FeatureProp = {
-  icon: LucideIcon | any;
-  title: string;
-  text: string;
-};
+import { FeatureProp } from '@/content/types';
 
 const Feature = ({ icon, title, text }: FeatureProp) => {
   return (
