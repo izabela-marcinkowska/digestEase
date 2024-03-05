@@ -9,31 +9,31 @@ const LogCategory = ({ log }: LogCategoryProp) => {
     <div className="flex flex-col gap-2">
       <div className="flex gap-1 items-center">
         <div className="min-w-6">
-          <Wine strokeWidth={1} />
+          <Wine strokeWidth={1} color="darkGreen" />
         </div>
         Alcohol: {log.alcohol ? 'Yes' : 'No'}
       </div>
       <div className="flex gap-1 items-center">
         <div className="min-w-6">
-          <SmilePlus strokeWidth={1} />
+          <SmilePlus strokeWidth={1} color="darkGreen" />
         </div>
         Stress Level: {log.stress}
       </div>
       <div className="flex gap-1 items-center">
         <div className="min-w-6">
-          <BloatedIcon width={23} />
+          <BloatedIcon width={23} color="darkGreen" />
         </div>
         Bowel: {log.bowelMovements}
       </div>
       <div className="flex gap-1 items-center">
         <div className="min-w-6">
-          <PainIcon width={21} />
+          <PainIcon width={21} color="darkGreen" />
         </div>
         Pain: {log.pain ? 'Yes' : 'No'}
       </div>
       <div className="flex gap-1 items-center">
         <div className="min-w-6">
-          <NauseaIcon width={21} />
+          <NauseaIcon width={21} color="darkGreen" />
         </div>
         Nausea: {log.nausea ? 'Yes' : 'No'}
       </div>

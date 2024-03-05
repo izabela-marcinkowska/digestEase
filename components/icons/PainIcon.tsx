@@ -1,4 +1,4 @@
-const PainIcon = ({ width }: { width: number }) => {
+const PainIcon = ({ width, color }: { width: number; color: string }) => {
   return (
     <svg
       id="Lager_2"
@@ -6,6 +6,7 @@ const PainIcon = ({ width }: { width: number }) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 90.01 102.95"
       width={width}
+      fill={color}
     >
       <g id="Lager_1-2" data-name="Lager 1">
         <g>
