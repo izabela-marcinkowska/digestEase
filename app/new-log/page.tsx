@@ -1,9 +1,8 @@
-// import LogForm from "../../components/LogForm";
+import LogForm from '@/components/LogForm';
 const NewLog = () => {
   return (
     <div className="justify-between">
-      Hello
-      {/* <LogForm /> */}
+      <LogForm />
     </div>
   );
 };
