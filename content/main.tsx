@@ -10,12 +10,12 @@ export const howItWorksDescription =
 
 export const NAV_LINKS = [
   {
-    text: 'Logs',
-    href: '/logs',
+    text: 'Journal',
+    href: '/journal',
   },
   {
-    text: 'Rapports',
-    href: '/rapports',
+    text: 'Reports',
+    href: '/reports',
   },
 ];
 

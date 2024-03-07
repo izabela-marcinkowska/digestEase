@@ -11,21 +11,21 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const LogBox = () => {
-  const [logs, setLogs] = useState<DayLogs[]>([]);
+  // const [logs, setLogs] = useState<DayLogs[]>([]);
 
-  useEffect(() => {
-    const getLogs = async () => {
-      const { data, error } = await supabase.rpc('get_logs_grouped_by_day');
-      setLogs(data as DayLogs[]);
-    };
-    getLogs();
-  }, []);
+  // useEffect(() => {
+  //   const getLogs = async () => {
+  //     const { data, error } = await supabase.rpc('get_logs_grouped_by_day');
+  //     setLogs(data as DayLogs[]);
+  //   };
+  //   getLogs();
+  // }, []);
 
-  console.log('logs', logs);
+  // console.log('logs', logs);
 
   return (
     <div>
-      <div className="flex justify-between m-10">
+      {/* <div className="flex justify-between m-10">
         <h1 className="text-3xl">Logs</h1>
         <Link href={'/new-log'}>
           <PlusCircle size={34} />
@@ -44,7 +44,8 @@ const LogBox = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+      <h1>This site is dead now</h1>
     </div>
   );
 };

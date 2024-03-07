@@ -1,6 +1,6 @@
 import RapportBox from '@/components/RapportBox';
 
-const Rapports = () => {
+const Reports = () => {
   return (
     <>
       <RapportBox />
@@ -8,4 +8,4 @@ const Rapports = () => {
   );
 };
 
-export default Rapports;
+export default Reports;
