@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 // const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 // const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
 // const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// This is test text
 
 const LogBox = () => {
   // const [logs, setLogs] = useState<DayLogs[]>([]);
