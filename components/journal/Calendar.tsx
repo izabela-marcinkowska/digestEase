@@ -1,35 +1,55 @@
 'use client';
-import { startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
+import {
+  startOfWeek,
+  endOfWeek,
+  eachDayOfInterval,
+  subDays,
+  addDays,
+} from 'date-fns';
+import { useEffect, useState } from 'react';
 
 const today = new Date();
-const getWeekStartAndEnd = (date: Date) => {
+const getWeekStartAndEnd = (date: Date): Date[] => {
   const monday = startOfWeek(date, { weekStartsOn: 1 }); // Monday
   const sunday = endOfWeek(date, { weekStartsOn: 1 }); // Sunday
   return [monday, sunday];
 };
 
-const showWeek = (monday: Date, sunday: Date) => {
-  eachDayOfInterval({
-    start: monday,
-    end: sunday,
-  });
-  return eachDayOfInterval;
-};
-
 const Calendar = () => {
-  const result = getWeekStartAndEnd(today);
-  const week = eachDayOfInterval({
-    start: result[0],
-    end: result[1],
-  });
-  console.log(result[0]);
-  console.log('week', week);
+  const [currentDay, setCurrentDay] = useState(today);
+  const [week, setWeek] = useState<Date[]>([]);
+
+  useEffect(() => {
+    const result = getWeekStartAndEnd(currentDay);
+    const calculatedWeek = eachDayOfInterval({
+      start: result[0],
+      end: result[1],
+    });
+    setWeek(calculatedWeek);
+  }, [currentDay]);
+
+  const moveToPrevWeek = () => {
+    const startOfLastWeek = subDays(
+      startOfWeek(currentDay, { weekStartsOn: 1 }),
+      7
+    );
+    setCurrentDay(startOfLastWeek);
+  };
+  const moveToNextWeek = () => {
+    const startOfLastWeek = addDays(
+      startOfWeek(currentDay, { weekStartsOn: 1 }),
+      7
+    );
+    setCurrentDay(startOfLastWeek);
+  };
 
   return (
     <>
+      <h1 onClick={moveToPrevWeek}>Last Week</h1>
       {week.map((weekday, index) => (
         <p key={index}>{weekday.toDateString()}</p>
       ))}
+      <h1 onClick={moveToNextWeek}>Next Week</h1>
     </>
   );
 };
