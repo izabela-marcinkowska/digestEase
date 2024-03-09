@@ -5,6 +5,7 @@ import {
   eachDayOfInterval,
   subDays,
   addDays,
+  format,
 } from 'date-fns';
 import { useEffect, useState } from 'react';
 
@@ -47,7 +48,7 @@ const Calendar = () => {
     <>
       <h1 onClick={moveToPrevWeek}>Last Week</h1>
       {week.map((weekday, index) => (
-        <p key={index}>{weekday.toDateString()}</p>
+        <p key={index}>{format(weekday, 'd LLL')}</p>
       ))}
       <h1 onClick={moveToNextWeek}>Next Week</h1>
     </>
