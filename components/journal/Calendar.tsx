@@ -6,6 +6,7 @@ import {
   subDays,
   addDays,
   format,
+  isBefore,
 } from 'date-fns';
 import { useEffect, useState } from 'react';
 
@@ -46,7 +47,9 @@ const Calendar = () => {
   };
 
   const handleSelectDay = (weekday: Date) => {
-    setChosenDay(weekday);
+    if (isBefore(weekday, today)) {
+      setChosenDay(weekday);
+    }
   };
 
   return (
