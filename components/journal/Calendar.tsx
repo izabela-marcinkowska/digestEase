@@ -19,6 +19,7 @@ const getWeekStartAndEnd = (date: Date): Date[] => {
 const Calendar = () => {
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState<Date[]>([]);
+  const [chosenDay, setChosenDay] = useState<Date>(today);
 
   useEffect(() => {
     const result = getWeekStartAndEnd(currentDay);
@@ -44,13 +45,20 @@ const Calendar = () => {
     setCurrentDay(startOfLastWeek);
   };
 
+  const handleSelectDay = (weekday: Date) => {
+    setChosenDay(weekday);
+  };
+
   return (
     <>
       <h1 onClick={moveToPrevWeek}>Last Week</h1>
       {week.map((weekday, index) => (
-        <p key={index}>{format(weekday, 'd LLL')}</p>
+        <p onClick={() => handleSelectDay(weekday)} key={index}>
+          {format(weekday, 'd LLL')}
+        </p>
       ))}
       <h1 onClick={moveToNextWeek}>Next Week</h1>
+      <p>Chsoen day is: {chosenDay.toDateString()}</p>
     </>
   );
 };
