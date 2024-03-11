@@ -6,6 +6,7 @@ import {
   subDays,
   addDays,
   format,
+  isToday,
   isBefore,
   isAfter,
   isSameDay,
@@ -63,7 +64,11 @@ const Calendar = () => {
     <>
       <h1 onClick={moveToPrevWeek}>Last Week</h1>
       {week.map((weekday, index) => (
-        <p onClick={() => handleSelectDay(weekday)} key={index}>
+        <p
+          onClick={() => handleSelectDay(weekday)}
+          key={index}
+          className={`${isSameDay(chosenDay, weekday) ? 'bg-green-600' : ''}`}
+        >
           {format(weekday, 'd LLL')}
         </p>
       ))}
