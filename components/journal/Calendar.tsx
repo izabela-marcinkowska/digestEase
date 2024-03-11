@@ -7,6 +7,8 @@ import {
   addDays,
   format,
   isBefore,
+  isAfter,
+  isSameDay,
 } from 'date-fns';
 import { useEffect, useState } from 'react';
 
@@ -39,11 +41,16 @@ const Calendar = () => {
     setCurrentDay(startOfLastWeek);
   };
   const moveToNextWeek = () => {
-    const startOfLastWeek = addDays(
+    // Calculate the start of the next week from the current day
+    const nextWeekStart = addDays(
       startOfWeek(currentDay, { weekStartsOn: 1 }),
       7
     );
-    setCurrentDay(startOfLastWeek);
+
+    // Only move to the next week if the next week's start is before or the same as 'today'
+    if (isBefore(nextWeekStart, today) || isSameDay(nextWeekStart, today)) {
+      setCurrentDay(nextWeekStart);
+    }
   };
 
   const handleSelectDay = (weekday: Date) => {
@@ -62,6 +69,7 @@ const Calendar = () => {
       ))}
       <h1 onClick={moveToNextWeek}>Next Week</h1>
       <p>Chsoen day is: {chosenDay.toDateString()}</p>
+      <p>current day is: {currentDay.toDateString()}</p>
     </>
   );
 };
