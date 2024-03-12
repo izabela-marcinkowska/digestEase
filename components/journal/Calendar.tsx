@@ -11,6 +11,7 @@ import {
 } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useDateStore } from '@/app/dateStore';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const today = new Date();
 const getWeekStartAndEnd = (date: Date): Date[] => {
@@ -64,17 +65,19 @@ const Calendar = () => {
 
   return (
     <>
-      <h1 onClick={moveToPrevWeek}>Last Week</h1>
-      {week.map((weekday, index) => (
-        <p
-          onClick={() => handleSelectDay(weekday)}
-          key={index}
-          className={`${isSameDay(pickedDay, weekday) ? 'bg-green-600' : ''}`}
-        >
-          {format(weekday, 'd LLL')}
-        </p>
-      ))}
-      <h1 onClick={moveToNextWeek}>Next Week</h1>
+      <div className="flex">
+        <ChevronLeft onClick={moveToPrevWeek} />
+        {week.map((weekday, index) => (
+          <p
+            onClick={() => handleSelectDay(weekday)}
+            key={index}
+            className={`${isSameDay(pickedDay, weekday) ? 'bg-green-600' : ''}`}
+          >
+            {format(weekday, 'd LLL')}
+          </p>
+        ))}
+        <ChevronRight onClick={moveToNextWeek} />
+      </div>
       <p>Chsoen day is: {pickedDay.toDateString()}</p>
       <p>current day is: {currentDay.toDateString()}</p>
     </>
