@@ -6,12 +6,11 @@ import {
   subDays,
   addDays,
   format,
-  isToday,
   isBefore,
-  isAfter,
   isSameDay,
 } from 'date-fns';
 import { useEffect, useState } from 'react';
+import { useDateStore } from '@/app/dateStore';
 
 const today = new Date();
 const getWeekStartAndEnd = (date: Date): Date[] => {
@@ -23,7 +22,10 @@ const getWeekStartAndEnd = (date: Date): Date[] => {
 const Calendar = () => {
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState<Date[]>([]);
-  const [chosenDay, setChosenDay] = useState<Date>(today);
+  //   const [chosenDay, setChosenDay] = useState<Date>(today);
+
+  const pickedDay = useDateStore((state) => state.chosenDay);
+  const updatePickedDay = useDateStore((state) => state.updateChosenDay);
 
   useEffect(() => {
     const result = getWeekStartAndEnd(currentDay);
@@ -56,7 +58,7 @@ const Calendar = () => {
 
   const handleSelectDay = (weekday: Date) => {
     if (isBefore(weekday, today)) {
-      setChosenDay(weekday);
+      updatePickedDay(weekday);
     }
   };
 
@@ -67,13 +69,13 @@ const Calendar = () => {
         <p
           onClick={() => handleSelectDay(weekday)}
           key={index}
-          className={`${isSameDay(chosenDay, weekday) ? 'bg-green-600' : ''}`}
+          className={`${isSameDay(pickedDay, weekday) ? 'bg-green-600' : ''}`}
         >
           {format(weekday, 'd LLL')}
         </p>
       ))}
       <h1 onClick={moveToNextWeek}>Next Week</h1>
-      <p>Chsoen day is: {chosenDay.toDateString()}</p>
+      <p>Chsoen day is: {pickedDay.toDateString()}</p>
       <p>current day is: {currentDay.toDateString()}</p>
     </>
   );

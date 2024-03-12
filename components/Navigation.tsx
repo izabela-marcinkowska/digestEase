@@ -20,6 +20,7 @@ const Navigation = () => {
           <Image
             src={logoText}
             height={30}
+            priority
             alt="Logo text with DigestEase green letters."
           />
         </Link>
