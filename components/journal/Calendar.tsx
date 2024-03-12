@@ -66,13 +66,13 @@ const Calendar = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center mt-10">
+      <div className="flex items-center justify-center mt-10 gap-1">
         <ChevronLeft onClick={moveToPrevWeek} size={38} />
         {week.map((weekday, index) => (
           <div
             onClick={() => handleSelectDay(weekday)}
             key={index}
-            className={`border-solid border border-gray rounded-md p-6 ${
+            className={`border-solid border border-gray rounded-md p-6 w-36 text-center ${
               isSameDay(pickedDay, weekday) ? 'bg-green-600' : ''
             } ${isAfter(weekday, today) ? 'bg-slate-300' : ''}`}
           >
