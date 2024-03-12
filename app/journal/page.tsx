@@ -1,7 +1,9 @@
+import Calendar from '@/components/journal/Calendar';
+
 const Journal = () => {
   return (
     <>
-      <h1>Page in work</h1>
+      <Calendar />
     </>
   );
 };
