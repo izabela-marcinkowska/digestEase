@@ -24,7 +24,6 @@ const getWeekStartAndEnd = (date: Date): Date[] => {
 const Calendar = () => {
   const [currentDay, setCurrentDay] = useState(today);
   const [week, setWeek] = useState<Date[]>([]);
-  //   const [chosenDay, setChosenDay] = useState<Date>(today);
 
   const pickedDay = useDateStore((state) => state.chosenDay);
   const updatePickedDay = useDateStore((state) => state.updateChosenDay);
