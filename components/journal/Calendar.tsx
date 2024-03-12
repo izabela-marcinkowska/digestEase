@@ -8,6 +8,7 @@ import {
   format,
   isBefore,
   isSameDay,
+  isAfter,
 } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useDateStore } from '@/app/dateStore';
@@ -65,18 +66,20 @@ const Calendar = () => {
 
   return (
     <>
-      <div className="flex">
-        <ChevronLeft onClick={moveToPrevWeek} />
+      <div className="flex items-center justify-center mt-10">
+        <ChevronLeft onClick={moveToPrevWeek} size={38} />
         {week.map((weekday, index) => (
-          <p
+          <div
             onClick={() => handleSelectDay(weekday)}
             key={index}
-            className={`${isSameDay(pickedDay, weekday) ? 'bg-green-600' : ''}`}
+            className={`border-solid border border-gray rounded-md p-6 ${
+              isSameDay(pickedDay, weekday) ? 'bg-green-600' : ''
+            } ${isAfter(weekday, today) ? 'bg-slate-300' : ''}`}
           >
             {format(weekday, 'd LLL')}
-          </p>
+          </div>
         ))}
-        <ChevronRight onClick={moveToNextWeek} />
+        <ChevronRight onClick={moveToNextWeek} size={38} />
       </div>
       <p>Chsoen day is: {pickedDay.toDateString()}</p>
       <p>current day is: {currentDay.toDateString()}</p>
