@@ -26,18 +26,20 @@ const Journal = () => {
     <>
       <h1>{format(pickedDay.toDateString(), 'PPP')}</h1>
       <div className="flex flex-col gap-3 w-11/12 mx-auto">
-        {logs.map((log: DayLogs, logindex) => (
-          <div className="mb-3" key={logindex}>
-            <p className="text-lg mb-2">{log.day}</p>
-            <div className="flex gap-2 flex-col md:flex-row w-11/12 md:w-full md:ml-3 mx-auto">
-              {log.logs.map((oneLog: SingleLog, oneLogIndex) => (
-                <div key={oneLogIndex} className="md:w-1/4">
-                  <Log log={oneLog} />
+        {logs
+          ? logs.map((log: DayLogs, logindex) => (
+              <div className="mb-3" key={logindex}>
+                <p className="text-lg mb-2">{log.day}</p>
+                <div className="flex gap-2 flex-col md:flex-row w-11/12 md:w-full md:ml-3 mx-auto">
+                  {log.logs.map((oneLog: SingleLog, oneLogIndex) => (
+                    <div key={oneLogIndex} className="md:w-1/4">
+                      <Log log={oneLog} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        ))}
+              </div>
+            ))
+          : ''}
       </div>
     </>
   );
