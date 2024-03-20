@@ -3,38 +3,39 @@ import { format } from 'date-fns';
 import { useDateStore } from '@/app/dateStore';
 import type { DayLogs, SingleLog } from '@/content/types';
 import { useEffect, useState } from 'react';
-import { Link, PlusCircle } from 'lucide-react';
 import Log from '../log/Log';
 import supabaseClient from '@/lib/supabase/client';
-import { isSameDay } from 'date-fns';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
-  const [logs, setLogs] = useState<DayLogs[]>([]);
+  const [todayLog, setTodayLog] = useState<SingleLog>();
 
   useEffect(() => {
-    // const getLogs = async () => {
-    //   const { data, error } = await supabaseClient.rpc(
-    //     'get_logs_grouped_by_day'
-    //   );
-    //   setLogs(data as DayLogs[]);
-    // };
-    // getLogs();
-
     const getTodayLog = async () => {
       const { data, error } = await supabaseClient
         .from('logs')
-        .select('date, foodInput')
-        .eq('date', pickedDay.toDateString());
+        .select(
+          `
+        id,
+        date,
+        stress,
+        pain,
+        nausea,
+        food (id, type, food),
+        toilet_visits (id, created_at, data)`
+        )
+        .eq('date', pickedDay.toDateString())
+        .single();
       console.log('This day data', data);
+      setTodayLog(data as SingleLog);
     };
     getTodayLog();
   }, [pickedDay]);
   return (
     <>
       <h1>{format(pickedDay.toDateString(), 'PPP')}</h1>
-      <div className="flex flex-col gap-3 w-11/12 mx-auto">
-        {logs
+      {/* <div className="flex flex-col gap-3 w-11/12 mx-auto">
+        {todayLog
           ? logs.map((log: DayLogs, logindex) => (
               <div className="mb-3" key={logindex}>
                 <p className="text-lg mb-2">{log.day}</p>
@@ -48,7 +49,8 @@ const Journal = () => {
               </div>
             ))
           : ''}
-      </div>
+      </div> */}
+      {JSON.stringify(todayLog, null, 2)}
     </>
   );
 };
