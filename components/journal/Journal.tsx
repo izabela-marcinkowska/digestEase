@@ -1,15 +1,11 @@
 'use client';
 import { format } from 'date-fns';
-import { createClient } from '@supabase/supabase-js';
 import { useDateStore } from '@/app/dateStore';
 import type { DayLogs, SingleLog } from '@/content/types';
 import { useEffect, useState } from 'react';
 import { Link, PlusCircle } from 'lucide-react';
 import Log from '../log/Log';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import supabaseClient from '@/lib/supabase/client';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
@@ -17,7 +13,9 @@ const Journal = () => {
 
   useEffect(() => {
     const getLogs = async () => {
-      const { data, error } = await supabase.rpc('get_logs_grouped_by_day');
+      const { data, error } = await supabaseClient.rpc(
+        'get_logs_grouped_by_day'
+      );
       setLogs(data as DayLogs[]);
     };
     getLogs();
