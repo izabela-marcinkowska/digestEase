@@ -21,6 +21,11 @@ export type ToiletVisitType = {
   data: string;
 };
 
+export type foodBoxProp = {
+  id: string;
+  food: FoodType[];
+};
+
 export type SingleDayProp = {
   log: SingleLog;
 };

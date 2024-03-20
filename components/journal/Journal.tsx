@@ -34,7 +34,10 @@ const Journal = () => {
   }, [pickedDay]);
   return (
     <div>
-      <FoodBox />
+      <FoodBox
+        food={todayLog ? todayLog.food : []}
+        id={todayLog ? todayLog.id : ''}
+      />
     </div>
   );
 };
