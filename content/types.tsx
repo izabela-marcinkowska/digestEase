@@ -41,3 +41,9 @@ export type RegLog = {
   nausea: boolean;
   type: string;
 };
+
+export type foodLog = {
+  id: string;
+  foodInput: string[];
+  type: string;
+};

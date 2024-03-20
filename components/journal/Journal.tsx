@@ -6,20 +6,30 @@ import { useEffect, useState } from 'react';
 import { Link, PlusCircle } from 'lucide-react';
 import Log from '../log/Log';
 import supabaseClient from '@/lib/supabase/client';
+import { isSameDay } from 'date-fns';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
   const [logs, setLogs] = useState<DayLogs[]>([]);
 
   useEffect(() => {
-    const getLogs = async () => {
-      const { data, error } = await supabaseClient.rpc(
-        'get_logs_grouped_by_day'
-      );
-      setLogs(data as DayLogs[]);
+    // const getLogs = async () => {
+    //   const { data, error } = await supabaseClient.rpc(
+    //     'get_logs_grouped_by_day'
+    //   );
+    //   setLogs(data as DayLogs[]);
+    // };
+    // getLogs();
+
+    const getTodayLog = async () => {
+      const { data, error } = await supabaseClient
+        .from('logs')
+        .select('date, foodInput')
+        .eq('date', pickedDay.toDateString());
+      console.log('This day data', data);
     };
-    getLogs();
-  }, []);
+    getTodayLog();
+  }, [pickedDay]);
   return (
     <>
       <h1>{format(pickedDay.toDateString(), 'PPP')}</h1>
