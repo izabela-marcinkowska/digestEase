@@ -6,7 +6,7 @@ const FoodBox = ({ meals, id }: foodBoxProp) => {
     <>
       <div className="flex gap-2 flex-col md:flex-row w-11/12 md:w-full md:ml-3 mx-auto">
         {meals.map((meal, index) => (
-          <Meal key={id} id={id} food={meal.food} type={meal.type} />
+          <Meal key={index} id={id} food={meal.food} type={meal.type} />
         ))}
       </div>
     </>
