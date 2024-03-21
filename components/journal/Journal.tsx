@@ -22,7 +22,7 @@ const Journal = () => {
         stress,
         pain,
         nausea,
-        food (id, type, food),
+        meals (id, type, food),
         toilet_visits (id, created_at, data)`
         )
         .eq('date', pickedDay.toDateString())
@@ -35,7 +35,7 @@ const Journal = () => {
   return (
     <div>
       <FoodBox
-        food={todayLog ? todayLog.food : []}
+        meals={todayLog ? todayLog.meals : []}
         id={todayLog ? todayLog.id : ''}
       />
     </div>

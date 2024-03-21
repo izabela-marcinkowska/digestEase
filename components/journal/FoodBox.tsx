@@ -1,10 +1,14 @@
-import { foodBoxProp } from '@/content/types';
+import { FoodType, foodBoxProp } from '@/content/types';
+import Meal from './Meal';
 
-const FoodBox = ({ food, id }: foodBoxProp) => {
+const FoodBox = ({ meals, id }: foodBoxProp) => {
   return (
     <>
-      <p>This is food box</p>
-      {JSON.stringify(food)}
+      <div className="flex flex-col gap-3 w-11/12 mx-auto">
+        {meals.map((meal, index) => (
+          <Meal key={id} id={id} food={meal.food} type={meal.type} />
+        ))}
+      </div>
     </>
   );
 };
