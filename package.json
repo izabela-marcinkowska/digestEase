@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@meinefinsternis/react-horizontal-date-picker": "^1.0.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
@@ -23,7 +22,6 @@
     "next": "14.1.0",
     "openai": "^4.28.0",
     "react": "^18",
-    "react-datepicker": "^6.1.0",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "tailwind-merge": "^2.2.1",
