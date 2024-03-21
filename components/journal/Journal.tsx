@@ -3,7 +3,6 @@ import { format } from 'date-fns';
 import { useDateStore } from '@/app/dateStore';
 import type { DayLogs, SingleLog } from '@/content/types';
 import { useEffect, useState } from 'react';
-import Log from '../log/Log';
 import supabaseClient from '@/lib/supabase/client';
 import FoodBox from './FoodBox';
 
