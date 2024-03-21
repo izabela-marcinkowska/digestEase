@@ -1,6 +1,3 @@
-'use client';
-import type { SingleLog, SingleDayProp } from '@/content/types';
-
 import {
   Accordion,
   AccordionContent,
@@ -9,26 +6,23 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from '../ui/button';
 import { Pencil, Trash2 } from 'lucide-react';
-import LogCategory from './LogCategory';
+import { MealProp } from '@/content/types';
 
-const Log = ({ log }: SingleDayProp) => {
-  console.log('the', log);
+const Meal = ({ food, id, type }: MealProp) => {
   return (
-    <>
+    <div className="min-w-64">
       <Accordion
         type="single"
         collapsible
         className="border rounded-lg bg-white shadow-sm "
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger>{log.type}</AccordionTrigger>
+          <AccordionTrigger>{type}</AccordionTrigger>
           <AccordionContent className="flex w-3/4 mx-auto flex-col gap-6">
-            <LogCategory log={log} />
             <div>
-              <p className="text-lg mb-2">Food:</p>
               <ul className="w-11/12 mx-auto">
-                {log.foodInput.map((logEntry, logIndex) => (
-                  <li key={logIndex}>{logEntry}</li>
+                {food.map((foodItem, foodIndex) => (
+                  <li key={foodIndex}>{foodItem}</li>
                 ))}
               </ul>
             </div>
@@ -45,8 +39,8 @@ const Log = ({ log }: SingleDayProp) => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </>
+    </div>
   );
 };
 
-export default Log;
+export default Meal;

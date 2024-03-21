@@ -80,8 +80,6 @@ const Calendar = () => {
         ))}
         <ChevronRight onClick={moveToNextWeek} size={38} />
       </div>
-      <p>Chsoen day is: {pickedDay.toDateString()}</p>
-      <p>current day is: {currentDay.toDateString()}</p>
     </>
   );
 };
