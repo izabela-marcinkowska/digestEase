@@ -10,7 +10,7 @@ import { MealProp } from '@/content/types';
 
 const Meal = ({ food, id, type }: MealProp) => {
   return (
-    <>
+    <div className="min-w-64">
       <Accordion
         type="single"
         collapsible
@@ -20,7 +20,6 @@ const Meal = ({ food, id, type }: MealProp) => {
           <AccordionTrigger>{type}</AccordionTrigger>
           <AccordionContent className="flex w-3/4 mx-auto flex-col gap-6">
             <div>
-              <p className="text-lg mb-2">Food:</p>
               <ul className="w-11/12 mx-auto">
                 {food.map((foodItem, foodIndex) => (
                   <li key={foodIndex}>{foodItem}</li>
@@ -40,7 +39,7 @@ const Meal = ({ food, id, type }: MealProp) => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </>
+    </div>
   );
 };
 
