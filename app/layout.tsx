@@ -1,64 +1,12 @@
 import type { Metadata } from 'next';
-import {
-  Inter,
-  Dancing_Script,
-  Fanwood_Text,
-  Open_Sans,
-  Montserrat,
-  Shadows_Into_Light,
-  Philosopher,
-  Montserrat_Alternates,
-  Josefin_Slab,
-  Roboto_Serif,
-} from 'next/font/google';
+import { Montserrat, Roboto_Serif } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Toaster } from '@/components/ui/sonner';
 
-const inter = Inter({ subsets: ['latin'] });
-const open = Open_Sans({ subsets: ['latin'] });
-const montserrat = Montserrat({ subsets: ['latin'], weight: '400' });
-const montserratBold = Montserrat({
-  subsets: ['latin'],
-  weight: '500',
-  variable: '--font-montserratBold',
-});
-const montserratTiny = Montserrat({
-  subsets: ['latin'],
-  weight: '300',
-  variable: '--font-montserratTiny',
-});
-const dancing = Dancing_Script({
-  subsets: ['latin'],
-  variable: '--font-dancing_scripts',
-});
-const Fanwood = Fanwood_Text({
-  subsets: ['latin'],
-  variable: '--font-fanwood',
-  weight: '400',
-});
-const Shadow = Shadows_Into_Light({
-  subsets: ['latin'],
-  variable: '--font-shadow',
-  weight: '400',
-});
-const Philo = Philosopher({
-  subsets: ['latin'],
-  variable: '--font-philo',
-  weight: '400',
-});
-const Mon_Alt = Montserrat_Alternates({
-  subsets: ['latin'],
-  variable: '--font-mont',
-  weight: '200',
-});
-const Josefin = Josefin_Slab({
-  subsets: ['latin'],
-  variable: '--font-josefin',
-  weight: '300',
-  style: 'italic',
-});
+const montserrat = Montserrat({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
+
 const RobotoSerif = Roboto_Serif({
   subsets: ['latin'],
   variable: '--font-robotoSerif',
@@ -74,9 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${montserrat.className} ${montserratTiny.variable} ${Josefin.variable} ${RobotoSerif.variable} ${montserratBold.variable} ${Philo.variable} ${dancing.variable} ${Fanwood.variable} bg-backg`}
-      >
+      <body className={`${montserrat.className} ${RobotoSerif.variable} bg-backg`}>
         <Navigation />
         {children}
         <Footer />
