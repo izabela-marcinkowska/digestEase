@@ -1,25 +1,10 @@
 import type { Config } from 'tailwindcss';
 
 const config = {
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
+  content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   prefix: '',
   theme: {
     fontFamily: {
-      sans: ['ubuntu'],
-      open: ['open'],
-      logo: 'var(--font-dancing_scripts)',
-      main: 'var(--font-fanwood)',
-      montserratTiny: 'var(--font-montserratTiny)',
-      montserratBold: 'var(--font-montserratBold)',
-      shadow: 'var(--font-shadow)',
-      philo: 'var(--font-philo)',
-      mont: 'var(--font-mont)',
-      josefin: 'var(--font-josefin)',
       robotoSerif: 'var(--font-robotoSerif)',
     },
     container: {
@@ -32,8 +17,7 @@ const config = {
 
     extend: {
       backgroundImage: {
-        highlight:
-          'url(//s2.svgbox.net/pen-brushes.svg?ic=brush-1&color=d1f1e8)',
+        highlight: 'url(//s2.svgbox.net/pen-brushes.svg?ic=brush-1&color=d1f1e8)',
       },
       colors: {
         border: 'hsl(var(--border))',
