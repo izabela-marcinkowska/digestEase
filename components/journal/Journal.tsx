@@ -1,4 +1,5 @@
 'use client';
+import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { useDateStore } from '@/app/dateStore';
 import type { DayLogs, SingleLog } from '@/content/types';
@@ -8,7 +9,7 @@ import FoodBox from './FoodBox';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
-  const [todayLog, setTodayLog] = useState<SingleLog>();
+  const [todayLog, setTodayLog] = useState<SingleLog | null>();
 
   useEffect(() => {
     const getTodayLog = async () => {
@@ -25,18 +26,24 @@ const Journal = () => {
         toilet_visits (id, created_at, data)`
         )
         .eq('date', pickedDay.toDateString())
-        .single();
-      console.log('This day data', data);
-      setTodayLog(data as SingleLog);
+        .limit(1);
+
+      if (error) {
+        toast.error('An error occurred while fetching journal entries.');
+      }
+
+      if (data?.length) {
+        setTodayLog(data[0]);
+      } else {
+        setTodayLog(null);
+      }
     };
     getTodayLog();
   }, [pickedDay]);
+
   return (
     <div className="w-5/6 mx-auto mt-16">
-      <FoodBox
-        meals={todayLog ? todayLog.meals : []}
-        id={todayLog ? todayLog.id : ''}
-      />
+      <FoodBox meals={todayLog ? todayLog.meals : []} id={todayLog ? todayLog.id : ''} />
     </div>
   );
 };
