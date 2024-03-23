@@ -32,6 +32,10 @@ export type MealProp = {
   type: string;
 };
 
+export type AddMealProp = {
+  id: string;
+};
+
 export type SingleDayProp = {
   log: SingleLog;
 };
