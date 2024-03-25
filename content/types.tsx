@@ -2,11 +2,11 @@ import { LucideIcon } from 'lucide-react';
 
 export type SingleLog = {
   id: string;
-  meals: FoodType[];
-  stress: number;
-  pain: boolean;
-  nausea: boolean;
-  toilet_visits: ToiletVisitType[];
+  meals?: FoodType[];
+  stress?: number;
+  pain?: boolean;
+  nausea?: boolean;
+  toilet_visits?: ToiletVisitType[];
 };
 
 export type FoodType = {

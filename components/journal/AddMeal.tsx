@@ -2,34 +2,41 @@ import { useState } from 'react';
 import supabaseClient from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import { useDateStore } from '@/app/dateStore';
-import { AddMealProp } from '@/content/types';
+import { AddMealProp, MealProp, SingleLog } from '@/content/types';
 
 const AddMeal = ({ id }: AddMealProp) => {
   const [newMeal, setNewMeal] = useState({});
-  const [createdIdLog, setCreatedIdLog] = useState('');
   const pickedDay = useDateStore((state) => state.chosenDay);
 
-  const checkId = async (insertedId: string) => {
+  const checkId = async (insertedId: string): Promise<string> => {
     if (!insertedId) {
       const { data, error } = await supabaseClient
         .from('logs')
         .insert({ date: pickedDay })
-        .select(id);
-      setCreatedIdLog(id);
-      console.log('this is createdIdLog', createdIdLog);
-      console.log(error);
+        .select()
+        .single(); // Ensures a single record is expected in response
+
+      if (error || !data) {
+        console.error('Error creating or retrieving log:', error);
+        throw new Error('Failed to create or retrieve log');
+      }
+
+      console.log('This is id', data.id);
       console.log('now is day created', data);
+      return data.id; // TypeScript should now recognize `id` on `data`
     } else {
-      setCreatedIdLog(insertedId);
+      console.log('the log has been already created', insertedId);
+      return insertedId;
     }
   };
 
   const addNewMeal = async (food: string[], type: string, id: string) => {
     try {
-      checkId(id);
+      const logId = await checkId(id); // Await the ID from checkId
+      console.log('is the log correct now?', logId); // Use the directly returned ID
       const { data, error } = await supabaseClient
         .from('meals')
-        .insert({ food, type, id: createdIdLog });
+        .insert({ food, type, log: logId });
 
       if (error) {
         console.error('Error from Supabase when adding new meal:', error);
@@ -46,7 +53,6 @@ const AddMeal = ({ id }: AddMealProp) => {
     }
   };
 
-  // Note: Using an arrow function to wrap the async function call
   const handleOnClick = () => {
     addNewMeal(['ost', 'cola'], 'breakfast', id).catch(console.error);
   };
