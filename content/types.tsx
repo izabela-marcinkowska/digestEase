@@ -2,7 +2,8 @@ import { LucideIcon } from 'lucide-react';
 
 export type SingleLog = {
   id: string;
-  meals?: FoodType[];
+  date: string;
+  meals?: FoodType[] | null;
   stress?: number;
   pain?: boolean;
   nausea?: boolean;
@@ -23,7 +24,7 @@ export type ToiletVisitType = {
 
 export type foodBoxProp = {
   id: string;
-  meals: FoodType[];
+  meals?: FoodType[] | null;
 };
 
 export type MealProp = {

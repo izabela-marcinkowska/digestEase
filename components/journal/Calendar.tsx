@@ -59,7 +59,7 @@ const Calendar = () => {
 
   const handleSelectDay = (weekday: Date) => {
     if (isBefore(weekday, today)) {
-      updatePickedDay(weekday);
+      updatePickedDay(weekday.toDateString());
     }
   };
 

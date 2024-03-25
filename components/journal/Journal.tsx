@@ -25,7 +25,7 @@ const Journal = () => {
         meals (id, type, food),
         toilet_visits (id, created_at, data)`
         )
-        .eq('date', pickedDay.toDateString())
+        .eq('date', pickedDay)
         .limit(1);
 
       if (error) {
@@ -43,7 +43,10 @@ const Journal = () => {
 
   return (
     <div className="w-5/6 mx-auto mt-16">
-      <FoodBox meals={todayLog ? todayLog.meals : []} id={todayLog ? todayLog.id : ''} />
+      <FoodBox
+        meals={todayLog ? todayLog.meals : null}
+        id={todayLog ? todayLog.id : ''}
+      />
     </div>
   );
 };

@@ -15,7 +15,7 @@ const AddMeal = ({ id }: AddMealProp) => {
         .insert({ date: pickedDay })
         .select()
         .single(); // Ensures a single record is expected in response
-
+      console.log(pickedDay, 'this is the date i picked');
       if (error || !data) {
         console.error('Error creating or retrieving log:', error);
         throw new Error('Failed to create or retrieve log');
@@ -23,6 +23,7 @@ const AddMeal = ({ id }: AddMealProp) => {
 
       console.log('This is id', data.id);
       console.log('now is day created', data);
+      console.log('the date inside data', data.date);
       return data.id; // TypeScript should now recognize `id` on `data`
     } else {
       console.log('the log has been already created', insertedId);
@@ -59,6 +60,7 @@ const AddMeal = ({ id }: AddMealProp) => {
 
   return (
     <>
+      {pickedDay}
       <h1 onClick={handleOnClick}>This is Add box</h1>
     </>
   );
