@@ -49,8 +49,11 @@ const AddMeal = ({ id }: AddMealProp) => {
 
   return (
     <>
-      <div onClick={handleOnClick}>
-        <Plus size={45} />
+      <div
+        onClick={handleOnClick}
+        className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner"
+      >
+        <Plus size={45} color="darkGreen" />
       </div>
     </>
   );
