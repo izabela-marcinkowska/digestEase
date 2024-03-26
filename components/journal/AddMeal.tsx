@@ -2,6 +2,7 @@ import supabaseClient from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import { useDateStore } from '@/app/dateStore';
 import { AddMealProp } from '@/content/types';
+import { Plus } from 'lucide-react';
 
 const AddMeal = ({ id }: AddMealProp) => {
   const pickedDay = useDateStore((state) => state.chosenDay);
@@ -48,7 +49,12 @@ const AddMeal = ({ id }: AddMealProp) => {
 
   return (
     <>
-      <h1 onClick={handleOnClick}>This is Add box</h1>
+      <div
+        onClick={handleOnClick}
+        className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner"
+      >
+        <Plus size={45} color="darkGreen" />
+      </div>
     </>
   );
 };
