@@ -6,11 +6,13 @@ import type { DayLogs, SingleLog } from '@/content/types';
 import { useEffect, useState } from 'react';
 import supabaseClient from '@/lib/supabase/client';
 import FoodBox from './FoodBox';
+import { useMealSectionStore } from '@/app/mealSectionStore';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
-  const [todayLog, setTodayLog] = useState<SingleLog | null>();
-
+  // const [todayLog, setTodayLog] = useState<SingleLog | null>();
+  const chosenLog = useMealSectionStore((state) => state.todayLog);
+  const setChosenLog = useMealSectionStore((state) => state.setTodayLog);
   useEffect(() => {
     const getTodayLog = async () => {
       const { data, error } = await supabaseClient
@@ -33,9 +35,9 @@ const Journal = () => {
       }
 
       if (data?.length) {
-        setTodayLog(data[0]);
+        setChosenLog(data[0]);
       } else {
-        setTodayLog(null);
+        setChosenLog(null);
       }
     };
     getTodayLog();
@@ -44,8 +46,8 @@ const Journal = () => {
   return (
     <div className="w-5/6 mx-auto mt-16">
       <FoodBox
-        meals={todayLog ? todayLog.meals : null}
-        id={todayLog ? todayLog.id : ''}
+        meals={chosenLog ? chosenLog.meals : null}
+        id={chosenLog ? chosenLog.id : ''}
       />
     </div>
   );

@@ -3,9 +3,12 @@ import { toast } from 'sonner';
 import { useDateStore } from '@/app/dateStore';
 import { AddMealProp } from '@/content/types';
 import { Plus } from 'lucide-react';
+import { useMealSectionStore } from '@/app/mealSectionStore';
 
 const AddMeal = ({ id }: AddMealProp) => {
   const pickedDay = useDateStore((state) => state.chosenDay);
+  const setChosenLog = useMealSectionStore((state) => state.setTodayLog);
+  const chosenLog = useMealSectionStore((state) => state.todayLog);
 
   const checkId = async (insertedId: string): Promise<string> => {
     if (!insertedId) {
@@ -17,6 +20,8 @@ const AddMeal = ({ id }: AddMealProp) => {
       if (error || !data) {
         throw new Error('Failed to create or retrieve log');
       }
+      setChosenLog(data);
+      console.log('this is state after update', chosenLog);
       return data.id;
     } else {
       return insertedId;
