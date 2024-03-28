@@ -1,6 +1,7 @@
 import { FoodType, foodBoxProp } from '@/content/types';
 import Meal from './Meal';
 import AddMeal from './AddMeal';
+import { useMealSectionStore } from '@/app/mealSectionStore';
 
 const FoodBox = ({ meals, id }: foodBoxProp) => {
   return (

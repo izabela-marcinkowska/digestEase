@@ -1,14 +1,17 @@
 import supabaseClient from '@/lib/supabase/client';
 import { toast } from 'sonner';
 import { useDateStore } from '@/app/dateStore';
-import { AddMealProp } from '@/content/types';
+import { AddMealProp, SingleLog } from '@/content/types';
 import { Plus } from 'lucide-react';
 import { useMealSectionStore } from '@/app/mealSectionStore';
+import { useState } from 'react';
 
 const AddMeal = ({ id }: AddMealProp) => {
   const pickedDay = useDateStore((state) => state.chosenDay);
-  const setChosenLog = useMealSectionStore((state) => state.setTodayLog);
   const chosenLog = useMealSectionStore((state) => state.todayLog);
+  const setChosenLog = useMealSectionStore((state) => state.setTodayLog);
+
+  const [theLog, setTheLog] = useState<SingleLog | null>();
 
   const checkId = async (insertedId: string): Promise<string> => {
     if (!insertedId) {
@@ -20,8 +23,7 @@ const AddMeal = ({ id }: AddMealProp) => {
       if (error || !data) {
         throw new Error('Failed to create or retrieve log');
       }
-      setChosenLog(data);
-      console.log('this is state after update', chosenLog);
+      setTheLog(data);
       return data.id;
     } else {
       return insertedId;
@@ -40,6 +42,7 @@ const AddMeal = ({ id }: AddMealProp) => {
         toast.error('Failed to create new meal due to a server error.');
         return null;
       }
+      setChosenLog(theLog!);
       return data;
     } catch (error) {
       console.error('Unexpected error when adding new meal:', error);
