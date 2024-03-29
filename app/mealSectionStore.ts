@@ -10,11 +10,14 @@ type MealSection = {
 
 export const useMealSectionStore = create<MealSection | null>((set) => ({
   todayLog: { id: '', date: '' },
-  setTodayLog: (newTodayLog: SingleLog | null) =>
-    set({ todayLog: newTodayLog }),
+  setTodayLog: (newTodayLog: SingleLog | null) => set({ todayLog: newTodayLog }),
   todayMeals: [],
   setTodayMeals: (newTodayMeal: FoodType[]) =>
-    set((state) => ({
-      todayMeals: [...state.todayMeals, newTodayMeal],
-    })),
+    set((state) => {
+      if (!state) return { todayMeals: [...newTodayMeal] };
+
+      return {
+        todayMeals: [...state.todayMeals, ...newTodayMeal],
+      };
+    }),
 }));
