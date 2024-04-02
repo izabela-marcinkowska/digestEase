@@ -1,17 +1,14 @@
-import { FoodType, foodBoxProp } from '@/content/types';
+import { foodBoxProp } from '@/content/types';
 import Meal from './Meal';
 import AddMeal from './AddMeal';
-import { useMealSectionStore } from '@/app/mealSectionStore';
 
 const FoodBox = ({ meals, id }: foodBoxProp) => {
   return (
     <>
       <div className="flex gap-2 flex-col md:flex-row w-11/12 md:w-full md:ml-3 mx-auto">
-        <AddMeal id={id} />
+        <AddMeal journalId={id} />
         {meals &&
-          meals.map((meal, index) => (
-            <Meal key={index} id={id} food={meal.food} type={meal.type} />
-          ))}
+          meals.map((meal, index) => <Meal key={index} id={id} food={meal.food} type={meal.type} isNew={meal.isNew} />)}
       </div>
     </>
   );

@@ -14,6 +14,8 @@ export type FoodType = {
   id: string;
   type: string;
   food: string[];
+  log?: string;
+  isNew?: boolean;
 };
 
 export type ToiletVisitType = {
@@ -31,10 +33,12 @@ export type MealProp = {
   id: string;
   food: string[];
   type: string;
+  log?: string;
+  isNew?: boolean;
 };
 
 export type AddMealProp = {
-  id: string;
+  journalId: string;
 };
 
 export type SingleDayProp = {

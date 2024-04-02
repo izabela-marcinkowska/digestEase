@@ -11,10 +11,12 @@ import {
   isAfter,
 } from 'date-fns';
 import { useEffect, useState } from 'react';
-import { useDateStore } from '@/app/dateStore';
+import { useDateStore } from '@/lib/stores/datePicker';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const today = new Date();
+const DAYS_IN_WEEK = 7;
+
 const getWeekStartAndEnd = (date: Date): Date[] => {
   const monday = startOfWeek(date, { weekStartsOn: 1 }); // Monday
   const sunday = endOfWeek(date, { weekStartsOn: 1 }); // Sunday
@@ -38,18 +40,12 @@ const Calendar = () => {
   }, [currentDay]);
 
   const moveToPrevWeek = () => {
-    const startOfLastWeek = subDays(
-      startOfWeek(currentDay, { weekStartsOn: 1 }),
-      7
-    );
+    const startOfLastWeek = subDays(startOfWeek(currentDay, { weekStartsOn: 1 }), DAYS_IN_WEEK);
     setCurrentDay(startOfLastWeek);
   };
   const moveToNextWeek = () => {
     // Calculate the start of the next week from the current day
-    const nextWeekStart = addDays(
-      startOfWeek(currentDay, { weekStartsOn: 1 }),
-      7
-    );
+    const nextWeekStart = addDays(startOfWeek(currentDay, { weekStartsOn: 1 }), DAYS_IN_WEEK);
 
     // Only move to the next week if the next week's start is before or the same as 'today'
     if (isBefore(nextWeekStart, today) || isSameDay(nextWeekStart, today)) {
