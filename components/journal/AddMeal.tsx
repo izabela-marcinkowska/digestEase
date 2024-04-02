@@ -1,60 +1,70 @@
-import supabaseClient from '@/lib/supabase/client';
+import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import { toast } from 'sonner';
-import { useDateStore } from '@/app/dateStore';
+import supabaseClient from '@/lib/supabase/client';
+import { useDateStore } from '@/lib/stores/datePicker';
 import { AddMealProp } from '@/content/types';
 import { Plus } from 'lucide-react';
+import { useJournalStore } from '@/lib/stores/journal';
 
-const AddMeal = ({ id }: AddMealProp) => {
+const AddMeal = ({ journalId }: AddMealProp) => {
+  const [loading, setLoading] = useState(false);
   const pickedDay = useDateStore((state) => state.chosenDay);
+  const addMeal = useJournalStore((state) => state.addMeal);
+  const setLog = useJournalStore((state) => state.setCurrentLog);
 
-  const checkId = async (insertedId: string): Promise<string> => {
-    if (!insertedId) {
+  const addNewMeal = async (type: string, food: string[]) => {
+    setLoading(true);
+    if (!journalId) {
       const { data, error } = await supabaseClient
         .from('logs')
         .insert({ date: pickedDay })
         .select()
         .single();
-      if (error || !data) {
-        throw new Error('Failed to create or retrieve log');
-      }
-      return data.id;
-    } else {
-      return insertedId;
-    }
-  };
-
-  const addNewMeal = async (food: string[], type: string, id: string) => {
-    try {
-      const logId = await checkId(id);
-      const { data, error } = await supabaseClient
-        .from('meals')
-        .insert({ food, type, log: logId });
-
       if (error) {
-        console.error('Error from Supabase when adding new meal:', error);
-        toast.error('Failed to create new meal due to a server error.');
-        return null;
+        console.error('Failed to create new log.');
+        toast.error('Failed to create new log.');
+        return;
       }
-      return data;
-    } catch (error) {
-      console.error('Unexpected error when adding new meal:', error);
-      toast.error('An unexpected error occurred while creating new meal.');
-      return null;
-    }
-  };
 
-  const handleOnClick = () => {
-    addNewMeal(['ost', 'cola'], 'breakfast', id).catch(console.error);
+      if (data) {
+        setLog(data);
+        const newMealId = uuid();
+        addMeal({ id: newMealId, type, food, log: data.id }, true);
+        const { error } = await supabaseClient
+          .from('meals')
+          .insert({ id: newMealId, type, food, log: data.id });
+        if (error) {
+          console.log('failed to add meal to the database');
+          toast.error('Failed to add new meal.');
+        }
+        setLoading(false);
+      }
+    }
+
+    if (journalId) {
+      const newMealId = uuid();
+      addMeal({ id: newMealId, type, food, log: journalId }, true);
+      const { error } = await supabaseClient
+        .from('meals')
+        .insert({ id: newMealId, type, food, log: journalId });
+      if (error) {
+        console.log('failed to add meal to the database');
+        toast.error('Failed to add new meal.');
+      }
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <div
-        onClick={handleOnClick}
-        className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner"
+      <button
+        onClick={() => addNewMeal('breakfast', ['cola', 'cheese'])}
+        className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
+        disabled={loading}
       >
         <Plus size={45} color="darkGreen" />
-      </div>
+      </button>
     </>
   );
 };
