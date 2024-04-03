@@ -14,17 +14,20 @@ const MealForm = () => {
 
   return (
     <>
-      <h1>This will be a Form here</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <input defaultValue="test" {...register('type')} />
-
-        {/* include validation with required or other standard HTML validation rules */}
-        <input {...register('food', { required: true })} />
-        {/* errors will return when field validation fails  */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col p-6 border rounded-xl gap-4"
+      >
+        <select {...register('type', { required: true })}>
+          <option value="breakfast">Breakfast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+          <option value="snacks">Snacks</option>
+        </select>
         {errors.food && <span>This field is required</span>}
-
-        <input type="submit" />
+        <input {...register('food', { required: true })} />
+        {errors.food && <span>This field is required</span>}
+        <button type="submit">Submit</button>
       </form>
     </>
   );
