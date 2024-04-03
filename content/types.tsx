@@ -41,19 +41,6 @@ export type AddMealProp = {
   journalId: string;
 };
 
-export type SingleDayProp = {
-  log: SingleLog;
-};
-
-export type DayLogs = {
-  day: string;
-  logs: SingleLog[];
-};
-
-export type LogCategoryProp = {
-  log: SingleLog;
-};
-
 export type FeatureProp = {
   icon: LucideIcon | any;
   title: string;
