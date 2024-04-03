@@ -58,3 +58,8 @@ export type RegLog = {
   nausea: boolean;
   type: string;
 };
+
+export type FormInputs = {
+  type: string;
+  food: string[];
+};
