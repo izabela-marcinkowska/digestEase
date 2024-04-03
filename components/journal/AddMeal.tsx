@@ -6,6 +6,7 @@ import { useDateStore } from '@/lib/stores/datePicker';
 import { AddMealProp } from '@/content/types';
 import { Plus } from 'lucide-react';
 import { useJournalStore } from '@/lib/stores/journal';
+import MealForm from './MealForm';
 
 const AddMeal = ({ journalId }: AddMealProp) => {
   const [loading, setLoading] = useState(false);
@@ -73,7 +74,7 @@ const AddMeal = ({ journalId }: AddMealProp) => {
           <Plus size={45} color="darkGreen" />
         </button>
       ) : (
-        <p>Here will be form</p>
+        <MealForm />
       )}
     </>
   );
