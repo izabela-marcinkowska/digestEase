@@ -9,6 +9,7 @@ import { useJournalStore } from '@/lib/stores/journal';
 
 const AddMeal = ({ journalId }: AddMealProp) => {
   const [loading, setLoading] = useState(false);
+  const [formStatus, setFormStatus] = useState(false);
   const pickedDay = useDateStore((state) => state.chosenDay);
   const addMeal = useJournalStore((state) => state.addMeal);
   const setLog = useJournalStore((state) => state.setCurrentLog);
@@ -56,15 +57,24 @@ const AddMeal = ({ journalId }: AddMealProp) => {
     }
   };
 
+  const handleFormStatus = () => {
+    setFormStatus(true);
+  };
+
   return (
     <>
-      <button
-        onClick={() => addNewMeal('breakfast', ['cola', 'cheese'])}
-        className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
-        disabled={loading}
-      >
-        <Plus size={45} color="darkGreen" />
-      </button>
+      {!formStatus ? (
+        <button
+          // onClick={() => addNewMeal('breakfast', ['cola', 'cheese'])}
+          onClick={handleFormStatus}
+          className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
+          disabled={loading}
+        >
+          <Plus size={45} color="darkGreen" />
+        </button>
+      ) : (
+        <p>Here will be form</p>
+      )}
     </>
   );
 };
