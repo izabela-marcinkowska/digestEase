@@ -6,7 +6,8 @@ import { useDateStore } from '@/lib/stores/datePicker';
 import { AddMealProp } from '@/content/types';
 import { Plus } from 'lucide-react';
 import { useJournalStore } from '@/lib/stores/journal';
-import MealForm from './MealForm';
+import { FormInputs } from '@/content/types';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 const AddMeal = ({ journalId }: AddMealProp) => {
   const [loading, setLoading] = useState(false);
@@ -14,6 +15,29 @@ const AddMeal = ({ journalId }: AddMealProp) => {
   const pickedDay = useDateStore((state) => state.chosenDay);
   const addMeal = useJournalStore((state) => state.addMeal);
   const setLog = useJournalStore((state) => state.setCurrentLog);
+  const [foodList, setFoodList] = useState<string[]>([]);
+  const [currentFood, setCurrentFood] = useState('');
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormInputs>();
+  const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
+    // Since `foodList` contains all the food items added, pass it to `addNewMeal`
+    // `formData.type` contains the meal type selected by the user
+    await addNewMeal(formData.type, foodList);
+
+    // Clear the food list after submitting
+    setFoodList([]);
+  };
+
+  const handleAddFoodItem = () => {
+    if (!currentFood) return; // Don't add if the input is empty
+    setFoodList((prevFoodList) => [...prevFoodList, currentFood]);
+    setCurrentFood(''); // Clear the input field after adding the food item
+  };
 
   const addNewMeal = async (type: string, food: string[]) => {
     setLoading(true);
@@ -74,7 +98,40 @@ const AddMeal = ({ journalId }: AddMealProp) => {
           <Plus size={45} color="darkGreen" />
         </button>
       ) : (
-        <MealForm />
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col p-6 border rounded-xl gap-4"
+        >
+          <select {...register('type', { required: true })}>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snacks">Snacks</option>
+          </select>
+          {errors.food && <span>This field is required</span>}
+          <div>
+            <span>What did you eat today?</span>
+            <input
+              type="text"
+              value={currentFood}
+              onChange={(e) => setCurrentFood(e.target.value)} // Update the currentFood state with the input's value
+            />
+            <button
+              type="button"
+              onClick={handleAddFoodItem}
+              className="btn btn-primary"
+            >
+              Add
+            </button>
+            {errors.food && <span>This field is required</span>}
+            <ul>
+              {foodList.map((food, index) => (
+                <li key={index}>{food}</li> // Display each food item as a list item
+              ))}
+            </ul>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
       )}
     </>
   );

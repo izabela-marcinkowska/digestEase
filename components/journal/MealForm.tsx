@@ -13,8 +13,6 @@ const MealForm = () => {
   } = useForm<FormInputs>();
   const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
 
-  console.log(watch('type')); // watch input value by passing the name of it
-
   const handleAddFoodItem = () => {
     if (!currentFood) return; // Don't add if the input is empty
     setFoodList((prevFoodList) => [...prevFoodList, currentFood]);
