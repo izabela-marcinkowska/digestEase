@@ -12,7 +12,8 @@ import { Button } from '../ui/button';
 
 const AddMeal = ({ journalId }: AddMealProp) => {
   const [loading, setLoading] = useState(false);
-  const [formStatus, setFormStatus] = useState(false);
+  const formStatus = useDateStore((state) => state.formStatus);
+  const toggleFormStatus = useDateStore((state) => state.toggleFormStatus);
   const pickedDay = useDateStore((state) => state.chosenDay);
   const addMeal = useJournalStore((state) => state.addMeal);
   const setLog = useJournalStore((state) => state.setCurrentLog);
@@ -82,12 +83,14 @@ const AddMeal = ({ journalId }: AddMealProp) => {
   };
 
   const handleFormStatus = () => {
-    setFormStatus(true);
+    console.log('before handling form status is:', formStatus);
+    toggleFormStatus(formStatus);
+    console.log('after handling form status is:', formStatus);
   };
 
   return (
     <>
-      {!formStatus ? (
+      {formStatus ? (
         <button
           onClick={handleFormStatus}
           className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"

@@ -9,13 +9,17 @@ const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
   const chosenLog = useJournalStore((state) => state.log);
   const setChosenLog = useJournalStore((state) => state.setCurrentLog);
+  const toggleFormStatus = useDateStore((state) => state.toggleFormStatus);
+  const formStatus = useDateStore((state) => state.formStatus);
 
   useEffect(() => {
+    toggleFormStatus(false);
     const getLog = async () => {
       const log = await getJournalByDate(pickedDay);
       if (!log) {
         setChosenLog(null);
       }
+      console.log('formstatus is', formStatus);
       setChosenLog(log);
     };
     getLog();
