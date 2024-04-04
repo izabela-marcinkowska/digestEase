@@ -28,8 +28,6 @@ const AddMeal = ({ journalId }: AddMealProp) => {
     // Since `foodList` contains all the food items added, pass it to `addNewMeal`
     // `formData.type` contains the meal type selected by the user
     await addNewMeal(formData.type, foodList);
-
-    // Clear the food list after submitting
     setFoodList([]);
   };
 
@@ -90,7 +88,6 @@ const AddMeal = ({ journalId }: AddMealProp) => {
     <>
       {!formStatus ? (
         <button
-          // onClick={() => addNewMeal('breakfast', ['cola', 'cheese'])}
           onClick={handleFormStatus}
           className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
           disabled={loading}
