@@ -8,6 +8,7 @@ import { Plus } from 'lucide-react';
 import { useJournalStore } from '@/lib/stores/journal';
 import { FormInputs } from '@/content/types';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Button } from '../ui/button';
 
 const AddMeal = ({ journalId }: AddMealProp) => {
   const [loading, setLoading] = useState(false);
@@ -107,27 +108,40 @@ const AddMeal = ({ journalId }: AddMealProp) => {
           </select>
           {errors.food && <span>This field is required</span>}
           <div>
-            <span>What did you eat today?</span>
-            <input
-              type="text"
-              value={currentFood}
-              onChange={(e) => setCurrentFood(e.target.value)} // Update the currentFood state with the input's value
-            />
-            <button
-              type="button"
-              onClick={handleAddFoodItem}
-              className="btn btn-primary"
-            >
-              Add
-            </button>
-            {errors.food && <span>This field is required</span>}
+            <div className="flex flex-col justify-items-center mb-3">
+              <span>What did you eat today?</span>
+              <div className="flex gap-4">
+                <input
+                  type="text"
+                  value={currentFood}
+                  onChange={(e) => setCurrentFood(e.target.value)} // Update the currentFood state with the input's value
+                />
+                <Button
+                  type="button"
+                  onClick={handleAddFoodItem}
+                  className="p-3 w-28 flex gap-2"
+                  variant={'outline'}
+                >
+                  Add
+                </Button>
+              </div>
+              {errors.food && <span>This field is required</span>}
+            </div>
             <ul>
               {foodList.map((food, index) => (
                 <li key={index}>{food}</li> // Display each food item as a list item
               ))}
             </ul>
           </div>
-          <button type="submit">Submit</button>
+          <div className="flex justify-center">
+            <Button
+              type="submit"
+              className="p-3 w-28 flex gap-2"
+              variant={'outline'}
+            >
+              Submit
+            </Button>
+          </div>
         </form>
       )}
     </>

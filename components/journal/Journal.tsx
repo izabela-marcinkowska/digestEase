@@ -23,8 +23,10 @@ const Journal = () => {
 
   return (
     <div className="w-5/6 mx-auto mt-16">
-      <pre>{JSON.stringify(chosenLog, null, 2)}</pre>
-      <FoodBox meals={chosenLog ? chosenLog.meals : null} id={chosenLog ? chosenLog.id : ''} />
+      <FoodBox
+        meals={chosenLog ? chosenLog.meals : null}
+        id={chosenLog ? chosenLog.id : ''}
+      />
     </div>
   );
 };
