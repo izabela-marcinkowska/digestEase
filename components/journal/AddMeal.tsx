@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import supabaseClient from '@/lib/supabase/client';
 import { useDateStore } from '@/lib/stores/datePicker';
 import { AddMealProp } from '@/content/types';
-import { CornerDownLeft, Plus, X } from 'lucide-react';
+import { CornerDownLeft, Plus, Trash, X } from 'lucide-react';
 import { useJournalStore } from '@/lib/stores/journal';
 import { FormInputs } from '@/content/types';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -141,9 +141,15 @@ const AddMeal = ({ journalId }: AddMealProp) => {
               </div>
               {errors.food && <span>This field is required</span>}
             </div>
-            <ul>
+            <ul className="flex flex-col gap-1">
               {foodList.map((food, index) => (
-                <li key={index}>{food}</li> // Display each food item as a list item
+                <div
+                  key={index}
+                  className="flex items-center bg-backg rounded-sm p-2 justify-between"
+                >
+                  <li>{food}</li>
+                  <Trash size={18} />
+                </div>
               ))}
             </ul>
           </div>
