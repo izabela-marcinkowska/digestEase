@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import supabaseClient from '@/lib/supabase/client';
 import { useDateStore } from '@/lib/stores/datePicker';
 import { AddMealProp } from '@/content/types';
-import { Plus } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { useJournalStore } from '@/lib/stores/journal';
 import { FormInputs } from '@/content/types';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -103,6 +103,7 @@ const AddMeal = ({ journalId }: AddMealProp) => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col p-6 border rounded-xl gap-4"
         >
+          <X className="self-end" onClick={handleFormStatus} />
           <select {...register('type', { required: true })}>
             <option value="breakfast">Breakfast</option>
             <option value="lunch">Lunch</option>
