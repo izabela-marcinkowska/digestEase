@@ -128,13 +128,13 @@ const AddMeal = ({ journalId }: AddMealProp) => {
           {errors.food && <span>This field is required</span>}
           <div>
             <div className="flex flex-col justify-items-center gap-2 mb-3">
-              <span>What did you eat today?</span>
+              <span className="text-center">What did you eat today?</span>
               <div className="flex gap-2">
                 <input
                   type="text"
                   value={currentFood}
                   onChange={(e) => setCurrentFood(e.target.value)} // Update the currentFood state with the input's value
-                  className="p-1"
+                  className="p-1 rounded-sm"
                 />
 
                 <CornerDownLeft type="button" onClick={handleAddFoodItem} />
