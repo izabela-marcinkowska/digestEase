@@ -101,15 +101,27 @@ const AddMeal = ({ journalId }: AddMealProp) => {
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col p-6 border rounded-xl gap-4"
+          className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]"
         >
           <X className="self-end" onClick={handleFormStatus} />
-          <select {...register('type', { required: true })}>
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-            <option value="snacks">Snacks</option>
-          </select>
+          <div className="flex justify-around">
+            <div className="flex flex-col justify-around">
+              <label>
+                <input type="radio" value="breakfast" name="type" /> Breakfast
+              </label>
+              <label>
+                <input type="radio" value="dinner" name="type" /> Dinner
+              </label>
+            </div>
+            <div className="flex flex-col justify-around">
+              <label>
+                <input type="radio" value="lunch" name="type" /> Lunch
+              </label>
+              <label>
+                <input type="radio" value="snacks" name="type" /> Snacks
+              </label>
+            </div>
+          </div>
           {errors.food && <span>This field is required</span>}
           <div>
             <div className="flex flex-col justify-items-center mb-3">
