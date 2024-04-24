@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import supabaseClient from '@/lib/supabase/client';
 import { useDateStore } from '@/lib/stores/datePicker';
 import { AddMealProp } from '@/content/types';
-import { Plus, X } from 'lucide-react';
+import { CornerDownLeft, Plus, X } from 'lucide-react';
 import { useJournalStore } from '@/lib/stores/journal';
 import { FormInputs } from '@/content/types';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -107,39 +107,37 @@ const AddMeal = ({ journalId }: AddMealProp) => {
           <div className="flex justify-around">
             <div className="flex flex-col justify-around">
               <label>
-                <input type="radio" value="breakfast" name="type" /> Breakfast
+                <input type="radio" value="breakfast" {...register('type')} />{' '}
+                Breakfast
               </label>
               <label>
-                <input type="radio" value="dinner" name="type" /> Dinner
+                <input type="radio" value="dinner" {...register('type')} />{' '}
+                Dinner
               </label>
             </div>
             <div className="flex flex-col justify-around">
               <label>
-                <input type="radio" value="lunch" name="type" /> Lunch
+                <input type="radio" value="lunch" {...register('type')} /> Lunch
               </label>
               <label>
-                <input type="radio" value="snacks" name="type" /> Snacks
+                <input type="radio" value="snacks" {...register('type')} />{' '}
+                Snacks
               </label>
             </div>
           </div>
           {errors.food && <span>This field is required</span>}
           <div>
-            <div className="flex flex-col justify-items-center mb-3">
+            <div className="flex flex-col justify-items-center gap-2 mb-3">
               <span>What did you eat today?</span>
-              <div className="flex gap-4">
+              <div className="flex gap-2">
                 <input
                   type="text"
                   value={currentFood}
                   onChange={(e) => setCurrentFood(e.target.value)} // Update the currentFood state with the input's value
+                  className="p-1"
                 />
-                <Button
-                  type="button"
-                  onClick={handleAddFoodItem}
-                  className="p-3 w-28 flex gap-2"
-                  variant={'outline'}
-                >
-                  Add
-                </Button>
+
+                <CornerDownLeft type="button" onClick={handleAddFoodItem} />
               </div>
               {errors.food && <span>This field is required</span>}
             </div>
