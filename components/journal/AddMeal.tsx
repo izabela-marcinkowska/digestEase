@@ -93,7 +93,7 @@ const AddMeal = ({ journalId }: AddMealProp) => {
       {formStatus ? (
         <button
           onClick={handleFormStatus}
-          className="border rounded-lg shadow-sm w-24 h-24 flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
+          className="border rounded-lg shadow-sm size-[85px] flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
           disabled={loading}
         >
           <Plus size={45} color="darkGreen" />
