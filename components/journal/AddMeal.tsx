@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, KeyboardEvent } from 'react';
 import { v4 as uuid } from 'uuid';
 import { toast } from 'sonner';
 import supabaseClient from '@/lib/supabase/client';
@@ -37,6 +37,10 @@ const AddMeal = ({ journalId }: AddMealProp) => {
     if (!currentFood) return; // Don't add if the input is empty
     setFoodList((prevFoodList) => [...prevFoodList, currentFood]);
     setCurrentFood(''); // Clear the input field after adding the food item
+  };
+
+  const handleDeleteFoodItem = (index: number) => {
+    setFoodList((prevFoodList) => prevFoodList.filter((_, i) => i !== index));
   };
 
   const addNewMeal = async (type: string, food: string[]) => {
@@ -88,6 +92,15 @@ const AddMeal = ({ journalId }: AddMealProp) => {
     console.log('after handling form status is:', formStatus);
   };
 
+  const handleInput = (e: KeyboardEvent<HTMLInputElement>) => {
+    console.log(e);
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      console.log('haaaaai');
+      handleAddFoodItem();
+    }
+  };
+
   return (
     <>
       {formStatus ? (
@@ -134,6 +147,7 @@ const AddMeal = ({ journalId }: AddMealProp) => {
                   type="text"
                   value={currentFood}
                   onChange={(e) => setCurrentFood(e.target.value)} // Update the currentFood state with the input's value
+                  onKeyDown={handleInput}
                   className="p-1 rounded-sm"
                 />
 
@@ -148,7 +162,12 @@ const AddMeal = ({ journalId }: AddMealProp) => {
                   className="flex items-center bg-backg rounded-sm p-2 justify-between"
                 >
                   <li>{food}</li>
-                  <Trash size={18} />
+                  <Trash
+                    size={18}
+                    onClick={() => {
+                      handleDeleteFoodItem(index);
+                    }}
+                  />
                 </div>
               ))}
             </ul>
