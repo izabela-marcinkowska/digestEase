@@ -7,9 +7,19 @@ import {
 import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
 import { MealProp } from '@/content/types';
 import { useState } from 'react';
+import supabaseClient from '@/lib/supabase/client';
 
 const Meal = ({ food, id, type, isNew }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
+
+  const deleteMeal = async (id: string) => {
+    console.log('stopped id is', id);
+    const { error } = await supabaseClient.from('meals').delete().eq('id', id);
+    if (error) {
+      console.log('failed to delete');
+    }
+  };
+
   return (
     <div className="min-w-72">
       <Collapsible
@@ -39,7 +49,13 @@ const Meal = ({ food, id, type, isNew }: MealProp) => {
               <Pencil width={17} />
               Edit
             </Button>
-            <Button className="p-3 w-28 flex gap-2" variant={'destructive'}>
+            <Button
+              className="p-3 w-28 flex gap-2"
+              variant={'destructive'}
+              onClick={() => {
+                deleteMeal(id);
+              }}
+            >
               <Trash2 width={17} />
               Delete
             </Button>

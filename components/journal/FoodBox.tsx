@@ -14,7 +14,7 @@ const FoodBox = ({ meals, id }: foodBoxProp) => {
             meals.map((meal, index) => (
               <Meal
                 key={index}
-                id={id}
+                id={meal.id}
                 food={meal.food}
                 type={meal.type}
                 isNew={meal.isNew}
