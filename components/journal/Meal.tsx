@@ -9,6 +9,7 @@ import { MealProp } from '@/content/types';
 import { useState } from 'react';
 import supabaseClient from '@/lib/supabase/client';
 import { useJournalStore } from '@/lib/stores/journal';
+import { toast } from 'sonner';
 
 const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
@@ -18,7 +19,9 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
     console.log('stopped id is', id);
     const { error } = await supabaseClient.from('meals').delete().eq('id', id);
     removeMeal({ id: id, type, food, log: logId });
+    toast.success('Success to delete the meal.');
     if (error) {
+      toast.error('Failed to delete the meal.');
       console.log('failed to delete');
     }
   };
