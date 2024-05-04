@@ -4,6 +4,17 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
 import { MealProp } from '@/content/types';
 import { useState } from 'react';
@@ -55,16 +66,33 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
               <Pencil width={17} />
               Edit
             </Button>
-            <Button
-              className="p-3 w-28 flex gap-2"
-              variant={'destructive'}
-              onClick={() => {
-                deleteMeal(id);
-              }}
-            >
-              <Trash2 width={17} />
-              Delete
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Button className="p-3 w-28 flex gap-2" variant={'destructive'}>
+                  <Trash2 width={17} />
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your meal and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => {
+                      deleteMeal(id);
+                    }}
+                  >
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </CollapsibleContent>
       </Collapsible>
