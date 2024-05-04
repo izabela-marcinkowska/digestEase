@@ -18,6 +18,7 @@ const FoodBox = ({ meals, id }: foodBoxProp) => {
                 food={meal.food}
                 type={meal.type}
                 isNew={meal.isNew}
+                logId={id}
               />
             ))}
         </div>

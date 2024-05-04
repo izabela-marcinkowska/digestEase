@@ -35,6 +35,7 @@ export type MealProp = {
   type: string;
   log?: string;
   isNew?: boolean;
+  logId: string;
 };
 
 export type AddMealProp = {

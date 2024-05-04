@@ -8,13 +8,16 @@ import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
 import { MealProp } from '@/content/types';
 import { useState } from 'react';
 import supabaseClient from '@/lib/supabase/client';
+import { useJournalStore } from '@/lib/stores/journal';
 
-const Meal = ({ food, id, type, isNew }: MealProp) => {
+const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
+  const removeMeal = useJournalStore((state) => state.removeMeal);
 
   const deleteMeal = async (id: string) => {
     console.log('stopped id is', id);
     const { error } = await supabaseClient.from('meals').delete().eq('id', id);
+    removeMeal({ id: id, type, food, log: logId });
     if (error) {
       console.log('failed to delete');
     }
