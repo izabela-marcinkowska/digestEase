@@ -83,6 +83,7 @@ const AddMeal = ({ journalId }: AddMealProp) => {
         toast.error('Failed to add new meal.');
       }
       setLoading(false);
+      toast.success('Successfully added new meal!');
     }
   };
 
