@@ -2,17 +2,20 @@ import { LucideIcon } from 'lucide-react';
 
 export type SingleLog = {
   id: string;
-  meals: FoodType[];
-  stress: number;
-  pain: boolean;
-  nausea: boolean;
-  toilet_visits: ToiletVisitType[];
+  date: string;
+  meals?: FoodType[] | null;
+  stress?: number;
+  pain?: boolean;
+  nausea?: boolean;
+  toilet_visits?: ToiletVisitType[];
 };
 
 export type FoodType = {
   id: string;
   type: string;
   food: string[];
+  log?: string;
+  isNew?: boolean;
 };
 
 export type ToiletVisitType = {
@@ -23,26 +26,20 @@ export type ToiletVisitType = {
 
 export type foodBoxProp = {
   id: string;
-  meals: FoodType[];
+  meals?: FoodType[] | null;
 };
 
 export type MealProp = {
   id: string;
   food: string[];
   type: string;
+  log?: string;
+  isNew?: boolean;
+  logId: string;
 };
 
-export type SingleDayProp = {
-  log: SingleLog;
-};
-
-export type DayLogs = {
-  day: string;
-  logs: SingleLog[];
-};
-
-export type LogCategoryProp = {
-  log: SingleLog;
+export type AddMealProp = {
+  journalId: string;
 };
 
 export type FeatureProp = {
@@ -61,4 +58,9 @@ export type RegLog = {
   pain: boolean;
   nausea: boolean;
   type: string;
+};
+
+export type FormInputs = {
+  type: string;
+  food: string[];
 };

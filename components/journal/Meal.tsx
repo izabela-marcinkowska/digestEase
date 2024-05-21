@@ -1,44 +1,101 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
 import { Button } from '../ui/button';
-import { Pencil, Trash2 } from 'lucide-react';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
 import { MealProp } from '@/content/types';
+import { useState } from 'react';
+import supabaseClient from '@/lib/supabase/client';
+import { useJournalStore } from '@/lib/stores/journal';
+import { toast } from 'sonner';
 
-const Meal = ({ food, id, type }: MealProp) => {
+const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
+  const [open, setOpen] = useState<boolean>(isNew || false);
+  const removeMeal = useJournalStore((state) => state.removeMeal);
+
+  const deleteMeal = async (id: string) => {
+    console.log('stopped id is', id);
+    const { error } = await supabaseClient.from('meals').delete().eq('id', id);
+    removeMeal({ id: id, type, food, log: logId });
+    toast.success('Success to delete the meal.');
+    if (error) {
+      toast.error('Failed to delete the meal.');
+      console.log('failed to delete');
+    }
+  };
+
   return (
-    <div className="min-w-64">
-      <Accordion
-        type="single"
-        collapsible
-        className="border rounded-lg bg-white shadow-sm "
+    <div className="min-w-72">
+      <Collapsible
+        open={open}
+        onOpenChange={setOpen}
+        className="border rounded-lg bg-white shadow-sm p-4 content-center"
       >
-        <AccordionItem value="item-1">
-          <AccordionTrigger>{type}</AccordionTrigger>
-          <AccordionContent className="flex w-3/4 mx-auto flex-col gap-6">
-            <div>
-              <ul className="w-11/12 mx-auto">
-                {food.map((foodItem, foodIndex) => (
-                  <li key={foodIndex}>{foodItem}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex gap-3 justify-between">
-              <Button className="p-3 w-28 flex gap-2" variant={'outline'}>
-                <Pencil width={17} />
-                Edit
-              </Button>
-              <Button className="p-3 w-28 flex gap-2" variant={'destructive'}>
-                <Trash2 width={17} />
-                Delete
-              </Button>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+        <CollapsibleTrigger asChild>
+          <div className="flex items-center justify-between p-2 h-18">
+            <h4 className="text-sm font-semibold m-0">{type}</h4>
+            <Button variant="ghost" size="sm" className="w-9 p-0">
+              <ChevronsUpDown className="h-4 w-4" />
+              <span className="sr-only">Toggle</span>
+            </Button>
+          </div>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="flex flex-col gap-4">
+          <div>
+            <ul className="w-11/12 mx-auto">
+              {food.map((foodItem, foodIndex) => (
+                <li key={foodIndex}>{foodItem}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex gap-3 justify-between">
+            <Button className="p-3 w-28 flex gap-2" variant={'outline'}>
+              <Pencil width={17} />
+              Edit
+            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Button className="p-3 w-28 flex gap-2" variant={'destructive'}>
+                  <Trash2 width={17} />
+                  Delete
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your meal and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => {
+                      deleteMeal(id);
+                    }}
+                  >
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 };
