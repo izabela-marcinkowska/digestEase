@@ -35,23 +35,11 @@ export type MealProp = {
   type: string;
   log?: string;
   isNew?: boolean;
+  logId: string;
 };
 
 export type AddMealProp = {
   journalId: string;
-};
-
-export type SingleDayProp = {
-  log: SingleLog;
-};
-
-export type DayLogs = {
-  day: string;
-  logs: SingleLog[];
-};
-
-export type LogCategoryProp = {
-  log: SingleLog;
 };
 
 export type FeatureProp = {
@@ -70,4 +58,9 @@ export type RegLog = {
   pain: boolean;
   nausea: boolean;
   type: string;
+};
+
+export type FormInputs = {
+  type: string;
+  food: string[];
 };
