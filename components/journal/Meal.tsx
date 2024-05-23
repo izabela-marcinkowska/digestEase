@@ -25,6 +25,7 @@ import { toast } from 'sonner';
 const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
   const removeMeal = useJournalStore((state) => state.removeMeal);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const deleteMeal = async (id: string) => {
     console.log('stopped id is', id);
@@ -49,69 +50,82 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   };
 
   return (
-    <div className="min-w-72">
-      <Collapsible
-        open={open}
-        onOpenChange={setOpen}
-        className="border rounded-lg bg-white shadow-sm p-4 content-center"
-      >
-        <CollapsibleTrigger asChild>
-          <div className="flex items-center justify-between p-2 h-18">
-            <h4 className="text-sm font-semibold m-0">{type}</h4>
-            <Button variant="ghost" size="sm" className="w-9 p-0">
-              <ChevronsUpDown className="h-4 w-4" />
-              <span className="sr-only">Toggle</span>
-            </Button>
-          </div>
-        </CollapsibleTrigger>
-        <CollapsibleContent className="flex flex-col gap-4">
-          <div>
-            <ul className="w-11/12 mx-auto">
-              {food.map((foodItem, foodIndex) => (
-                <li key={foodIndex}>{foodItem}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex gap-3 justify-between">
-            <Button
-              className="p-3 w-28 flex gap-2"
-              variant={'outline'}
-              onClick={() => editMeal(id, ['thats', 'nice', 'list'], 'changed')}
-            >
-              <Pencil width={17} />
-              Edit
-            </Button>
-            <AlertDialog>
-              <AlertDialogTrigger>
-                <Button className="p-3 w-28 flex gap-2" variant={'destructive'}>
-                  <Trash2 width={17} />
-                  Delete
+    <>
+      {isEditing ? (
+        <div>noooting</div>
+      ) : (
+        <div className="min-w-72">
+          <Collapsible
+            open={open}
+            onOpenChange={setOpen}
+            className="border rounded-lg bg-white shadow-sm p-4 content-center"
+          >
+            <CollapsibleTrigger asChild>
+              <div className="flex items-center justify-between p-2 h-18">
+                <h4 className="text-sm font-semibold m-0">{type}</h4>
+                <Button variant="ghost" size="sm" className="w-9 p-0">
+                  <ChevronsUpDown className="h-4 w-4" />
+                  <span className="sr-only">Toggle</span>
                 </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your meal and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      deleteMeal(id);
-                    }}
-                  >
-                    Continue
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
-    </div>
+              </div>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="flex flex-col gap-4">
+              <div>
+                <ul className="w-11/12 mx-auto">
+                  {food.map((foodItem, foodIndex) => (
+                    <li key={foodIndex}>{foodItem}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex gap-3 justify-between">
+                <Button
+                  className="p-3 w-28 flex gap-2"
+                  variant={'outline'}
+                  onClick={() =>
+                    editMeal(id, ['thats', 'nice', 'list'], 'changed')
+                  }
+                >
+                  <Pencil width={17} />
+                  Edit
+                </Button>
+                <AlertDialog>
+                  <AlertDialogTrigger>
+                    <Button
+                      className="p-3 w-28 flex gap-2"
+                      variant={'destructive'}
+                    >
+                      <Trash2 width={17} />
+                      Delete
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure?
+                      </AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your meal and remove your data from our servers.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => {
+                          deleteMeal(id);
+                        }}
+                      >
+                        Continue
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </div>
+      )}
+    </>
   );
 };
 
