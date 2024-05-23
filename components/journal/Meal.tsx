@@ -37,6 +37,17 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
     }
   };
 
+  const editMeal = async (id: string, food: string[], type: string) => {
+    const { error } = await supabaseClient
+      .from('meals')
+      .update({ food, type })
+      .eq('id', id);
+    if (error) {
+      toast.error('Failed to edit the meal.');
+      console.log('failed to edit');
+    }
+  };
+
   return (
     <div className="min-w-72">
       <Collapsible
@@ -62,7 +73,11 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
             </ul>
           </div>
           <div className="flex gap-3 justify-between">
-            <Button className="p-3 w-28 flex gap-2" variant={'outline'}>
+            <Button
+              className="p-3 w-28 flex gap-2"
+              variant={'outline'}
+              onClick={() => editMeal(id, ['thats', 'nice', 'list'], 'changed')}
+            >
               <Pencil width={17} />
               Edit
             </Button>
