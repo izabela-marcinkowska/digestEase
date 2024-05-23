@@ -21,6 +21,7 @@ import { useState } from 'react';
 import supabaseClient from '@/lib/supabase/client';
 import { useJournalStore } from '@/lib/stores/journal';
 import { toast } from 'sonner';
+import MealForm from './MealForm';
 
 const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
@@ -47,12 +48,13 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
       toast.error('Failed to edit the meal.');
       console.log('failed to edit');
     }
+    setIsEditing(!isEditing);
   };
 
   return (
     <>
       {isEditing ? (
-        <div>noooting</div>
+        <MealForm journalId={id} />
       ) : (
         <div className="min-w-72">
           <Collapsible
