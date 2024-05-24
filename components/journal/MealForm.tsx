@@ -32,6 +32,17 @@ const MealForm = ({ journalId }: AddMealProp) => {
     setFoodList([]);
   };
 
+  const editMeal = async (id: string, food: string[], type: string) => {
+    const { error } = await supabaseClient
+      .from('meals')
+      .update({ food, type })
+      .eq('id', id);
+    if (error) {
+      toast.error('Failed to edit the meal.');
+      console.log('failed to edit');
+    }
+  };
+
   const addNewMeal = async (type: string, food: string[]) => {
     setLoading(true);
     if (!journalId) {
