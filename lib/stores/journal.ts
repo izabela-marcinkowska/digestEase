@@ -16,6 +16,7 @@ type JournalStore = {
     value: SingleLog[K]
   ) => void;
   setIsEditing: (newIsEditing: boolean) => void;
+  editMeal: (mealId: string, food: string[], type: string) => void; // New function
 };
 
 export const useJournalStore = create<JournalStore>((set, get) => ({
@@ -71,6 +72,16 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
 
     if (currentLog) {
       set({ log: { ...currentLog, [property]: value } });
+    }
+  },
+  editMeal: (mealId, food, type) => {
+    const currentLog = get().log;
+
+    if (currentLog) {
+      const updatedMeals = currentLog.meals?.map((meal) =>
+        meal.id === mealId ? { ...meal, ...{ mealId, food, type } } : meal
+      );
+      set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },
 }));

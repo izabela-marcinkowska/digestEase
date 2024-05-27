@@ -20,6 +20,7 @@ const EditForm = ({ journalId, food, type }: EditMealProp) => {
   const [loading, setLoading] = useState(false);
   const editFormStatus = useJournalStore((state) => state.isEditing);
   const toggleEditForm = useJournalStore((state) => state.setIsEditing);
+  const updateMeal = useJournalStore((state) => state.editMeal);
 
   const {
     register,
@@ -43,6 +44,8 @@ const EditForm = ({ journalId, food, type }: EditMealProp) => {
       .from('meals')
       .update({ food, type })
       .eq('id', id);
+    updateMeal(id, food, type);
+    toggleEditForm(editFormStatus);
     if (error) {
       toast.error('Failed to edit the meal.');
       console.log('failed to edit');
