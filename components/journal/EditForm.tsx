@@ -42,6 +42,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
       .eq('id', id);
     updateMeal(id, food, type);
     handleFormStatus();
+    toast.success('Changes saved');
     if (error) {
       toast.error('Failed to edit the meal.');
     }
