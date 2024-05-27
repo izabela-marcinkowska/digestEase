@@ -22,6 +22,7 @@ import supabaseClient from '@/lib/supabase/client';
 import { useJournalStore } from '@/lib/stores/journal';
 import { toast } from 'sonner';
 import MealForm from './MealForm';
+import EditForm from './EditForm';
 
 const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
@@ -46,7 +47,7 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   return (
     <>
       {isEditing ? (
-        <MealForm journalId={id} />
+        <EditForm journalId={id} food={food} type={type} />
       ) : (
         <div className="min-w-72">
           <Collapsible
