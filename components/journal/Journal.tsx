@@ -19,7 +19,6 @@ const Journal = () => {
       if (!log) {
         setChosenLog(null);
       }
-      console.log('formstatus is', formStatus);
       setChosenLog(log);
     };
     getLog();

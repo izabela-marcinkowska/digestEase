@@ -7,13 +7,10 @@ import MealForm from './MealForm';
 const AddMeal = ({ journalId }: AddMealProp) => {
   const [loading, setLoading] = useState(false);
   const formStatus = useDateStore((state) => state.formStatus);
-
   const toggleFormStatus = useDateStore((state) => state.toggleFormStatus);
 
   const handleFormStatus = () => {
-    console.log('before handling form status is:', formStatus);
     toggleFormStatus(formStatus);
-    console.log('after handling form status is:', formStatus);
   };
 
   return (

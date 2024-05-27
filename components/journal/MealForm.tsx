@@ -65,7 +65,6 @@ const MealForm = ({ journalId }: AddMealProp) => {
           .from('meals')
           .insert({ id: newMealId, type, food, log: data.id });
         if (error) {
-          console.log('failed to add meal to the database');
           toast.error('Failed to add new meal.');
         }
         setLoading(false);
@@ -79,7 +78,6 @@ const MealForm = ({ journalId }: AddMealProp) => {
         .from('meals')
         .insert({ id: newMealId, type, food, log: journalId });
       if (error) {
-        console.log('failed to add meal to the database');
         toast.error('Failed to add new meal.');
       }
       setLoading(false);
@@ -95,7 +93,6 @@ const MealForm = ({ journalId }: AddMealProp) => {
     console.log(e);
     if (e.keyCode === 13) {
       e.preventDefault();
-      console.log('haaaaai');
       handleAddFoodItem();
     }
   };
@@ -107,9 +104,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
   };
 
   const handleFormStatus = () => {
-    console.log('before handling form status is:', formStatus);
     toggleFormStatus(formStatus);
-    console.log('after handling form status is:', formStatus);
   };
   return (
     <>

@@ -30,13 +30,11 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [editFormOpen, setEditFormOpen] = useState<boolean>(false);
 
   const deleteMeal = async (id: string) => {
-    console.log('stopped id is', id);
     const { error } = await supabaseClient.from('meals').delete().eq('id', id);
     removeMeal({ id: id, type, food, log: logId });
     toast.success('Success to delete the meal.');
     if (error) {
       toast.error('Failed to delete the meal.');
-      console.log('failed to delete');
     }
   };
 

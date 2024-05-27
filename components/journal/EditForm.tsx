@@ -44,7 +44,6 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
     handleFormStatus();
     if (error) {
       toast.error('Failed to edit the meal.');
-      console.log('failed to edit');
     }
   };
 
@@ -56,7 +55,6 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
     console.log(e);
     if (e.keyCode === 13) {
       e.preventDefault();
-      console.log('haaaaai');
       handleAddFoodItem();
     }
   };
@@ -67,9 +65,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   };
 
   const handleFormStatus = () => {
-    console.log('before handling form status is:', formStatus);
     onClose();
-    console.log('after handling form status is:', formStatus);
   };
   return (
     <>
