@@ -6,7 +6,6 @@ type JournalStore = {
   meals: FoodType[];
   toilet_visits: ToiletVisitType[];
   setCurrentLog: (log: SingleLog | null) => void;
-  isEditing: boolean;
   addMeal: (newMeal: FoodType, isNew: boolean) => void;
   removeMeal: (newMeal: FoodType) => void;
   addToiletVisit: (newToiletVisit: ToiletVisitType) => void;
@@ -15,7 +14,6 @@ type JournalStore = {
     property: K,
     value: SingleLog[K]
   ) => void;
-  setIsEditing: (newIsEditing: boolean) => void;
   editMeal: (mealId: string, food: string[], type: string) => void; // New function
 };
 
@@ -24,7 +22,6 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
   meals: [],
   toilet_visits: [],
   isEditing: false,
-  setIsEditing: (newIsEditing) => set({ isEditing: !newIsEditing }),
   setCurrentLog: (log: SingleLog | null) => set({ log }),
   addMeal: (newMeal: FoodType, isNew: boolean = true) => {
     const currentLog = get().log;

@@ -21,7 +21,6 @@ import { useState } from 'react';
 import supabaseClient from '@/lib/supabase/client';
 import { useJournalStore } from '@/lib/stores/journal';
 import { toast } from 'sonner';
-import MealForm from './MealForm';
 import EditForm from './EditForm';
 
 const Meal = ({ food, id, type, isNew, logId }: MealProp) => {

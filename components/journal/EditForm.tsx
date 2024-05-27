@@ -1,21 +1,15 @@
 import { CornerDownLeft, Plus, Trash, X } from 'lucide-react';
-import { AddMealProp, EditMealProp, FormInputs } from '@/content/types';
+import { EditMealProp, FormInputs } from '@/content/types';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
-import { v4 as uuid } from 'uuid';
 import { toast } from 'sonner';
 import supabaseClient from '@/lib/supabase/client';
-import { useDateStore } from '@/lib/stores/datePicker';
 import { useState, KeyboardEvent } from 'react';
 import { useJournalStore } from '@/lib/stores/journal';
 
 const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
-  const toggleFormStatus = useDateStore((state) => state.toggleFormStatus);
   const [foodList, setFoodList] = useState<string[]>(food);
-  const formStatus = useDateStore((state) => state.formStatus);
   const [currentFood, setCurrentFood] = useState('');
-  const editFormStatus = useJournalStore((state) => state.isEditing);
-  const toggleEditForm = useJournalStore((state) => state.setIsEditing);
   const updateMeal = useJournalStore((state) => state.editMeal);
 
   const {

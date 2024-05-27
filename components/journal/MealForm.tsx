@@ -39,7 +39,6 @@ const MealForm = ({ journalId }: AddMealProp) => {
       .eq('id', id);
     if (error) {
       toast.error('Failed to edit the meal.');
-      console.log('failed to edit');
     }
   };
 
