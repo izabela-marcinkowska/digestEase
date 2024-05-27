@@ -9,15 +9,11 @@ import { useDateStore } from '@/lib/stores/datePicker';
 import { useState, KeyboardEvent } from 'react';
 import { useJournalStore } from '@/lib/stores/journal';
 
-const EditForm = ({ journalId, food, type }: EditMealProp) => {
+const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   const toggleFormStatus = useDateStore((state) => state.toggleFormStatus);
   const [foodList, setFoodList] = useState<string[]>(food);
-  const pickedDay = useDateStore((state) => state.chosenDay);
-  const addMeal = useJournalStore((state) => state.addMeal);
-  const setLog = useJournalStore((state) => state.setCurrentLog);
   const formStatus = useDateStore((state) => state.formStatus);
   const [currentFood, setCurrentFood] = useState('');
-  const [loading, setLoading] = useState(false);
   const editFormStatus = useJournalStore((state) => state.isEditing);
   const toggleEditForm = useJournalStore((state) => state.setIsEditing);
   const updateMeal = useJournalStore((state) => state.editMeal);
@@ -45,7 +41,7 @@ const EditForm = ({ journalId, food, type }: EditMealProp) => {
       .update({ food, type })
       .eq('id', id);
     updateMeal(id, food, type);
-    toggleEditForm(editFormStatus);
+    handleFormStatus();
     if (error) {
       toast.error('Failed to edit the meal.');
       console.log('failed to edit');
@@ -72,7 +68,7 @@ const EditForm = ({ journalId, food, type }: EditMealProp) => {
 
   const handleFormStatus = () => {
     console.log('before handling form status is:', formStatus);
-    toggleEditForm(editFormStatus);
+    onClose();
     console.log('after handling form status is:', formStatus);
   };
   return (

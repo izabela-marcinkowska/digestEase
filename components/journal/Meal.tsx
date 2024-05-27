@@ -27,8 +27,7 @@ import EditForm from './EditForm';
 const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
   const removeMeal = useJournalStore((state) => state.removeMeal);
-  const editFormStatus = useJournalStore((state) => state.isEditing);
-  const toggleEditForm = useJournalStore((state) => state.setIsEditing);
+  const [editFormOpen, setEditFormOpen] = useState<boolean>(false);
 
   const deleteMeal = async (id: string) => {
     console.log('stopped id is', id);
@@ -42,13 +41,17 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   };
 
   const handleEditButton = () => {
-    toggleEditForm(editFormStatus);
+    setEditFormOpen(true);
+  };
+
+  const setClose = () => {
+    setEditFormOpen(false);
   };
 
   return (
     <>
-      {editFormStatus ? (
-        <EditForm journalId={id} food={food} type={type} />
+      {editFormOpen ? (
+        <EditForm journalId={id} food={food} type={type} onClose={setClose} />
       ) : (
         <div className="min-w-72">
           <Collapsible
