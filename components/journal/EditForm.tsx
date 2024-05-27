@@ -11,7 +11,7 @@ import { useJournalStore } from '@/lib/stores/journal';
 
 const EditForm = ({ journalId, food, type }: EditMealProp) => {
   const toggleFormStatus = useDateStore((state) => state.toggleFormStatus);
-  const [foodList, setFoodList] = useState<string[]>([]);
+  const [foodList, setFoodList] = useState<string[]>(food);
   const pickedDay = useDateStore((state) => state.chosenDay);
   const addMeal = useJournalStore((state) => state.addMeal);
   const setLog = useJournalStore((state) => state.setCurrentLog);
@@ -26,7 +26,11 @@ const EditForm = ({ journalId, food, type }: EditMealProp) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm<FormInputs>({
+    defaultValues: {
+      type: type,
+    },
+  });
   const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
     // Since `foodList` contains all the food items added, pass it to `addNewMeal`
     // `formData.type` contains the meal type selected by the user
