@@ -18,6 +18,8 @@ const EditForm = ({ journalId, food, type }: EditMealProp) => {
   const formStatus = useDateStore((state) => state.formStatus);
   const [currentFood, setCurrentFood] = useState('');
   const [loading, setLoading] = useState(false);
+  const editFormStatus = useJournalStore((state) => state.isEditing);
+  const toggleEditForm = useJournalStore((state) => state.setIsEditing);
 
   const {
     register,
@@ -63,7 +65,7 @@ const EditForm = ({ journalId, food, type }: EditMealProp) => {
 
   const handleFormStatus = () => {
     console.log('before handling form status is:', formStatus);
-    toggleFormStatus(formStatus);
+    toggleEditForm(editFormStatus);
     console.log('after handling form status is:', formStatus);
   };
   return (

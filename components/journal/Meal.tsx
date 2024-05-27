@@ -27,7 +27,8 @@ import EditForm from './EditForm';
 const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   const [open, setOpen] = useState<boolean>(isNew || false);
   const removeMeal = useJournalStore((state) => state.removeMeal);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const editFormStatus = useJournalStore((state) => state.isEditing);
+  const toggleEditForm = useJournalStore((state) => state.setIsEditing);
 
   const deleteMeal = async (id: string) => {
     console.log('stopped id is', id);
@@ -41,12 +42,12 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
   };
 
   const handleEditButton = () => {
-    setIsEditing(!isEditing);
+    toggleEditForm(editFormStatus);
   };
 
   return (
     <>
-      {isEditing ? (
+      {editFormStatus ? (
         <EditForm journalId={id} food={food} type={type} />
       ) : (
         <div className="min-w-72">
