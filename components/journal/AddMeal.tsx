@@ -12,20 +12,18 @@ const AddMeal = ({ journalId }: AddMealProp) => {
     toggleFormStatus(formStatus);
   };
 
-  return (
-    <>
-      {formStatus ? (
-        <button
-          onClick={handleFormStatus}
-          className="border rounded-lg shadow-sm size-[85px] flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
-        >
-          <Plus size={45} color="darkGreen" />
-        </button>
-      ) : (
-        <MealForm journalId={journalId} />
-      )}
-    </>
-  );
+  if (formStatus) {
+    return (
+      <button
+        onClick={handleFormStatus}
+        className="border rounded-lg shadow-sm size-[85px] flex justify-center items-center bg-lightGreen cursor-pointer hover:shadow-inner disabled:opacity-50"
+      >
+        <Plus size={45} color="darkGreen" />
+      </button>
+    );
+  }
+
+  return <MealForm journalId={journalId} />;
 };
 
 export default AddMeal;
