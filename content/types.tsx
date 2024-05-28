@@ -15,7 +15,6 @@ export type FoodType = {
   type: string;
   food: string[];
   log?: string;
-  isNew?: boolean;
 };
 
 export type ToiletVisitType = {
@@ -34,7 +33,6 @@ export type MealProp = {
   food: string[];
   type: string;
   log?: string;
-  isNew?: boolean;
   logId: string;
 };
 

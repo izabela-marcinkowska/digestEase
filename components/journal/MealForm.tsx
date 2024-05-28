@@ -34,10 +34,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
   };
 
   const editMeal = async (id: string, food: string[], type: string) => {
-    const { error } = await supabaseClient
-      .from('meals')
-      .update({ food, type })
-      .eq('id', id);
+    const { error } = await supabaseClient.from('meals').update({ food, type }).eq('id', id);
     if (error) {
       toast.error('Failed to edit the meal.');
     }
@@ -46,11 +43,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
   const addNewMeal = async (type: string, food: string[]) => {
     setLoading(true);
     if (!journalId) {
-      const { data, error } = await supabaseClient
-        .from('logs')
-        .insert({ date: pickedDay })
-        .select()
-        .single();
+      const { data, error } = await supabaseClient.from('logs').insert({ date: pickedDay }).select().single();
       if (error) {
         console.error('Failed to create new log.');
         toast.error('Failed to create new log.');
@@ -60,10 +53,8 @@ const MealForm = ({ journalId }: AddMealProp) => {
       if (data) {
         setLog(data);
         const newMealId = uuid();
-        addMeal({ id: newMealId, type, food, log: data.id }, true);
-        const { error } = await supabaseClient
-          .from('meals')
-          .insert({ id: newMealId, type, food, log: data.id });
+        addMeal({ id: newMealId, type, food, log: data.id });
+        const { error } = await supabaseClient.from('meals').insert({ id: newMealId, type, food, log: data.id });
         if (error) {
           toast.error('Failed to add new meal.');
         }
@@ -73,10 +64,8 @@ const MealForm = ({ journalId }: AddMealProp) => {
 
     if (journalId) {
       const newMealId = uuid();
-      addMeal({ id: newMealId, type, food, log: journalId }, true);
-      const { error } = await supabaseClient
-        .from('meals')
-        .insert({ id: newMealId, type, food, log: journalId });
+      addMeal({ id: newMealId, type, food, log: journalId });
+      const { error } = await supabaseClient.from('meals').insert({ id: newMealId, type, food, log: journalId });
       if (error) {
         toast.error('Failed to add new meal.');
       }
@@ -108,10 +97,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
   };
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]">
         <div className="flex justify-between">
           <div className="text-xl">Add meal</div>
           <X onClick={handleFormStatus} size={26} />
@@ -119,8 +105,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="breakfast" {...register('type')} />{' '}
-              Breakfast
+              <input type="radio" value="breakfast" {...register('type')} /> Breakfast
             </label>
             <label>
               <input type="radio" value="dinner" {...register('type')} /> Dinner
@@ -154,10 +139,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
           </div>
           <ul className="flex flex-col gap-1">
             {foodList.map((food, index) => (
-              <div
-                key={index}
-                className="flex items-center bg-backg rounded-sm p-2 justify-between"
-              >
+              <div key={index} className="flex items-center bg-backg rounded-sm p-2 justify-between">
                 <li>{food}</li>
                 <Trash
                   size={18}
@@ -170,11 +152,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
           </ul>
         </div>
         <div className="flex justify-center">
-          <Button
-            type="submit"
-            className="p-3 w-28 flex gap-2"
-            variant={'outline'}
-          >
+          <Button type="submit" className="p-3 w-28 flex gap-2" variant={'outline'}>
             Submit
           </Button>
         </div>

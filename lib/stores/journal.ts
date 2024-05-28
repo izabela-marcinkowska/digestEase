@@ -6,14 +6,11 @@ type JournalStore = {
   meals: FoodType[];
   toilet_visits: ToiletVisitType[];
   setCurrentLog: (log: SingleLog | null) => void;
-  addMeal: (newMeal: FoodType, isNew: boolean) => void;
+  addMeal: (newMeal: FoodType) => void;
   removeMeal: (newMeal: FoodType) => void;
   addToiletVisit: (newToiletVisit: ToiletVisitType) => void;
   removeToiletVisit: (newToiletVisit: ToiletVisitType) => void;
-  setJournalProperty: <K extends keyof SingleLog>(
-    property: K,
-    value: SingleLog[K]
-  ) => void;
+  setJournalProperty: <K extends keyof SingleLog>(property: K, value: SingleLog[K]) => void;
   editMeal: (mealId: string, food: string[], type: string) => void; // New function
 };
 
@@ -23,14 +20,12 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
   toilet_visits: [],
   isEditing: false,
   setCurrentLog: (log: SingleLog | null) => set({ log }),
-  addMeal: (newMeal: FoodType, isNew: boolean = true) => {
+  addMeal: (newMeal: FoodType) => {
     const currentLog = get().log;
 
     if (currentLog) {
-      const meal = { ...newMeal, isNew };
-      const updatedMeals = currentLog.meals
-        ? [...currentLog.meals, meal]
-        : [meal];
+      const meal = { ...newMeal };
+      const updatedMeals = currentLog.meals ? [...currentLog.meals, meal] : [meal];
       set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },
@@ -38,9 +33,7 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
     const currentLog = get().log;
 
     if (currentLog) {
-      const updatedMeals = currentLog.meals?.filter(
-        (meal) => meal.id !== mealToRemove.id
-      );
+      const updatedMeals = currentLog.meals?.filter((meal) => meal.id !== mealToRemove.id);
       set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },

@@ -11,16 +11,7 @@ const FoodBox = ({ meals, id }: foodBoxProp) => {
         </div>
         <div className="w-full flex">
           {meals &&
-            meals.map((meal, index) => (
-              <Meal
-                key={index}
-                id={meal.id}
-                food={meal.food}
-                type={meal.type}
-                isNew={meal.isNew}
-                logId={id}
-              />
-            ))}
+            meals.map((meal, index) => <Meal key={index} id={meal.id} food={meal.food} type={meal.type} logId={id} />)}
         </div>
       </div>
     </>
