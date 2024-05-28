@@ -12,6 +12,6 @@ type date = {
 export const useDateStore = create<date>((set) => ({
   chosenDay: today,
   updateChosenDay: (newChosenDay: string) => set({ chosenDay: newChosenDay }),
-  formStatus: false,
+  formStatus: true,
   toggleFormStatus: (newStatus) => set({ formStatus: !newStatus }),
 }));

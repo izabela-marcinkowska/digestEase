@@ -12,7 +12,6 @@ const Journal = () => {
   const toggleFormStatus = useDateStore((state) => state.toggleFormStatus);
 
   useEffect(() => {
-    toggleFormStatus(false);
     const getLog = async () => {
       const log = await getJournalByDate(pickedDay);
       if (!log) {
