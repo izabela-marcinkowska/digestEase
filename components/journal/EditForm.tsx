@@ -22,6 +22,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
       type: type,
     },
   });
+
   const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
     // Since `foodList` contains all the food items added, pass it to `addNewMeal`
     // `formData.type` contains the meal type selected by the user
@@ -31,10 +32,11 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
 
   const editMeal = async (id: string, food: string[], type: string) => {
     const { error } = await supabaseClient.from('meals').update({ food, type }).eq('id', id);
-    updateMeal(id, food, type);
-    closeEditForm();
-    toast.success('Changes saved');
-    if (error) {
+    if (!error) {
+      updateMeal(id, food, type);
+      closeEditForm();
+      toast.success('Changes saved');
+    } else {
       toast.error('Failed to edit the meal.');
     }
   };
@@ -44,12 +46,12 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   };
 
   const handleInput = (e: KeyboardEvent<HTMLInputElement>) => {
-    console.log(e);
     if (e.key === 'Enter') {
       e.preventDefault();
       handleAddFoodItem();
     }
   };
+
   const handleAddFoodItem = () => {
     if (!currentFood) return; // Don't add if the input is empty
     setFoodList((prevFoodList) => [...prevFoodList, currentFood]);
@@ -70,18 +72,25 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="breakfast" {...register('type')} /> Breakfast
+              <input
+                type="radio"
+                value="breakfast"
+                {...register('type', {
+                  required: true,
+                })}
+              />{' '}
+              Breakfast
             </label>
             <label>
-              <input type="radio" value="dinner" {...register('type')} /> Dinner
+              <input type="radio" value="dinner" {...register('type', { required: true })} /> Dinner
             </label>
           </div>
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="lunch" {...register('type')} /> Lunch
+              <input type="radio" value="lunch" {...register('type', { required: true })} /> Lunch
             </label>
             <label>
-              <input type="radio" value="snacks" {...register('type')} /> Snacks
+              <input type="radio" value="snacks" {...register('type', { required: true })} /> Snacks
             </label>
           </div>
         </div>
@@ -97,10 +106,8 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
                 onKeyDown={handleInput}
                 className="p-1 rounded-sm"
               />
-
               <CornerDownLeft type="button" onClick={handleAddFoodItem} />
             </div>
-            {errors.food && <span>This field is required</span>}
           </div>
           <ul className="flex flex-col gap-1">
             {foodList.map((food, index) => (
