@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { toast } from 'sonner';
 import supabaseClient from '@/lib/supabase/client';
 import { useDateStore } from '@/lib/stores/datePicker';
-import { useState, KeyboardEvent } from 'react';
+import { useState, KeyboardEvent, useEffect } from 'react';
 import { useJournalStore } from '@/lib/stores/journal';
 
 const MealForm = ({ journalId }: AddMealProp) => {
@@ -25,6 +25,12 @@ const MealForm = ({ journalId }: AddMealProp) => {
     watch,
     formState: { errors },
   } = useForm<FormInputs>();
+
+  useEffect(() => {
+    if (errors !== undefined && errors.type) {
+      toast.error('Please select a meal type.');
+    }
+  }, [errors]);
 
   const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
     // Since `foodList` contains all the food items added, pass it to `addNewMeal`
@@ -99,18 +105,18 @@ const MealForm = ({ journalId }: AddMealProp) => {
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="breakfast" {...register('type')} /> Breakfast
+              <input type="radio" value="breakfast" {...register('type', { required: true })} /> Breakfast
             </label>
             <label>
-              <input type="radio" value="dinner" {...register('type')} /> Dinner
+              <input type="radio" value="dinner" {...register('type', { required: true })} /> Dinner
             </label>
           </div>
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="lunch" {...register('type')} /> Lunch
+              <input type="radio" value="lunch" {...register('type', { required: true })} /> Lunch
             </label>
             <label>
-              <input type="radio" value="snacks" {...register('type')} /> Snacks
+              <input type="radio" value="snacks" {...register('type', { required: true })} /> Snacks
             </label>
           </div>
         </div>
@@ -129,7 +135,6 @@ const MealForm = ({ journalId }: AddMealProp) => {
 
               <CornerDownLeft type="button" onClick={handleAddFoodItem} />
             </div>
-            {errors.food && <span>This field is required</span>}
           </div>
           <ul className="flex flex-col gap-1">
             {foodList.map((food, index) => (
