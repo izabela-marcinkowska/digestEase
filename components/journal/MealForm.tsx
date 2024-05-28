@@ -25,19 +25,13 @@ const MealForm = ({ journalId }: AddMealProp) => {
     watch,
     formState: { errors },
   } = useForm<FormInputs>();
+
   const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
     // Since `foodList` contains all the food items added, pass it to `addNewMeal`
     // `formData.type` contains the meal type selected by the user
     await addNewMeal(formData.type, foodList);
     setFoodList([]);
     toggleFormStatus(false);
-  };
-
-  const editMeal = async (id: string, food: string[], type: string) => {
-    const { error } = await supabaseClient.from('meals').update({ food, type }).eq('id', id);
-    if (error) {
-      toast.error('Failed to edit the meal.');
-    }
   };
 
   const addNewMeal = async (type: string, food: string[]) => {
