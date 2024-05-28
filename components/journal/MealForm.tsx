@@ -152,7 +152,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
           </ul>
         </div>
         <div className="flex justify-center">
-          <Button type="submit" className="p-3 w-28 flex gap-2" variant={'outline'}>
+          <Button type="submit" className="p-3 w-28 flex gap-2" variant={'outline'} disabled={loading}>
             Submit
           </Button>
         </div>
