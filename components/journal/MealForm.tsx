@@ -30,6 +30,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
     // `formData.type` contains the meal type selected by the user
     await addNewMeal(formData.type, foodList);
     setFoodList([]);
+    toggleFormStatus(false);
   };
 
   const editMeal = async (id: string, food: string[], type: string) => {
