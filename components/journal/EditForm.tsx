@@ -32,7 +32,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   const editMeal = async (id: string, food: string[], type: string) => {
     const { error } = await supabaseClient.from('meals').update({ food, type }).eq('id', id);
     updateMeal(id, food, type);
-    handleFormStatus();
+    closeEditForm();
     toast.success('Changes saved');
     if (error) {
       toast.error('Failed to edit the meal.');
@@ -56,15 +56,16 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
     setCurrentFood(''); // Clear the input field after adding the food item
   };
 
-  const handleFormStatus = () => {
+  const closeEditForm = () => {
     onClose();
   };
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]">
         <div className="flex justify-between">
           <div className="text-xl">Add meal</div>
-          <X onClick={handleFormStatus} size={26} />
+          <X onClick={closeEditForm} size={26} />
         </div>
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
