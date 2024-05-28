@@ -1,9 +1,5 @@
 import { Button } from '../ui/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,8 +19,8 @@ import { useJournalStore } from '@/lib/stores/journal';
 import { toast } from 'sonner';
 import EditForm from './EditForm';
 
-const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
-  const [open, setOpen] = useState<boolean>(isNew || false);
+const Meal = ({ food, id, type, logId }: MealProp) => {
+  const [open, setOpen] = useState<boolean>(false);
   const removeMeal = useJournalStore((state) => state.removeMeal);
   const [editFormOpen, setEditFormOpen] = useState<boolean>(false);
 
@@ -74,32 +70,23 @@ const Meal = ({ food, id, type, isNew, logId }: MealProp) => {
                 </ul>
               </div>
               <div className="flex gap-3 justify-between">
-                <Button
-                  className="p-3 w-28 flex gap-2"
-                  variant={'outline'}
-                  onClick={handleEditButton}
-                >
+                <Button className="p-3 w-28 flex gap-2" variant={'outline'} onClick={handleEditButton}>
                   <Pencil width={17} />
                   Edit
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger>
-                    <Button
-                      className="p-3 w-28 flex gap-2"
-                      variant={'destructive'}
-                    >
+                    <Button className="p-3 w-28 flex gap-2" variant={'destructive'}>
                       <Trash2 width={17} />
                       Delete
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Are you absolutely sure?
-                      </AlertDialogTitle>
+                      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete your meal and remove your data from our servers.
+                        This action cannot be undone. This will permanently delete your meal and remove your data from
+                        our servers.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
