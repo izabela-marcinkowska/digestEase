@@ -38,6 +38,13 @@ export type MealProp = {
   logId: string;
 };
 
+export type EditMealProp = {
+  journalId: string;
+  food: string[];
+  type: string;
+  onClose: () => void;
+};
+
 export type AddMealProp = {
   journalId: string;
 };

@@ -10,20 +10,27 @@ type JournalStore = {
   removeMeal: (newMeal: FoodType) => void;
   addToiletVisit: (newToiletVisit: ToiletVisitType) => void;
   removeToiletVisit: (newToiletVisit: ToiletVisitType) => void;
-  setJournalProperty: <K extends keyof SingleLog>(property: K, value: SingleLog[K]) => void;
+  setJournalProperty: <K extends keyof SingleLog>(
+    property: K,
+    value: SingleLog[K]
+  ) => void;
+  editMeal: (mealId: string, food: string[], type: string) => void; // New function
 };
 
 export const useJournalStore = create<JournalStore>((set, get) => ({
   log: null,
   meals: [],
   toilet_visits: [],
+  isEditing: false,
   setCurrentLog: (log: SingleLog | null) => set({ log }),
   addMeal: (newMeal: FoodType, isNew: boolean = true) => {
     const currentLog = get().log;
 
     if (currentLog) {
       const meal = { ...newMeal, isNew };
-      const updatedMeals = currentLog.meals ? [...currentLog.meals, meal] : [meal];
+      const updatedMeals = currentLog.meals
+        ? [...currentLog.meals, meal]
+        : [meal];
       set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },
@@ -31,7 +38,9 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
     const currentLog = get().log;
 
     if (currentLog) {
-      const updatedMeals = currentLog.meals?.filter((meal) => meal.id !== mealToRemove.id);
+      const updatedMeals = currentLog.meals?.filter(
+        (meal) => meal.id !== mealToRemove.id
+      );
       set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },
@@ -60,6 +69,16 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
 
     if (currentLog) {
       set({ log: { ...currentLog, [property]: value } });
+    }
+  },
+  editMeal: (mealId, food, type) => {
+    const currentLog = get().log;
+
+    if (currentLog) {
+      const updatedMeals = currentLog.meals?.map((meal) =>
+        meal.id === mealId ? { ...meal, ...{ mealId, food, type } } : meal
+      );
+      set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },
 }));
