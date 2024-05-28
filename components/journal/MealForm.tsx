@@ -80,7 +80,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
 
   const handleInput = (e: KeyboardEvent<HTMLInputElement>) => {
     console.log(e);
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       e.preventDefault();
       handleAddFoodItem();
     }

@@ -30,10 +30,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   };
 
   const editMeal = async (id: string, food: string[], type: string) => {
-    const { error } = await supabaseClient
-      .from('meals')
-      .update({ food, type })
-      .eq('id', id);
+    const { error } = await supabaseClient.from('meals').update({ food, type }).eq('id', id);
     updateMeal(id, food, type);
     handleFormStatus();
     toast.success('Changes saved');
@@ -48,7 +45,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
 
   const handleInput = (e: KeyboardEvent<HTMLInputElement>) => {
     console.log(e);
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       e.preventDefault();
       handleAddFoodItem();
     }
@@ -64,10 +61,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   };
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]">
         <div className="flex justify-between">
           <div className="text-xl">Add meal</div>
           <X onClick={handleFormStatus} size={26} />
@@ -75,8 +69,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="breakfast" {...register('type')} />{' '}
-              Breakfast
+              <input type="radio" value="breakfast" {...register('type')} /> Breakfast
             </label>
             <label>
               <input type="radio" value="dinner" {...register('type')} /> Dinner
@@ -110,10 +103,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
           </div>
           <ul className="flex flex-col gap-1">
             {foodList.map((food, index) => (
-              <div
-                key={index}
-                className="flex items-center bg-backg rounded-sm p-2 justify-between"
-              >
+              <div key={index} className="flex items-center bg-backg rounded-sm p-2 justify-between">
                 <li>{food}</li>
                 <Trash
                   size={18}
@@ -126,11 +116,7 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
           </ul>
         </div>
         <div className="flex justify-center">
-          <Button
-            type="submit"
-            className="p-3 w-28 flex gap-2"
-            variant={'outline'}
-          >
+          <Button type="submit" className="p-3 w-28 flex gap-2" variant={'outline'}>
             Submit
           </Button>
         </div>
