@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import supabase from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 import { Toggle } from '@/components/ui/toggle';
@@ -17,6 +17,10 @@ const pressedLabel = (isPressed: boolean) => (isPressed ? 'Yes' : 'No');
 export const FeelingsToggle = ({ title, name, status, id }: FeelingsToggleProps) => {
   const [isPressed, setPressed] = useState(status);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setPressed(status);
+  }, [status]);
 
   const updateStatus = async () => {
     try {
