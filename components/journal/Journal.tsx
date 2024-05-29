@@ -5,6 +5,7 @@ import FoodBox from './FoodBox';
 import { getJournalByDate } from '@/lib/utils';
 import { useJournalStore } from '@/lib/stores/journal';
 import { FeelingsToggle } from './FeelingsToggle';
+import { StressIndicator } from './StressIndicator';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
@@ -40,6 +41,10 @@ const Journal = () => {
             status={chosenLog ? chosenLog.nausea : false}
             id={chosenLog ? chosenLog.id : ''}
           />
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">Stress</h2>
+          <StressIndicator id={chosenLog ? chosenLog.id : ''} value={chosenLog ? chosenLog.stress : 1} />
         </div>
       </div>
     </div>
