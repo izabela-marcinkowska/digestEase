@@ -5,8 +5,8 @@ export type SingleLog = {
   date: string;
   meals?: FoodType[] | null;
   stress?: number;
-  pain?: boolean;
-  nausea?: boolean;
+  pain: boolean;
+  nausea: boolean;
   toilet_visits?: ToiletVisitType[];
 };
 
