@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import FoodBox from './FoodBox';
 import { getJournalByDate } from '@/lib/utils';
 import { useJournalStore } from '@/lib/stores/journal';
+import { FeelingsToggle } from './FeelingsToggle';
+import { StressIndicator } from './StressIndicator';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
@@ -24,6 +26,27 @@ const Journal = () => {
   return (
     <div className="w-5/6 mx-auto mt-16">
       <FoodBox meals={chosenLog ? chosenLog.meals : null} id={chosenLog ? chosenLog.id : ''} />
+      <div className="pt-8 space-y-2">
+        <h2 className="text-2xl font-bold">Feelings</h2>
+        <div className="flex gap-4">
+          <FeelingsToggle
+            title="Pain"
+            name="pain"
+            status={chosenLog ? chosenLog.pain : false}
+            id={chosenLog ? chosenLog.id : ''}
+          />
+          <FeelingsToggle
+            title="Nausea"
+            name="nausea"
+            status={chosenLog ? chosenLog.nausea : false}
+            id={chosenLog ? chosenLog.id : ''}
+          />
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">Stress</h2>
+          <StressIndicator id={chosenLog ? chosenLog.id : ''} value={chosenLog ? chosenLog.stress : 1} />
+        </div>
+      </div>
     </div>
   );
 };
