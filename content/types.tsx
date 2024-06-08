@@ -18,9 +18,10 @@ export type FoodType = {
 };
 
 export type ToiletVisitType = {
-  id: number;
+  id?: number;
   created_at: string;
   data: string;
+  log?: string;
 };
 
 export type foodBoxProp = {
