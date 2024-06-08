@@ -4,6 +4,9 @@ import supabase from '@/lib/supabase/client';
 import { Slider } from '@/components/ui/slider';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { useJournalStore } from '@/lib/stores/journal';
+import { useDateStore } from '@/lib/stores/datePicker';
+import { createEmptyLog } from '@/lib/utils';
 
 type StressIndicatorProps = {
   id: string;
@@ -13,28 +16,39 @@ type StressIndicatorProps = {
 export const StressIndicator = ({ id, value }: StressIndicatorProps) => {
   const [stressValue, setStressValue] = useState<number>(value);
   const [loading, setLoading] = useState(false);
+  const setChosenLog = useJournalStore((state) => state.setCurrentLog);
+  const pickedDay = useDateStore((state) => state.chosenDay);
 
   useEffect(() => {
     setStressValue(value);
   }, [value]);
 
   const updateStressStatus = async () => {
-    try {
+    if (!id) {
       setLoading(true);
-      const { error, data } = await supabase
-        .from('logs')
-        .update({ stress: stressValue })
-        .eq('id', id)
-        .select('stress')
-        .single();
-      if (error) {
-        throw error;
+      const newLog = await createEmptyLog(pickedDay);
+      if (newLog) {
+        setChosenLog(newLog);
+        setLoading(false);
       }
-      setStressValue(data.stress);
-    } catch (error) {
-      toast.error(`Error updating stress status. Please try again later.`);
-    } finally {
-      setLoading(false);
+    } else {
+      try {
+        setLoading(true);
+        const { error, data } = await supabase
+          .from('logs')
+          .update({ stress: stressValue })
+          .eq('id', id)
+          .select('stress')
+          .single();
+        if (error) {
+          throw error;
+        }
+        setStressValue(data.stress);
+      } catch (error) {
+        toast.error(`Error updating stress status. Please try again later.`);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
