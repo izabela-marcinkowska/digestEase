@@ -17,6 +17,26 @@ export async function journalExists(id: string): Promise<boolean> {
   return !!data;
 }
 
+export async function createEmptyLog(date: string): Promise<SingleLog | null> {
+  const { data, error } = await supabaseClient
+    .from('logs')
+    .insert({ date })
+    .select(
+      `
+  id,
+  date,
+  stress,
+  pain,
+  nausea`
+    )
+    .single();
+  if (error) {
+    console.error('Error from Supabase when creating empty log:', error);
+    return null;
+  }
+  return data;
+}
+
 export async function getJournalByDate(date: string): Promise<SingleLog | null> {
   const { data, error } = await supabaseClient
     .from('logs')
@@ -36,4 +56,20 @@ export async function getJournalByDate(date: string): Promise<SingleLog | null> 
     return null;
   }
   return data;
+}
+
+export function currentTimeWithDate(inputDate: string): Date {
+  const inputDay = new Date(inputDate);
+  if (isNaN(inputDay.getTime())) {
+    throw new Error('Invalid date format. Please provide a valid date string.');
+  }
+
+  const currentTime = new Date();
+
+  inputDay.setHours(currentTime.getHours());
+  inputDay.setMinutes(currentTime.getMinutes());
+  inputDay.setSeconds(currentTime.getSeconds());
+  inputDay.setMilliseconds(currentTime.getMilliseconds());
+
+  return inputDay;
 }
