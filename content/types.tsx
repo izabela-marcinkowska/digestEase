@@ -20,7 +20,7 @@ export type FoodType = {
 export type ToiletVisitType = {
   id?: number;
   created_at: string;
-  data: string;
+  type: number;
   log?: string;
 };
 

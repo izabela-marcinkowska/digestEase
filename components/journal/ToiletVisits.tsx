@@ -13,7 +13,7 @@ import { Form, FormControl, FormLabel, FormField } from '@/components/ui/form';
 const toiletVisitSchema = z.object({
   id: z.number().optional(),
   created_at: z.string(),
-  data: z.string(),
+  type: z.number(),
   log: z.string(),
 });
 
@@ -26,20 +26,24 @@ export function ToiletVisits({ id }: { id: string }) {
   const pickedDay = useDateStore((state) => state.chosenDay);
   const setChosenLog = useJournalStore((state) => state.setCurrentLog);
 
-  const handleAddToiletVisit = async () => {
+  const handleAddToiletVisit = async (type: number) => {
     if (!id) {
       const newLog = await createEmptyLog(pickedDay);
       if (newLog) {
         setChosenLog(newLog);
       }
     }
-    addToiletVisit({ log: id, created_at: currentTimeWithDate(pickedDay).toISOString(), data: '' });
+    addToiletVisit({
+      log: id,
+      created_at: currentTimeWithDate(pickedDay).toISOString(),
+      type: type,
+    });
   };
 
   return (
     <div className="flex flex-col gap-2">
       <div>
-        <Button onClick={handleAddToiletVisit}>
+        <Button onClick={() => handleAddToiletVisit(4)}>
           <PlusIcon className="mr-2 size-4" />
           Add Toilet Visit
         </Button>
@@ -47,8 +51,7 @@ export function ToiletVisits({ id }: { id: string }) {
       <div>
         {toiletVisits?.map((toiletVisit, index) => (
           <div key={index}>
-            <TimePicker date={new Date(toiletVisit.created_at)} setDate={(date) => {}} />
-            <p>{toiletVisit.data}</p>
+            <p>{toiletVisit.type}</p>
           </div>
         ))}
       </div>
