@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormLabel, FormField } from '@/components/ui/form';
+import supabaseClient from '@/lib/supabase/client';
 
 const toiletVisitSchema = z.object({
   id: z.number().optional(),
@@ -27,17 +28,23 @@ export function ToiletVisits({ id }: { id: string }) {
   const setChosenLog = useJournalStore((state) => state.setCurrentLog);
 
   const handleAddToiletVisit = async (type: number) => {
+    const newToiletVisit = {
+      log: id,
+      created_at: currentTimeWithDate(pickedDay).toISOString(),
+      type: type,
+    };
     if (!id) {
       const newLog = await createEmptyLog(pickedDay);
       if (newLog) {
         setChosenLog(newLog);
       }
     }
-    addToiletVisit({
-      log: id,
-      created_at: currentTimeWithDate(pickedDay).toISOString(),
-      type: type,
-    });
+    const { data, error } = await supabaseClient
+      .from('toilet_visits')
+      .insert(newToiletVisit)
+      .select()
+      .single();
+    addToiletVisit(newToiletVisit);
   };
 
   return (
