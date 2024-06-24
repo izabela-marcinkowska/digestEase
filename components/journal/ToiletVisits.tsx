@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormLabel, FormField } from '@/components/ui/form';
 import supabaseClient from '@/lib/supabase/client';
+import { useState } from 'react';
 
 const toiletVisitSchema = z.object({
   id: z.number().optional(),
@@ -26,6 +27,7 @@ export function ToiletVisits({ id }: { id: string }) {
   const toiletVisits = useJournalStore((state) => state.log?.toilet_visits);
   const pickedDay = useDateStore((state) => state.chosenDay);
   const setChosenLog = useJournalStore((state) => state.setCurrentLog);
+  const [showToiletForm, setShowToiletForm] = useState(false);
 
   const handleAddToiletVisit = async (type: number) => {
     const newToiletVisit = {
@@ -49,12 +51,16 @@ export function ToiletVisits({ id }: { id: string }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <div>
-        <Button onClick={() => handleAddToiletVisit(4)}>
-          <PlusIcon className="mr-2 size-4" />
-          Add Toilet Visit
-        </Button>
-      </div>
+      {showToiletForm ? (
+        <div>
+          <Button onClick={() => handleAddToiletVisit(4)}>
+            <PlusIcon className="mr-2 size-4" />
+            Add Toilet Visit
+          </Button>
+        </div>
+      ) : (
+        <div>Nothing</div>
+      )}
       <div>
         {toiletVisits?.map((toiletVisit, index) => (
           <div key={index}>
