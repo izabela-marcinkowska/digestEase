@@ -29,6 +29,11 @@ export function ToiletVisits({ id }: { id: string }) {
   const setChosenLog = useJournalStore((state) => state.setCurrentLog);
   const [showToiletForm, setShowToiletForm] = useState(false);
 
+  const handleToiletForm = () => {
+    setShowToiletForm(!showToiletForm);
+    console.log(showToiletForm, 'the form is');
+  };
+
   const handleAddToiletVisit = async (type: number) => {
     const newToiletVisit = {
       log: id,
@@ -53,13 +58,12 @@ export function ToiletVisits({ id }: { id: string }) {
     <div className="flex flex-col gap-2">
       {showToiletForm ? (
         <div>
-          <Button onClick={() => handleAddToiletVisit(4)}>
-            <PlusIcon className="mr-2 size-4" />
-            Add Toilet Visit
-          </Button>
+          <Button onClick={() => handleAddToiletVisit(4)}>Visit</Button>
         </div>
       ) : (
-        <div>Nothing</div>
+        <div>
+          <Button onClick={handleToiletForm}>Add Toilet Visit</Button>
+        </div>
       )}
       <div>
         {toiletVisits?.map((toiletVisit, index) => (
