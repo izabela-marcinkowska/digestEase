@@ -24,6 +24,10 @@ export type ToiletVisitType = {
   log?: string;
 };
 
+export type ToiletVisitPropType = {
+  visit: ToiletVisitType;
+};
+
 export type foodBoxProp = {
   id: string;
   meals?: FoodType[] | null;
