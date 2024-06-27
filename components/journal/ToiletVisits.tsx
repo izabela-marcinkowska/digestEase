@@ -100,14 +100,16 @@ export function ToiletVisits({ logId }: { logId: string }) {
         </div>
       )}
       <div>
-        {toiletVisits?.map((toiletVisit, index) => (
-          <Visit
-            id={toiletVisit.id}
-            type={toiletVisit.type}
-            created_at={toiletVisit.created_at}
-            key={index}
-          />
-        ))}
+        <div className="flex">
+          {toiletVisits?.map((toiletVisit, index) => (
+            <Visit
+              id={toiletVisit.id}
+              type={toiletVisit.type}
+              created_at={toiletVisit.created_at}
+              key={index}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
