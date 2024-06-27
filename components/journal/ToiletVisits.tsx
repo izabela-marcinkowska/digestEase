@@ -60,6 +60,7 @@ export function ToiletVisits({ id }: { id: string }) {
       .select()
       .single();
     addToiletVisit(newToiletVisit);
+    handleToiletForm();
   };
 
   return (
