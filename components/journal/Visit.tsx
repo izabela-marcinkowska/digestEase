@@ -17,10 +17,32 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
 import { ToiletVisitType } from '@/content/types';
+import supabaseClient from '@/lib/supabase/client';
+import { useJournalStore } from '@/lib/stores/journal';
+import { toast } from 'sonner';
 
 const Visit = (visit: ToiletVisitType) => {
+  const removeToiletVisit = useJournalStore((state) => state.removeToiletVisit);
+
   const handleEditButton = () => {};
-  const deleteVisit = (id: number | undefined) => {};
+  const deleteVisit = async (id: number | undefined) => {
+    const { data, error } = await supabaseClient
+      .from('toilet_visits')
+      .delete()
+      .eq('id', id)
+      .select();
+    if (!error) {
+      removeToiletVisit({
+        id: id,
+        created_at: visit.created_at,
+        type: visit.type,
+        log: visit.log,
+      });
+      toast.success('Success to delete the visit.');
+    } else {
+      toast.error('Failed to delete the visit.');
+    }
+  };
   return (
     <div className="min-w-72">
       <Collapsible className="border rounded-lg bg-white shadow-sm p-4 content-center">
