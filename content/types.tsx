@@ -48,6 +48,11 @@ export type EditMealProp = {
   onClose: () => void;
 };
 
+export type VisitFormProp = {
+  logId: string;
+  onClose: () => void;
+};
+
 export type AddMealProp = {
   journalId: string;
 };
