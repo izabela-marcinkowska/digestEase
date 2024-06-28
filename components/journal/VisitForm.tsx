@@ -8,13 +8,8 @@ import {
 } from '@/components/ui/carousel';
 import { Card, CardContent } from '../ui/card';
 import { createEmptyLog, currentTimeWithDate } from '@/lib/utils';
-import { TimePicker } from '@/components/ui/time-picker';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormLabel, FormField } from '@/components/ui/form';
 import supabaseClient from '@/lib/supabase/client';
 import { z } from 'zod';
-import { useState } from 'react';
 import { useDateStore } from '@/lib/stores/datePicker';
 import { useJournalStore } from '@/lib/stores/journal';
 import { ToiletVisitType, VisitFormProp } from '@/content/types';

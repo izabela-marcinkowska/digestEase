@@ -16,7 +16,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
-import { ToiletVisitPropType, ToiletVisitType } from '@/content/types';
+import { ToiletVisitType } from '@/content/types';
 
 const Visit = (visit: ToiletVisitType) => {
   const handleEditButton = () => {};

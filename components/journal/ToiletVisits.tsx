@@ -1,23 +1,17 @@
 'use client';
 import { useJournalStore } from '@/lib/stores/journal';
-
 import { useState } from 'react';
-
 import { Button } from '../ui/button';
 import Visit from './Visit';
-import { ToiletVisitType } from '@/content/types';
-import { useDateStore } from '@/lib/stores/datePicker';
 import VisitForm from './VisitForm';
 
 export function ToiletVisits({ logId }: { logId: string }) {
   //   const { form } = useForm<typeof toiletVisitSchema>({
   //     resolver: zodResolver(toiletVisitSchema),
   //   });
-  const addToiletVisit = useJournalStore((state) => state.addToiletVisit);
+
   const toiletVisits = useJournalStore((state) => state.log?.toilet_visits);
-  const setChosenLog = useJournalStore((state) => state.setCurrentLog);
   const [showToiletForm, setShowToiletForm] = useState(false);
-  const pickedDay = useDateStore((state) => state.chosenDay);
 
   const handleToiletForm = () => {
     setShowToiletForm(!showToiletForm);
