@@ -13,7 +13,7 @@ export async function journalExists(id: string): Promise<boolean> {
     .from('logs')
     .select()
     .eq('id', id)
-    .single();
+    .maybeSingle();
   if (error) {
     console.error('Error from Supabase when checking for log:', error);
     return false;
@@ -57,7 +57,7 @@ export async function getJournalByDate(
     toilet_visits (id, created_at, type, log)`
     )
     .eq('date', date)
-    .single();
+    .maybeSingle();
   if (error) {
     return null;
   }

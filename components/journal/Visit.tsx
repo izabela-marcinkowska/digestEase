@@ -16,16 +16,31 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
-import { ToiletVisitType } from '@/content/types';
+import {
+  ToiletVisitProp,
+  ToiletVisitPropType,
+  ToiletVisitType,
+} from '@/content/types';
 import supabaseClient from '@/lib/supabase/client';
 import { useJournalStore } from '@/lib/stores/journal';
 import { toast } from 'sonner';
+import { useState } from 'react';
+import VisitForm from './VisitForm';
+import EditVisitForm from './EditVisitForm';
 
-const Visit = (visit: ToiletVisitType) => {
+const Visit = (visit: ToiletVisitProp) => {
   const removeToiletVisit = useJournalStore((state) => state.removeToiletVisit);
+  const [editFormOpen, setEditFormOpen] = useState<boolean>(false);
 
-  const handleEditButton = () => {};
-  const deleteVisit = async (id: number | undefined) => {
+  const handleEditButton = () => {
+    setEditFormOpen(true);
+  };
+
+  const setClose = () => {
+    setEditFormOpen(false);
+  };
+
+  const deleteVisit = async (id: number) => {
     const { data, error } = await supabaseClient
       .from('toilet_visits')
       .delete()
@@ -43,6 +58,10 @@ const Visit = (visit: ToiletVisitType) => {
       toast.error('Failed to delete the visit.');
     }
   };
+
+  if (editFormOpen) {
+    return <EditVisitForm visitId={visit.id} onClose={setClose} />;
+  }
   return (
     <div className="min-w-72">
       <Collapsible className="border rounded-lg bg-white shadow-sm p-4 content-center">

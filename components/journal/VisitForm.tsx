@@ -24,6 +24,7 @@ const toiletVisitSchema = z.object({
 const VisitForm = ({ logId, onClose }: VisitFormProp) => {
   const pickedDay = useDateStore((state) => state.chosenDay);
   const setChosenLog = useJournalStore((state) => state.setCurrentLog);
+  const chosenLog = useJournalStore((state) => state.log);
   const addToiletVisit = useJournalStore((state) => state.addToiletVisit);
 
   const closeEditForm = () => {
@@ -31,17 +32,18 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
   };
 
   const handleAddToiletVisit = async (type: number) => {
-    const newToiletVisit = {
-      log: logId,
-      created_at: currentTimeWithDate(pickedDay).toISOString(),
-      type: type,
-    };
+    console.log('this should be log coming in', logId);
     if (!logId) {
       const newLog = await createEmptyLog(pickedDay);
       if (newLog) {
         setChosenLog(newLog);
       }
     }
+    const newToiletVisit = {
+      log: chosenLog?.id,
+      created_at: currentTimeWithDate(pickedDay).toISOString(),
+      type: type,
+    };
     const { data, error } = await supabaseClient
       .from('toilet_visits')
       .insert(newToiletVisit)
@@ -51,6 +53,7 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
     console.log('this is data - addToiletVisit', data);
     closeEditForm();
   };
+
   return (
     <>
       <Carousel
