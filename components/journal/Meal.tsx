@@ -87,7 +87,7 @@ const Meal = ({ food, id, type, logId }: MealProp) => {
                 Edit
               </Button>
               <AlertDialog>
-                <AlertDialogTrigger>
+                <AlertDialogTrigger asChild>
                   <Button
                     className="p-3 w-28 flex gap-2"
                     variant={'destructive'}
