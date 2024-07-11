@@ -87,3 +87,7 @@ export type FormInputs = {
   type: string;
   food: string[];
 };
+
+export type visitFormInputs = {
+  type: number;
+};

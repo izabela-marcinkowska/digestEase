@@ -12,7 +12,15 @@ import supabaseClient from '@/lib/supabase/client';
 import { z } from 'zod';
 import { useDateStore } from '@/lib/stores/datePicker';
 import { useJournalStore } from '@/lib/stores/journal';
-import { ToiletVisitType, VisitFormProp } from '@/content/types';
+import {
+  ToiletVisitType,
+  VisitFormProp,
+  visitFormInputs,
+} from '@/content/types';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Button } from '../ui/button';
 
 const toiletVisitSchema = z.object({
   id: z.number().optional(),
@@ -26,6 +34,19 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
   const setChosenLog = useJournalStore((state) => state.setCurrentLog);
   const chosenLog = useJournalStore((state) => state.log);
   const addToiletVisit = useJournalStore((state) => state.addToiletVisit);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<visitFormInputs>();
+
+  const onSubmit: SubmitHandler<visitFormInputs> = async (formData) => {
+    // Since `foodList` contains all the food items added, pass it to `addNewMeal`
+    // `formData.type` contains the meal type selected by the user
+    await handleAddToiletVisit(formData.type);
+  };
 
   const closeEditForm = () => {
     onClose();
@@ -56,28 +77,61 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
 
   return (
     <>
-      <Carousel
-        opts={{
-          align: 'start',
-        }}
-        className="w-full max-w-sm"
-      >
-        <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="p-1">
-                <Card onClick={() => handleAddToiletVisit(index + 1)}>
-                  <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-3xl font-semibold">{index + 1}</span>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex justify-around">
+          <div className="flex flex-col justify-around">
+            <label>
+              <input
+                type="radio"
+                value="5"
+                {...register('type', { required: true })}
+              />{' '}
+              Very good
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="4"
+                {...register('type', { required: true })}
+              />{' '}
+              Good
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="3"
+                {...register('type', { required: true })}
+              />{' '}
+              Ok
+            </label>
+          </div>
+          <div className="flex flex-col justify-around">
+            <label>
+              <input
+                type="radio"
+                value="2"
+                {...register('type', { required: true })}
+              />{' '}
+              Bad
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="1"
+                {...register('type', { required: true })}
+              />{' '}
+              Very Very Bad
+            </label>
+          </div>
+        </div>
+        <Button
+          type="submit"
+          className="p-3 w-28 flex gap-2"
+          variant={'outline'}
+        >
+          Submit
+        </Button>
+      </form>
     </>
   );
 };
