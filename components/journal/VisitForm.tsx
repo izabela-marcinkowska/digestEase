@@ -77,7 +77,10 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8] w-1/4"
+      >
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
             <label>
@@ -104,8 +107,7 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
               />{' '}
               Ok
             </label>
-          </div>
-          <div className="flex flex-col justify-around">
+
             <label>
               <input
                 type="radio"
@@ -124,13 +126,15 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
             </label>
           </div>
         </div>
-        <Button
-          type="submit"
-          className="p-3 w-28 flex gap-2"
-          variant={'outline'}
-        >
-          Submit
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            type="submit"
+            className="p-3 w-28 flex gap-2"
+            variant={'outline'}
+          >
+            Submit
+          </Button>
+        </div>
       </form>
     </>
   );
