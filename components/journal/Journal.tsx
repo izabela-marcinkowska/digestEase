@@ -26,6 +26,7 @@ const Journal = () => {
 
   return (
     <div className="w-5/6 mx-auto mt-16">
+      <h2 className="text-2xl font-bold">Food</h2>
       <FoodBox
         meals={chosenLog ? chosenLog.meals : null}
         id={chosenLog ? chosenLog.id : ''}
