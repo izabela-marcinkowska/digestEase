@@ -9,8 +9,12 @@ type JournalStore = {
   addMeal: (newMeal: FoodType) => void;
   removeMeal: (newMeal: FoodType) => void;
   addToiletVisit: (newToiletVisit: ToiletVisitType) => void;
+  editToiletVisit: (newToiletVisit: ToiletVisitType) => void;
   removeToiletVisit: (newToiletVisit: ToiletVisitType) => void;
-  setJournalProperty: <K extends keyof SingleLog>(property: K, value: SingleLog[K]) => void;
+  setJournalProperty: <K extends keyof SingleLog>(
+    property: K,
+    value: SingleLog[K]
+  ) => void;
   editMeal: (mealId: string, food: string[], type: string) => void; // New function
 };
 
@@ -25,7 +29,9 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
 
     if (currentLog) {
       const meal = { ...newMeal };
-      const updatedMeals = currentLog.meals ? [...currentLog.meals, meal] : [meal];
+      const updatedMeals = currentLog.meals
+        ? [...currentLog.meals, meal]
+        : [meal];
       set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },
@@ -33,7 +39,9 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
     const currentLog = get().log;
 
     if (currentLog) {
-      const updatedMeals = currentLog.meals?.filter((meal) => meal.id !== mealToRemove.id);
+      const updatedMeals = currentLog.meals?.filter(
+        (meal) => meal.id !== mealToRemove.id
+      );
       set({ log: { ...currentLog, meals: updatedMeals } });
     }
   },
@@ -47,6 +55,19 @@ export const useJournalStore = create<JournalStore>((set, get) => ({
       set({ log: { ...currentLog, toilet_visits: updatedToiletVisits } });
     }
   },
+  editToiletVisit: (newToiletVisit: ToiletVisitType) => {
+    const currentLog = get().log;
+
+    if (currentLog) {
+      const updatedToiletVisits = currentLog.toilet_visits?.map((toiletVisit) =>
+        toiletVisit.id === newToiletVisit.id
+          ? { ...toiletVisit, ...newToiletVisit }
+          : toiletVisit
+      );
+      set({ log: { ...currentLog, toilet_visits: updatedToiletVisits } });
+    }
+  },
+
   removeToiletVisit: (toiletVisitToRemove: ToiletVisitType) => {
     const currentLog = get().log;
 

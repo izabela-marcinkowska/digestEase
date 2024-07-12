@@ -15,7 +15,6 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormInputs>({
     defaultValues: {
@@ -31,7 +30,10 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
   };
 
   const editMeal = async (id: string, food: string[], type: string) => {
-    const { error } = await supabaseClient.from('meals').update({ food, type }).eq('id', id);
+    const { error } = await supabaseClient
+      .from('meals')
+      .update({ food, type })
+      .eq('id', id);
     if (!error) {
       updateMeal(id, food, type);
       closeEditForm();
@@ -64,7 +66,10 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]"
+      >
         <div className="flex justify-between">
           <div className="text-xl">Add meal</div>
           <X onClick={closeEditForm} size={26} />
@@ -82,15 +87,30 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
               Breakfast
             </label>
             <label>
-              <input type="radio" value="dinner" {...register('type', { required: true })} /> Dinner
+              <input
+                type="radio"
+                value="dinner"
+                {...register('type', { required: true })}
+              />{' '}
+              Dinner
             </label>
           </div>
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="lunch" {...register('type', { required: true })} /> Lunch
+              <input
+                type="radio"
+                value="lunch"
+                {...register('type', { required: true })}
+              />{' '}
+              Lunch
             </label>
             <label>
-              <input type="radio" value="snacks" {...register('type', { required: true })} /> Snacks
+              <input
+                type="radio"
+                value="snacks"
+                {...register('type', { required: true })}
+              />{' '}
+              Snacks
             </label>
           </div>
         </div>
@@ -111,7 +131,10 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
           </div>
           <ul className="flex flex-col gap-1">
             {foodList.map((food, index) => (
-              <div key={index} className="flex items-center bg-backg rounded-sm p-2 justify-between">
+              <div
+                key={index}
+                className="flex items-center bg-backg rounded-sm p-2 justify-between"
+              >
                 <li>{food}</li>
                 <Trash
                   size={18}
@@ -124,7 +147,11 @@ const EditForm = ({ journalId, food, type, onClose }: EditMealProp) => {
           </ul>
         </div>
         <div className="flex justify-center">
-          <Button type="submit" className="p-3 w-28 flex gap-2" variant={'outline'}>
+          <Button
+            type="submit"
+            className="p-3 w-28 flex gap-2"
+            variant={'outline'}
+          >
             Submit
           </Button>
         </div>

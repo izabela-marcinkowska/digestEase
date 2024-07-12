@@ -6,6 +6,7 @@ import { getJournalByDate } from '@/lib/utils';
 import { useJournalStore } from '@/lib/stores/journal';
 import { FeelingsToggle } from './FeelingsToggle';
 import { StressIndicator } from './StressIndicator';
+import { ToiletVisits } from './ToiletVisits';
 
 const Journal = () => {
   const pickedDay = useDateStore((state) => state.chosenDay);
@@ -25,7 +26,11 @@ const Journal = () => {
 
   return (
     <div className="w-5/6 mx-auto mt-16">
-      <FoodBox meals={chosenLog ? chosenLog.meals : null} id={chosenLog ? chosenLog.id : ''} />
+      <h2 className="text-2xl font-bold">Food</h2>
+      <FoodBox
+        meals={chosenLog ? chosenLog.meals : null}
+        id={chosenLog ? chosenLog.id : ''}
+      />
       <div className="pt-8 space-y-2">
         <h2 className="text-2xl font-bold">Feelings</h2>
         <div className="flex gap-4">
@@ -44,7 +49,14 @@ const Journal = () => {
         </div>
         <div className="space-y-2">
           <h2 className="text-2xl font-bold">Stress</h2>
-          <StressIndicator id={chosenLog ? chosenLog.id : ''} value={chosenLog ? chosenLog.stress : 1} />
+          <StressIndicator
+            id={chosenLog ? chosenLog.id : ''}
+            value={chosenLog ? chosenLog.stress : 1}
+          />
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">Toilet Visits</h2>
+          <ToiletVisits logId={chosenLog ? chosenLog.id : ''} />
         </div>
       </div>
     </div>
