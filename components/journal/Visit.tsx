@@ -41,7 +41,7 @@ const Visit = (visit: ToiletVisitProp) => {
         return <p>Very Very bad</p>;
         break;
       case 2:
-        return <p>Very bad</p>;
+        return <p>Bad</p>;
         break;
       case 3:
         return <p>Ok</p>;
