@@ -11,6 +11,7 @@ import {
 } from '@/content/types';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
+import { X } from 'lucide-react';
 
 const toiletVisitSchema = z.object({
   id: z.number().optional(),
@@ -66,6 +67,10 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8] w-1/4"
       >
+        <div className="flex justify-between">
+          <div className="text-xl">Add meal</div>
+          <X onClick={closeEditForm} size={26} />
+        </div>
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
             <label>
