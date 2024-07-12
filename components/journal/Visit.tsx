@@ -34,6 +34,7 @@ const Visit = (visit: ToiletVisitProp) => {
 
   const handleEditButton = () => {
     setEditFormOpen(true);
+    console.log('wiwiwiwiiwi', visit.type);
   };
 
   const setClose = () => {
@@ -60,7 +61,13 @@ const Visit = (visit: ToiletVisitProp) => {
   };
 
   if (editFormOpen) {
-    return <EditVisitForm visitId={visit.id} onClose={setClose} />;
+    return (
+      <EditVisitForm
+        visitId={visit.id}
+        visitType={visit.type}
+        onClose={setClose}
+      />
+    );
   }
   return (
     <div className="min-w-72">

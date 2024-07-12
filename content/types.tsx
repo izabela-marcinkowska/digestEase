@@ -57,6 +57,7 @@ export type VisitFormProp = {
   onClose: () => void;
 };
 export type EditVisitFormProp = {
+  visitType: number;
   visitId: number;
   onClose: () => void;
 };
