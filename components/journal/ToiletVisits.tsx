@@ -38,6 +38,7 @@ export function ToiletVisits({ logId }: { logId: string }) {
               type={toiletVisit.type}
               created_at={toiletVisit.created_at}
               key={index}
+              index={index}
               onClose={setClose}
             />
           ))}

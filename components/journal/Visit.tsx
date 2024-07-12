@@ -35,6 +35,26 @@ const Visit = (visit: ToiletVisitProp) => {
     setEditFormOpen(false);
   };
 
+  const showType = (type: number) => {
+    switch (type) {
+      case 1:
+        return <p>Very Very bad</p>;
+        break;
+      case 2:
+        return <p>Very bad</p>;
+        break;
+      case 3:
+        return <p>Ok</p>;
+        break;
+      case 4:
+        return <p>Good</p>;
+        break;
+      case 5:
+        return <p>Very Good</p>;
+        break;
+    }
+  };
+
   const deleteVisit = async (id: number) => {
     const { data, error } = await supabaseClient
       .from('toilet_visits')
@@ -68,7 +88,9 @@ const Visit = (visit: ToiletVisitProp) => {
       <Collapsible className="border rounded-lg bg-white shadow-sm p-4 content-center">
         <CollapsibleTrigger asChild>
           <div className="flex items-center justify-between p-2 h-18">
-            <h4 className="text-sm font-semibold m-0">Visit</h4>
+            <h4 className="text-sm font-semibold m-0">
+              Visit {visit.index + 1}
+            </h4>
             <Button variant="ghost" size="sm" className="w-9 p-0">
               <ChevronsUpDown className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
@@ -76,9 +98,7 @@ const Visit = (visit: ToiletVisitProp) => {
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent className="flex flex-col gap-4">
-          <div>
-            <p>{visit.type}</p>
-          </div>
+          <div>{showType(visit.type)}</div>
           <div className="flex gap-3 justify-between">
             <Button
               className="p-3 w-28 flex gap-2"

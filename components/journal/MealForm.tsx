@@ -116,7 +116,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
             <label>
               <input
                 type="radio"
-                value="breakfast"
+                value="Breakfast"
                 {...register('type', { required: true })}
               />{' '}
               Breakfast
@@ -124,7 +124,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
             <label>
               <input
                 type="radio"
-                value="dinner"
+                value="Dinner"
                 {...register('type', { required: true })}
               />{' '}
               Dinner
@@ -134,7 +134,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
             <label>
               <input
                 type="radio"
-                value="lunch"
+                value="Lunch"
                 {...register('type', { required: true })}
               />{' '}
               Lunch
@@ -142,7 +142,7 @@ const MealForm = ({ journalId }: AddMealProp) => {
             <label>
               <input
                 type="radio"
-                value="snacks"
+                value="Snacks"
                 {...register('type', { required: true })}
               />{' '}
               Snacks

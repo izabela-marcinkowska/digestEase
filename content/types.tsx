@@ -26,6 +26,7 @@ export type ToiletVisitType = {
 
 export type ToiletVisitProp = ToiletVisitType & {
   onClose: () => void;
+  index: number;
 };
 
 export type ToiletVisitPropType = {
