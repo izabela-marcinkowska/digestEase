@@ -12,13 +12,9 @@ export function ToiletVisits({ logId }: { logId: string }) {
 
   const toiletVisits = useJournalStore((state) => state.log?.toilet_visits);
   const [showToiletForm, setShowToiletForm] = useState(false);
-  const chosenLog = useJournalStore((state) => state.log);
-  const setChosenLog = useJournalStore((state) => state.setCurrentLog);
 
   const handleToiletForm = () => {
     setShowToiletForm(!showToiletForm);
-    console.log(showToiletForm, 'the form is');
-    console.log('is this f log here?', logId);
   };
 
   const setClose = () => {

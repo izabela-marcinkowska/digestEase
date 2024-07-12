@@ -1,35 +1,16 @@
 'use client';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import { Card, CardContent } from '../ui/card';
-import { createEmptyLog, currentTimeWithDate } from '@/lib/utils';
 import supabaseClient from '@/lib/supabase/client';
-import { z } from 'zod';
-import { useDateStore } from '@/lib/stores/datePicker';
 import { useJournalStore } from '@/lib/stores/journal';
-import {
-  EditVisitFormProp,
-  ToiletVisitType,
-  VisitFormProp,
-  visitFormInputs,
-} from '@/content/types';
+import { EditVisitFormProp, visitFormInputs } from '@/content/types';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 
 const EditVisitForm = ({ visitId, visitType, onClose }: EditVisitFormProp) => {
-  const pickedDay = useDateStore((state) => state.chosenDay);
-  const setChosenLog = useJournalStore((state) => state.setCurrentLog);
   const editToiletVisit = useJournalStore((state) => state.editToiletVisit);
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<visitFormInputs>({
     defaultValues: {
@@ -42,10 +23,7 @@ const EditVisitForm = ({ visitId, visitType, onClose }: EditVisitFormProp) => {
   };
 
   const onSubmit: SubmitHandler<visitFormInputs> = async (formData) => {
-    // Since `foodList` contains all the food items added, pass it to `addNewMeal`
-    // `formData.type` contains the meal type selected by the user
     await handleEditToiletVisit(formData.type);
-    console.log('llalaallalaa', visitType);
   };
 
   const handleEditToiletVisit = async (type: number) => {
@@ -55,7 +33,6 @@ const EditVisitForm = ({ visitId, visitType, onClose }: EditVisitFormProp) => {
       .eq('id', visitId)
       .select();
     editToiletVisit({ id: visitId, type: type });
-    console.log('this is data - addToiletVisit', data);
     closeEditForm();
   };
 

@@ -16,16 +16,11 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Pencil, Trash2, ChevronsUpDown } from 'lucide-react';
-import {
-  ToiletVisitProp,
-  ToiletVisitPropType,
-  ToiletVisitType,
-} from '@/content/types';
+import { ToiletVisitProp } from '@/content/types';
 import supabaseClient from '@/lib/supabase/client';
 import { useJournalStore } from '@/lib/stores/journal';
 import { toast } from 'sonner';
 import { useState } from 'react';
-import VisitForm from './VisitForm';
 import EditVisitForm from './EditVisitForm';
 
 const Visit = (visit: ToiletVisitProp) => {
@@ -34,7 +29,6 @@ const Visit = (visit: ToiletVisitProp) => {
 
   const handleEditButton = () => {
     setEditFormOpen(true);
-    console.log('wiwiwiwiiwi', visit.type);
   };
 
   const setClose = () => {

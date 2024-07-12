@@ -1,12 +1,4 @@
 'use client';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import { Card, CardContent } from '../ui/card';
 import { createEmptyLog, currentTimeWithDate } from '@/lib/utils';
 import supabaseClient from '@/lib/supabase/client';
 import { z } from 'zod';
@@ -17,8 +9,6 @@ import {
   VisitFormProp,
   visitFormInputs,
 } from '@/content/types';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 
@@ -38,13 +28,10 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<visitFormInputs>();
 
   const onSubmit: SubmitHandler<visitFormInputs> = async (formData) => {
-    // Since `foodList` contains all the food items added, pass it to `addNewMeal`
-    // `formData.type` contains the meal type selected by the user
     await handleAddToiletVisit(formData.type);
   };
 
@@ -53,7 +40,6 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
   };
 
   const handleAddToiletVisit = async (type: number) => {
-    console.log('this should be log coming in', logId);
     if (!logId) {
       const newLog = await createEmptyLog(pickedDay);
       if (newLog) {
@@ -71,7 +57,6 @@ const VisitForm = ({ logId, onClose }: VisitFormProp) => {
       .select()
       .single();
     addToiletVisit(data as ToiletVisitType);
-    console.log('this is data - addToiletVisit', data);
     closeEditForm();
   };
 
