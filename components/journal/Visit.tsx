@@ -1,9 +1,5 @@
 import { Button } from '../ui/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,6 +19,18 @@ import { toast } from 'sonner';
 import { useState } from 'react';
 import EditVisitForm from './EditVisitForm';
 
+const visitType: { [key: number]: string } = {
+  1: 'Very Very bad',
+  2: 'Bad',
+  3: 'Ok',
+  4: 'Good',
+  5: 'Very Good',
+};
+
+const getVisitTypeLabel = (type: number) => {
+  return visitType[type + 1];
+};
+
 const Visit = (visit: ToiletVisitProp) => {
   const removeToiletVisit = useJournalStore((state) => state.removeToiletVisit);
   const [editFormOpen, setEditFormOpen] = useState<boolean>(false);
@@ -35,32 +43,8 @@ const Visit = (visit: ToiletVisitProp) => {
     setEditFormOpen(false);
   };
 
-  const showType = (type: number) => {
-    switch (type) {
-      case 1:
-        return <p>Very Very bad</p>;
-        break;
-      case 2:
-        return <p>Bad</p>;
-        break;
-      case 3:
-        return <p>Ok</p>;
-        break;
-      case 4:
-        return <p>Good</p>;
-        break;
-      case 5:
-        return <p>Very Good</p>;
-        break;
-    }
-  };
-
   const deleteVisit = async (id: number) => {
-    const { data, error } = await supabaseClient
-      .from('toilet_visits')
-      .delete()
-      .eq('id', id)
-      .select();
+    const { data, error } = await supabaseClient.from('toilet_visits').delete().eq('id', id).select();
     if (!error) {
       removeToiletVisit({
         id: id,
@@ -75,22 +59,14 @@ const Visit = (visit: ToiletVisitProp) => {
   };
 
   if (editFormOpen) {
-    return (
-      <EditVisitForm
-        visitId={visit.id}
-        visitType={visit.type}
-        onClose={setClose}
-      />
-    );
+    return <EditVisitForm visitId={visit.id} visitType={visit.type} onClose={setClose} />;
   }
   return (
     <div className="min-w-72">
       <Collapsible className="border rounded-lg bg-white shadow-sm p-4 content-center">
         <CollapsibleTrigger asChild>
           <div className="flex items-center justify-between p-2 h-18">
-            <h4 className="text-sm font-semibold m-0">
-              Visit {visit.index + 1}
-            </h4>
+            <h4 className="text-sm font-semibold m-0">Visit {visit.index + 1}</h4>
             <Button variant="ghost" size="sm" className="w-9 p-0">
               <ChevronsUpDown className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
@@ -98,13 +74,11 @@ const Visit = (visit: ToiletVisitProp) => {
           </div>
         </CollapsibleTrigger>
         <CollapsibleContent className="flex flex-col gap-4">
-          <div>{showType(visit.type)}</div>
+          <div>
+            <p>{getVisitTypeLabel(visit.type)}</p>
+          </div>
           <div className="flex gap-3 justify-between">
-            <Button
-              className="p-3 w-28 flex gap-2"
-              variant={'outline'}
-              onClick={handleEditButton}
-            >
+            <Button className="p-3 w-28 flex gap-2" variant={'outline'} onClick={handleEditButton}>
               <Pencil width={17} />
               Edit
             </Button>
@@ -119,8 +93,8 @@ const Visit = (visit: ToiletVisitProp) => {
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your meal and remove your data from our servers.
+                    This action cannot be undone. This will permanently delete your meal and remove your data from our
+                    servers.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
