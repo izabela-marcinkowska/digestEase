@@ -22,7 +22,6 @@ const MealForm = ({ journalId }: AddMealProp) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<FormInputs>();
 
@@ -43,7 +42,11 @@ const MealForm = ({ journalId }: AddMealProp) => {
   const addNewMeal = async (type: string, food: string[]) => {
     setLoading(true);
     if (!journalId) {
-      const { data, error } = await supabaseClient.from('logs').insert({ date: pickedDay }).select().single();
+      const { data, error } = await supabaseClient
+        .from('logs')
+        .insert({ date: pickedDay })
+        .select()
+        .single();
       if (error) {
         console.error('Failed to create new log.');
         toast.error('Failed to create new log.');
@@ -54,7 +57,9 @@ const MealForm = ({ journalId }: AddMealProp) => {
         setLog(data);
         const newMealId = uuid();
         addMeal({ id: newMealId, type, food, log: data.id });
-        const { error } = await supabaseClient.from('meals').insert({ id: newMealId, type, food, log: data.id });
+        const { error } = await supabaseClient
+          .from('meals')
+          .insert({ id: newMealId, type, food, log: data.id });
         if (error) {
           toast.error('Failed to add new meal.');
         }
@@ -65,7 +70,9 @@ const MealForm = ({ journalId }: AddMealProp) => {
     if (journalId) {
       const newMealId = uuid();
       addMeal({ id: newMealId, type, food, log: journalId });
-      const { error } = await supabaseClient.from('meals').insert({ id: newMealId, type, food, log: journalId });
+      const { error } = await supabaseClient
+        .from('meals')
+        .insert({ id: newMealId, type, food, log: journalId });
       if (error) {
         toast.error('Failed to add new meal.');
       }
@@ -79,7 +86,6 @@ const MealForm = ({ journalId }: AddMealProp) => {
   };
 
   const handleInput = (e: KeyboardEvent<HTMLInputElement>) => {
-    console.log(e);
     if (e.key === 'Enter') {
       e.preventDefault();
       handleAddFoodItem();
@@ -97,7 +103,10 @@ const MealForm = ({ journalId }: AddMealProp) => {
   };
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col p-6 border rounded-xl gap-4 bg-[#D1F1E8]"
+      >
         <div className="flex justify-between">
           <div className="text-xl">Add meal</div>
           <X onClick={handleFormStatus} size={26} />
@@ -105,18 +114,38 @@ const MealForm = ({ journalId }: AddMealProp) => {
         <div className="flex justify-around">
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="breakfast" {...register('type', { required: true })} /> Breakfast
+              <input
+                type="radio"
+                value="Breakfast"
+                {...register('type', { required: true })}
+              />{' '}
+              Breakfast
             </label>
             <label>
-              <input type="radio" value="dinner" {...register('type', { required: true })} /> Dinner
+              <input
+                type="radio"
+                value="Dinner"
+                {...register('type', { required: true })}
+              />{' '}
+              Dinner
             </label>
           </div>
           <div className="flex flex-col justify-around">
             <label>
-              <input type="radio" value="lunch" {...register('type', { required: true })} /> Lunch
+              <input
+                type="radio"
+                value="Lunch"
+                {...register('type', { required: true })}
+              />{' '}
+              Lunch
             </label>
             <label>
-              <input type="radio" value="snacks" {...register('type', { required: true })} /> Snacks
+              <input
+                type="radio"
+                value="Snacks"
+                {...register('type', { required: true })}
+              />{' '}
+              Snacks
             </label>
           </div>
         </div>
@@ -138,7 +167,10 @@ const MealForm = ({ journalId }: AddMealProp) => {
           </div>
           <ul className="flex flex-col gap-1">
             {foodList.map((food, index) => (
-              <div key={index} className="flex items-center bg-backg rounded-sm p-2 justify-between">
+              <div
+                key={index}
+                className="flex items-center bg-backg rounded-sm p-2 justify-between"
+              >
                 <li>{food}</li>
                 <Trash
                   size={18}
@@ -151,7 +183,12 @@ const MealForm = ({ journalId }: AddMealProp) => {
           </ul>
         </div>
         <div className="flex justify-center">
-          <Button type="submit" className="p-3 w-28 flex gap-2" variant={'outline'} disabled={loading}>
+          <Button
+            type="submit"
+            className="p-3 w-28 flex gap-2"
+            variant={'outline'}
+            disabled={loading}
+          >
             Submit
           </Button>
         </div>

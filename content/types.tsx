@@ -19,8 +19,18 @@ export type FoodType = {
 
 export type ToiletVisitType = {
   id: number;
-  created_at: string;
-  data: string;
+  created_at?: string;
+  type: number;
+  log?: string;
+};
+
+export type ToiletVisitProp = ToiletVisitType & {
+  onClose: () => void;
+  index: number;
+};
+
+export type ToiletVisitPropType = {
+  visit: ToiletVisitType;
 };
 
 export type foodBoxProp = {
@@ -40,6 +50,16 @@ export type EditMealProp = {
   journalId: string;
   food: string[];
   type: string;
+  onClose: () => void;
+};
+
+export type VisitFormProp = {
+  logId: string;
+  onClose: () => void;
+};
+export type EditVisitFormProp = {
+  visitType: number;
+  visitId: number;
   onClose: () => void;
 };
 
@@ -68,4 +88,8 @@ export type RegLog = {
 export type FormInputs = {
   type: string;
   food: string[];
+};
+
+export type visitFormInputs = {
+  type: number;
 };
